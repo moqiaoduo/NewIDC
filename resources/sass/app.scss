@@ -1,0 +1,43 @@
+@import "color";
+
+// 这里是 NewIDC 专用样式
+.newidc {
+    &-footer {
+        text-align: center;
+        @media screen and (max-width: 768px) {
+            left: 0 !important;
+        }
+    }
+    &-nav-show-button {
+        width: 40px;
+        height: 40px;
+        display: block;
+        cursor: pointer;
+        .layui-icon {
+            color: white;
+            line-height: 60px;
+            font-size: 24px;
+        }
+    }
+}
+
+#newidc {
+    &-nav {
+        @media screen and (max-width: 768px) {
+            width: 100%;
+            display: none;
+            .layui-nav {
+                width: 100%;
+            }
+        }
+    }
+    &-body {
+
+    }
+}
+
+// 下面是对 layui 的样式重写
+
+.layui-container {
+    padding: 15px;
+}
