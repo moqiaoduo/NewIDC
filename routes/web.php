@@ -11,4 +11,9 @@
 |
 */
 
+Auth::routes([
+    'verify'=>config('email_verify',false),
+    'register'=>config('register',true)
+]);
+
 Route::get('/', 'IndexController@index');

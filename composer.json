@@ -11,6 +11,9 @@
         "php": "^7.2",
         "encore/laravel-admin": "^1.7",
         "fideloper/proxy": "^4.0",
+        "ichynul/configx": "^1.3",
+        "laravel-admin-ext/chartjs": "^1.0",
+        "laravel-admin-ext/config": "^1.1",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0"
     },

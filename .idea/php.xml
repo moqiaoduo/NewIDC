@@ -100,6 +100,9 @@
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-ide-helper" />
       <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
       <path value="$PROJECT_DIR$/vendor/laravel-admin-ext/config" />
+      <path value="$PROJECT_DIR$/vendor/ichynul/configx" />
+      <path value="$PROJECT_DIR$/vendor/ichynul/row-table" />
+      <path value="$PROJECT_DIR$/vendor/laravel-admin-ext/chartjs" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

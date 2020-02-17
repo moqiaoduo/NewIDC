@@ -21,6 +21,25 @@
   font-size: 24px;
 }
 
+.newidc-login {
+  width: 100%;
+  max-width: 400px;
+  margin: calc(50vh - 300px) auto 0;
+}
+
+.newidc-form-invalid {
+  border-color: #FF5722 !important;
+}
+
+.newidc-form-invalid:hover {
+  border-color: #FF5722 !important;
+}
+
+.newidc-form-error {
+  font-weight: bold;
+  color: #FF5722 !important;
+}
+
 @media screen and (max-width: 768px) {
   #newidc-nav {
     width: 100%;

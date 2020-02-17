@@ -19,6 +19,21 @@
             font-size: 24px;
         }
     }
+    &-login {
+        width: 100%;
+        max-width: 400px;
+        margin: calc(50vh - 300px) auto 0;
+    }
+    &-form-invalid {
+        border-color: $bold-orange!important;
+        &:hover {
+            border-color: $bold-orange!important;
+        }
+    }
+    &-form-error {
+        font-weight: bold;
+        color: $bold-orange!important;
+    }
 }
 
 #newidc {
@@ -30,9 +45,6 @@
                 width: 100%;
             }
         }
-    }
-    &-body {
-
     }
 }
 

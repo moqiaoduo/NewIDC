@@ -17317,6 +17317,12 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 layui.use(['element', 'jquery'], function () {
   var element = layui.element,
       $ = layui.jquery;
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+    }
+  }); // 展开收起菜单
+
   $(".newidc-nav-show-button").on('click', function () {
     var nav = $("#newidc-nav");
     var width = $(window).width();
@@ -17338,9 +17344,9 @@ layui.use(['element', 'jquery'], function () {
         }, function () {
           nav.css("width", "");
           nav.hide();
-          changeMenuIcon(1, 2);
-          modBodyLeft(width, true);
         });
+        changeMenuIcon(1, 2);
+        modBodyLeft(width, true);
       }
     } else {
       nav.slideToggle(function () {
@@ -17355,17 +17361,43 @@ layui.use(['element', 'jquery'], function () {
   });
   $(document).ready(function () {
     setMenuStatus();
+    var url = window.location.href;
+    var candidate = null;
+    $(".layui-side .layui-nav-item a").each(function () {
+      var href = $(this).attr("href");
+
+      if (url === href) {
+        candidate = this;
+        return false;
+      } else if (url.indexOf(href) !== -1) {
+        if (candidate === null || $(candidate).attr("href").length < href.length) candidate = this;
+      }
+    });
+    setMenuItemActive(candidate);
   });
+
+  function setMenuItemActive(obj) {
+    if (!obj || $(obj).length === 0) return;
+    var parent = $(obj).parent();
+    parent.addClass("layui-this");
+    if (parent.is("dd")) parent.parent().parent().addClass("layui-nav-itemed");
+  }
 
   function setMenuStatus() {
     var width = $(window).width();
     var hidden = $("#newidc-nav").is(":hidden");
     changeMenuIcon(width > 768 ? 1 : 2, hidden ? 2 : 1);
-    modBodyLeft(width, hidden);
+    modBodyLeft(width, hidden, true);
   }
 
   function modBodyLeft(width, hidden) {
-    $("#newidc-body").css("left", width <= 768 || hidden ? "0" : "");
+    var immediate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var body = $("#newidc-body");
+    if (immediate) body.css("left", width <= 768 || hidden ? "0" : "");else body.animate({
+      left: width <= 768 || hidden ? "0" : "200px"
+    }, function () {
+      if (body.css("left") === "200px") body.css("left", "");
+    });
   }
 
   function changeMenuIcon(type, status) {
