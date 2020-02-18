@@ -29,7 +29,7 @@ return [
         'array'   => ':attribute 必须只有 :min - :max 个单元。',
     ],
     'boolean'        => ':attribute 必须为布尔值。',
-    'confirmed'      => ':attribute 与 确认:attribute 不一致。',
+    'confirmed'      => ':attribute 两次输入不一致。',
     'date'           => ':attribute 不是一个有效的日期。',
     'date_equals'    => ':attribute 必须要等于 :date。',
     'date_format'    => ':attribute 的格式必须为 :format。',
@@ -116,7 +116,6 @@ return [
     'uploaded'    => ':attribute 上传失败。',
     'url'         => ':attribute 格式不正确。',
     'uuid'        => ':attribute 必须是有效的 UUID。',
-    'recaptcha'   => ':attribute 似乎出了点差错',
 
     /*
     |--------------------------------------------------------------------------
@@ -153,8 +152,6 @@ return [
         'first_name'            => '名',
         'last_name'             => '姓',
         'password'              => '密码',
-        'old_password'          => '旧密码',
-        'new_password'          => '新密码',
         'password_confirmation' => '确认密码',
         'city'                  => '城市',
         'country'               => '国家',
@@ -178,6 +175,5 @@ return [
         'time'                  => '时间',
         'available'             => '可用的',
         'size'                  => '大小',
-        'invite_code'           => '邀请码'
     ],
 ];

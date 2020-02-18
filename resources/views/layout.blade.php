@@ -6,11 +6,7 @@
     <title>@yield('title') - {{config('app.name')}}</title>
     <link rel="stylesheet" href="{{asset('vendor/layui/css/layui.css')}}">
     <link rel="stylesheet" href="{{mix('css/app.css')}}">
-    <style>
-        .newidc-index {
-            left: 0 !important;
-        }
-    </style>
+    <link rel="stylesheet" href="{{mix('css/index.css')}}">
     @yield('head')
 </head>
 <body class="layui-layout-body">

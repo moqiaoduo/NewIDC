@@ -4,12 +4,21 @@ use Illuminate\Routing\Router;
 
 Admin::routes();
 
-Route::group([
-    'prefix'        => config('admin.route.prefix'),
-    'namespace'     => config('admin.route.namespace'),
-    'middleware'    => config('admin.route.middleware'),
-], function (Router $router) {
+Route::name("admin.")->prefix(config('admin.route.prefix'))->namespace(config('admin.route.namespace'))
+    ->middleware(config('admin.route.middleware'))->group(function (Router $router) {
 
-    $router->get('/', 'HomeController@index')->name('admin.home');
+        $router->get('/', 'HomeController@index');
 
-});
+        $router->name('config.')->prefix('/config')->group(function (Router $router) {
+            $router->get("/",'ConfigController@index')->name('base');
+            $router->post('/','ConfigController@save');
+            $router->get('/cron','ConfigController@cron')->name('cron');
+            $router->get('/template','ConfigController@template')->name('template');
+            $router->fallback('ConfigController@third_part');
+        });
+
+        $router->group(['prefix'=>"/api"],function (Router $router) {
+            $router->get('/products','ApiController@products');
+        });
+
+    });

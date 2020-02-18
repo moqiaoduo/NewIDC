@@ -11,7 +11,10 @@
         @else
             <dd><a href="javascript:;">修改信息</a></dd>
             <dd><a href="javascript:;">安全管理</a></dd>
-            <dd><a href="javascript:;">登出</a></dd>
+            <dd><a href="javascript:;" onclick="document.getElementById('logout').submit()">登出</a></dd>
         @endguest
     </dl>
 </li>
+<form method="post" action="{{route('logout')}}" id="logout">
+    @csrf
+</form>

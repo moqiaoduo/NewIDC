@@ -40,6 +40,10 @@
   color: #FF5722 !important;
 }
 
+.newidc-margin-top20 {
+  margin-top: 20px;
+}
+
 @media screen and (max-width: 768px) {
   #newidc-nav {
     width: 100%;

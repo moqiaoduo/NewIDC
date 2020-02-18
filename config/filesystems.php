@@ -48,6 +48,16 @@ return [
             'root' => storage_path('app'),
         ],
 
+        'template' => [
+            'driver' => 'local',
+            'root' => storage_path('app/templates'),
+        ],
+
+        'plugin' => [
+            'driver' => 'local',
+            'root' => app_path('Plugin'),
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
