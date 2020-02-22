@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5e5a1624e1493dea743699ffaf83158",
+    "content-hash": "9f931ed366862c5b2e8a924786420043",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1414,16 +1414,16 @@
         },
         {
             "name": "moqiaoduo/new-idc-plugin",
-            "version": "dev-master",
+            "version": "v0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/new-idc-plugin.git",
-                "reference": "f97184a3d5324184849b6ed993e413360ebb2246"
+                "reference": "dcf7122c258d0ea7bb6c5bf6feeeb0c735a31578"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/new-idc-plugin/zipball/f97184a3d5324184849b6ed993e413360ebb2246",
-                "reference": "f97184a3d5324184849b6ed993e413360ebb2246",
+                "url": "https://api.github.com/repos/moqiaoduo/new-idc-plugin/zipball/dcf7122c258d0ea7bb6c5bf6feeeb0c735a31578",
+                "reference": "dcf7122c258d0ea7bb6c5bf6feeeb0c735a31578",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1434,7 +1434,7 @@
             },
             "require": {
                 "ext-json": "*",
-                "laravel/framework": "^6.2",
+                "laravel/framework": "~6.0",
                 "php": ">=7.0.0"
             },
             "require-dev": {
@@ -1470,7 +1470,7 @@
                 }
             ],
             "description": "NewIDC",
-            "time": "2020-02-18T17:17:19+00:00"
+            "time": "2020-02-20T06:30:59+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -6832,9 +6832,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "moqiaoduo/new-idc-plugin": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
