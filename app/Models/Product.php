@@ -41,6 +41,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $product_group_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereProductGroupId($value)
  */
 class Product extends Model
 {

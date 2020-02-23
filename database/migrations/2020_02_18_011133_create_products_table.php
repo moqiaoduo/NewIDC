@@ -15,6 +15,7 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('product_group_id');
             $table->string('name');
             $table->string('type')
                 ->comment('hosting: 虚机,reseller: 分销,vps: VPS,server:独服,others:其他');
