@@ -89,7 +89,7 @@ class ConfigController extends Controller
         return $this->form($content,'template',function (Form $form) {
             $form->select('template','使用模板')->options(arrayKeyValueSame(Storage::disk('template')
                 ->allDirectories()))->help('点击叉号将其置空则使用默认模板');
-            $form->divider('下面是模板设置');
+            $form->divider('下面是模板设置（保存后刷新）');
             $template=getOption('template');
             if (empty($template)) {
                 $form->multipleSelect('template_default_home_product','首页显示推荐产品')
