@@ -45,7 +45,7 @@
             "database/factories"
         ],
         "files": [
-            "app/helpers.php"
+            "bootstrap/helpers.php"
         ]
     },
     "autoload-dev": {
