@@ -1414,16 +1414,16 @@
         },
         {
             "name": "moqiaoduo/new-idc-plugin",
-            "version": "v0.1",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/new-idc-plugin.git",
-                "reference": "dcf7122c258d0ea7bb6c5bf6feeeb0c735a31578"
+                "reference": "070a1a3982e49e4a4c1e10553a0debec7ff460bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/new-idc-plugin/zipball/dcf7122c258d0ea7bb6c5bf6feeeb0c735a31578",
-                "reference": "dcf7122c258d0ea7bb6c5bf6feeeb0c735a31578",
+                "url": "https://api.github.com/repos/moqiaoduo/new-idc-plugin/zipball/070a1a3982e49e4a4c1e10553a0debec7ff460bc",
+                "reference": "070a1a3982e49e4a4c1e10553a0debec7ff460bc",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1454,10 +1454,7 @@
             "autoload": {
                 "psr-4": {
                     "NewIDC\\Plugin\\": "src/"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1469,8 +1466,8 @@
                     "email": "415372363@qq.com"
                 }
             ],
-            "description": "NewIDC",
-            "time": "2020-02-20T06:30:59+00:00"
+            "description": "NewIDC插件管理器",
+            "time": "2020-02-23T12:17:48+00:00"
         },
         {
             "name": "nesbot/carbon",
