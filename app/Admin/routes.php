@@ -8,6 +8,8 @@ Route::name("admin.")->prefix(config('admin.route.prefix'))->namespace(config('a
     ->middleware(config('admin.route.middleware'))->group(function (Router $router) {
 
         $router->get('/', 'HomeController@index');
+        $router->resource('product', 'ProductController');
+        $router->resource('product_group', 'ProductGroupController');
 
         $router->name('config.')->prefix('/config')->group(function (Router $router) {
             $router->get("/",'ConfigController@index')->name('base');
@@ -19,6 +21,7 @@ Route::name("admin.")->prefix(config('admin.route.prefix'))->namespace(config('a
 
         $router->group(['prefix'=>"/api"],function (Router $router) {
             $router->get('/products','ApiController@products');
+            $router->get('/product_groups','ApiController@product_groups');
         });
 
     });

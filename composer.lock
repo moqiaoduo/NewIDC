@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f931ed366862c5b2e8a924786420043",
+    "content-hash": "e104f109691e9ad8eddcc70ce8d1665e",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1414,16 +1414,16 @@
         },
         {
             "name": "moqiaoduo/new-idc-plugin",
-            "version": "0.1.1",
+            "version": "0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/new-idc-plugin.git",
-                "reference": "070a1a3982e49e4a4c1e10553a0debec7ff460bc"
+                "reference": "4a456f89826a93602404e01abe58b933710245d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/new-idc-plugin/zipball/070a1a3982e49e4a4c1e10553a0debec7ff460bc",
-                "reference": "070a1a3982e49e4a4c1e10553a0debec7ff460bc",
+                "url": "https://api.github.com/repos/moqiaoduo/new-idc-plugin/zipball/4a456f89826a93602404e01abe58b933710245d3",
+                "reference": "4a456f89826a93602404e01abe58b933710245d3",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1435,7 +1435,7 @@
             "require": {
                 "ext-json": "*",
                 "laravel/framework": "~6.0",
-                "php": ">=7.0.0"
+                "php": "^7.2"
             },
             "require-dev": {
                 "phpunit/phpunit": "~6.0"
@@ -1467,7 +1467,7 @@
                 }
             ],
             "description": "NewIDC插件管理器",
-            "time": "2020-02-23T12:17:48+00:00"
+            "time": "2020-02-23T17:15:20+00:00"
         },
         {
             "name": "nesbot/carbon",

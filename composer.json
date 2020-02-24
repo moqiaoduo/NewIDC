@@ -1,9 +1,9 @@
 {
-    "name": "laravel/laravel",
+    "name": "moqiaoduo/newidc",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "基于Laravel的域名主机管理系统",
     "keywords": [
-        "framework",
+        "newidc",
         "laravel"
     ],
     "license": "MIT",
@@ -15,7 +15,7 @@
         "laravel-admin-ext/media-manager": "^1.1",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
-        "moqiaoduo/new-idc-plugin": "^0.1.0"
+        "moqiaoduo/new-idc-plugin": "0.1.3"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

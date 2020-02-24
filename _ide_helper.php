@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 6.15.1 on 2020-02-19 01:19:38.
+ * Generated for Laravel 6.15.1 on 2020-02-24 01:21:23.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -15691,23 +15691,47 @@ namespace NewIDC\Plugin\Facade {
          * @return array 
          * @static 
          */ 
-        public static function pList()
+        public static function getList()
         {
                         /** @var \NewIDC\Plugin\Manager $instance */
-                        return $instance->pList();
+                        return $instance->getList();
+        }
+        
+        /**
+         * 列出启用的插件
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getEnableList()
+        {
+                        /** @var \NewIDC\Plugin\Manager $instance */
+                        return $instance->getEnableList();
+        }
+        
+        /**
+         * 获取服务器插件列表
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getServerPluginList()
+        {
+                        /** @var \NewIDC\Plugin\Manager $instance */
+                        return $instance->getServerPluginList();
         }
         
         /**
          * 检查插件是否启用
          *
-         * @param $slug
+         * @param $id
          * @return bool 
          * @static 
          */ 
-        public static function checkEnable($slug)
+        public static function checkEnable($id)
         {
                         /** @var \NewIDC\Plugin\Manager $instance */
-                        return $instance->checkEnable($slug);
+                        return $instance->checkEnable($id);
         }
         
         /**
