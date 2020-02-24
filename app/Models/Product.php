@@ -43,8 +43,12 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property int $product_group_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereProductGroupId($value)
+ * @property-read \App\Models\ProductGroup $group
  */
 class Product extends Model
 {
-    //
+    public function group()
+    {
+        return $this->belongsTo(ProductGroup::class);
+    }
 }

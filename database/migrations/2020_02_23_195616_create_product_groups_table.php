@@ -16,8 +16,8 @@ class CreateProductGroupsTable extends Migration
         Schema::create('product_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->integer('order');
-            $table->boolean('hide');
+            $table->integer('order')->default(0);
+            $table->boolean('hide')->default(false);
             $table->timestamps();
         });
     }

@@ -20,15 +20,20 @@ class CreateProductsTable extends Migration
             $table->string('type')
                 ->comment('hosting: 虚机,reseller: 分销,vps: VPS,server:独服,others:其他');
             $table->longText('description')->nullable();
+            $table->boolean('require_domain');
+            $table->boolean('ena_stock');
+            $table->integer('rest_stock');
             $table->boolean('hide');
             $table->boolean('enable');
             $table->json('price')->nullable()->comment('价格表');
-            $table->json('config')->nullable();
+            $table->json('price_configs')->nullable()->comment('价格配置');
+            $table->json('server_configs')->nullable()->comment('服务器插件配置');
             $table->integer('order')->default(0);
             $table->string('server_plugin')->nullable();
             $table->integer('server_id')->default(0);
-            $table->longText('free_domain')->nullable();
-            $table->json('extra')->nullable();
+            $table->json('upgrade_downgrade_config')->nullable()->comment('升降级配置');
+            $table->json('domain_configs')->nullable()->comment('域名配置');
+            $table->json('extra')->nullable()->comment('其他设置');
             $table->timestamps();
         });
     }

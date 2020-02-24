@@ -23,8 +23,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductGroup whereOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductGroup whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
  */
 class ProductGroup extends Model
 {
-    //
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
