@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 6.15.1 on 2020-02-24 01:21:23.
+ * Generated for Laravel 6.15.1 on 2020-02-25 00:23:44.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -15737,18 +15737,14 @@ namespace NewIDC\Plugin\Facade {
         /**
          * 触发钩子
          *
-         * @param string $hook_name
-         * @param string|callable|null $default
-         * @param mixed $data
-         * @param bool $last
-         * @param bool $returnArray
+         * @param array $params
          * @return mixed 
          * @static 
          */ 
-        public static function trigger($hook_name, $default = null, $data = null, $last = false, $returnArray = false)
+        public static function trigger($params)
         {
                         /** @var \NewIDC\Plugin\Manager $instance */
-                        return $instance->trigger($hook_name, $default, $data, $last, $returnArray);
+                        return $instance->trigger($params);
         }
          
     }
