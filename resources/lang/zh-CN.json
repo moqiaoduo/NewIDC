@@ -53,18 +53,15 @@
     "Created at": "创建时间",
     "Updated at": "更新时间",
     "Id": "ID",
-    "Base info": "基础信息",
     "Server": "服务器",
     "Domain": "域名",
-    "Free domain": "免费域名",
     "Others": "其他",
     "Upgrade": "升级",
     "Downgrade": "降级",
     "Period": "周期",
-    "Automatic activate": "自动开通",
-    "Allow to use renewing": "允许用于续费",
     "Options": "选项",
-    "Server plugin": "服务器插件",
     "Settings": "设置",
-    "Priority": "优先级"
+    "Priority": "优先级",
+    "Username": "用户名",
+    "Stocks": "库存"
 }
