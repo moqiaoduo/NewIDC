@@ -9,6 +9,7 @@ use Encore\Admin\Layout\Content;
 use Encore\Admin\Widgets\Form;
 use Encore\Admin\Widgets\Tab;
 use Illuminate\Http\Request;
+use PluginManager;
 use Storage;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -28,6 +29,10 @@ class ConfigController extends Controller
             "cron"=>['计划任务设置','addLink',route('admin.config.cron'),false],
             "template"=>['模板设置','addLink',route('admin.config.template'),false],
         ];
+        foreach (PluginManager::trigger(['hook'=>'settings','returnArray'=>true]) as $item) {
+            list($slug,$name) = explode("|",$item);
+            $items[$slug]=[$name,'addLink',$this->save_url.'/'.$slug,false];
+        }
         if (!array_key_exists($nowTab,$items)) throw new NotFoundHttpException();
         $items[$nowTab][1]='add';
         $items[$nowTab][2]=$content;
@@ -58,46 +63,50 @@ class ConfigController extends Controller
     public function index(Content $content)
     {
         return $this->form($content,'base',function (Form $form) {
-            $form->switch('tos','服务条款(TOS)')->help('启用后，用户注册/购买产品需要先同意服务条款');
-            $form->url('tos_url','服务条款URL');
-            $form->radio('service_username_generation','服务用户名生成方式')
-                ->options(['random'=>'随机用户名','domain'=>'从域名生成'])->default('random')
-                ->help('若选择“随机用户名”，则会生成sxxxxxxx样子的用户名（s加7个数字）;
-        若选择“从域名生成”，则会取域名中所有字母，若有重复则后加1');
-            $form->switch('site_service_username_unique','全站服务用户名惟一')
-                ->help('启用后，整个服务表不允许出现相同用户名的服务（启用之前不算）');
-            $form->switch('site_service_domain_unique','全站服务域名惟一')
-                ->help('启用后，整个服务表不允许出现相同域名的服务（启用之前不算）');
-            $form->email('admin_email','管理员邮箱')->help('用于接收系统邮件(如工单提醒)');
+            $form->switch('register',__('admin.config.register'));
+            $form->switch('tos',__('admin.config.tos'))->help(__('admin.help.config.tos'));
+            $form->url('tos_url',__('admin.config.tos_url'));
+            $form->radio('service_username_generation',__('admin.config.sug'))->default('random')
+                ->options(['random'=>__('admin.config.sug_random'),'domain'=>__('admin.config.sug_domain')])
+                ->help(__('admin.help.config.sug'));
+            $form->switch('site_service_username_unique',__('admin.config.site_suu'))
+                ->help(__('admin.help.config.site_suu'));
+            $form->switch('site_service_domain_unique',__('admin.config.site_sdu'))
+                ->help(__('admin.help.config.site_sdu'));
+            $form->email('admin_email',__('admin.config.admin_email'))
+                ->help(__('admin.help.config.admin_email'));
         });
     }
 
     public function cron(Content $content)
     {
         return $this->form($content,'cron',function (Form $form) {
-            $form->switch('cron','启用计划任务');
-            $form->html("注意：暂停和停止时间是同时计时的，若时间一致，则优先停止服务");
-            $form->switch('suspend_expire','暂停过期服务');
-            $form->number('suspend_after_days','过期n天后暂停')->default(0)->min(0);
-            $form->switch('terminate_expire','停止过期服务');
-            $form->number('terminate_after_days','过期n天后停止')->default(3)->min(0);
+            $form->switch('cron',__('admin.config.cron'));
+            $form->html(__('admin.help.config.cron'));
+            $form->switch('suspend_expire',__('admin.config.suspend_expire'));
+            $form->number('suspend_after_days',__('admin.config.suspend_after_days'))
+                ->default(0)->min(0);
+            $form->switch('terminate_expire',__('admin.config.terminate_expire'));
+            $form->number('terminate_after_days',__('admin.config.terminate_after_days'))
+                ->default(3)->min(0);
         });
     }
 
     public function template(Content $content)
     {
         return $this->form($content,'template',function (Form $form) {
-            $form->select('template','使用模板')->options(arrayKeyValueSame(Storage::disk('template')
-                ->allDirectories()))->help('点击叉号将其置空则使用默认模板');
-            $form->divider('下面是模板设置（保存后刷新）');
+            $form->select('template',__('admin.config.template'))
+                ->options(arrayKeyValueSame(Storage::disk('template')->allDirectories()))
+                ->help(__('admin.help.config.template'));
+            $form->divider(__('admin.help.config.tpl_settings'));
             $template=getOption('template');
             if (empty($template)) {
-                $form->multipleSelect('template_default_home_product','首页显示推荐产品')
+                $form->multipleSelect('template_default_home_product',__('admin.config.tpl_home_product'))
                     ->options(function ($ids) {
                         if ($ids)
                             return Product::find($ids)->pluck('name', 'id');
                     })->ajax('/admin/api/products')->config('maximumSelectionLength',4)
-                    ->help('选中的产品将在首页展示，最多4个');
+                    ->help(__('admin.help.config.tpl_hp'));
             } else {
                 $settings_file=storage_path('app/templates/'.$template.'/settings.php');
                 if (file_exists($settings_file)) $configs=include($settings_file)??[];
@@ -118,8 +127,17 @@ class ConfigController extends Controller
 
     public function third_part(Content $content)
     {
-        return $this->form($content,\request()->route()->fallbackPlaceholder,function (Form $form) {
-
+        return $this->form($content,$page=\request()->route()->fallbackPlaceholder,function (Form $form) use ($page) {
+            $configs=PluginManager::trigger(['hook'=>$page.'_settings','last'=>true]);
+            foreach ((array) $configs as $key=>$config) {
+                $type=$config['type'];
+                $label=$config['label'];
+                unset($config['type'],$config['label']);
+                $t=$form->$type($key,$label);
+                foreach ($config as $k=>$v) {
+                    $t->$k($v);
+                }
+            }
         });
     }
 
@@ -132,7 +150,7 @@ class ConfigController extends Controller
         foreach ($options as $key=>$val) {
             setOption($key,$val);
         }
-        admin_toastr("保存成功");
+        admin_toastr(__('admin.save_succeeded'));
         return back();
     }
 }

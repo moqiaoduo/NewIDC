@@ -26,9 +26,11 @@ if (!function_exists('setOption')) {
      */
     function setOption($key, $value, $uid=0)
     {
-        if (Schema::hasTable("options")) {
-            DB::table("options")->updateOrInsert(compact('key','uid'),compact('value'));
-        }
+        try {
+            if (Schema::hasTable("options")) {
+                DB::table("options")->updateOrInsert(compact('key','uid'),compact('value'));
+            }
+        } catch (Exception $e) {}
     }
 }
 
@@ -43,11 +45,13 @@ if (!function_exists('getOption'))
      * @return mixed|null
      */
     function getOption($key, $default=null, $uid=0) {
-        if (Schema::hasTable("options")) {
-            $result=DB::table("options")->where("key",$key)->where('uid',$uid)->first();
-            if (!$result || ($val=$result->value)===null) return $default;
-            return $val;
-        }
+        try {
+            if (Schema::hasTable("options")) {
+                $result=DB::table("options")->where("key",$key)->where('uid',$uid)->first();
+                if (!$result || ($val=$result->value)===null) return $default;
+                return $val;
+            }
+        } catch (Exception $e) {}
         return $default;
     }
 }
@@ -61,12 +65,14 @@ if (!function_exists('getOptions')) {
      * @return \Illuminate\Support\Collection|null
      */
     function getOptions($keys=null,$uid=0) {
-        if (Schema::hasTable("options")) {
-            $db=DB::table("options")->where('uid',$uid);
-            if ($keys&&is_array($keys))
-                $db=$db->whereIn('key',$keys);
-            return $db->get()->pluck('value','key');
-        }
+        try {
+            if (Schema::hasTable("options")) {
+                $db=DB::table("options")->where('uid',$uid);
+                if ($keys&&is_array($keys))
+                    $db=$db->whereIn('key',$keys);
+                return $db->get()->pluck('value','key');
+            }
+        } catch (Exception $e) {}
         return null;
     }
 }

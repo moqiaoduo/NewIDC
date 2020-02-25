@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->longText('description')->nullable();
             $table->boolean('require_domain');
             $table->boolean('ena_stock');
-            $table->integer('rest_stock');
+            $table->integer('stocks')->nullable();
             $table->boolean('hide');
             $table->boolean('enable');
             $table->json('price')->nullable()->comment('价格表');
@@ -30,7 +30,7 @@ class CreateProductsTable extends Migration
             $table->json('server_configs')->nullable()->comment('服务器插件配置');
             $table->integer('order')->default(0);
             $table->string('server_plugin')->nullable();
-            $table->integer('server_id')->default(0);
+            $table->integer('server_id')->nullable();
             $table->json('upgrade_downgrade_config')->nullable()->comment('升降级配置');
             $table->json('domain_configs')->nullable()->comment('域名配置');
             $table->json('extra')->nullable()->comment('其他设置');

@@ -397,14 +397,20 @@ return [
     */
     'extensions' => [
         'chartjs' => [
-
             // Set to `false` if you want to disable this extension
             'enable' => true,
         ],
         'media-manager' => [
-
             // Select a local disk that you configured in `config/filesystem.php`
             'disk' => 'local'
+        ],
+        'wang-editor' => [
+            // 如果要关掉这个扩展，设置为false
+            'enable' => true,
+            // 编辑器的配置
+            'config' => [
+
+            ]
         ],
     ],
 ];

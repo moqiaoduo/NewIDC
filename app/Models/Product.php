@@ -44,9 +44,32 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $product_group_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereProductGroupId($value)
  * @property-read \App\Models\ProductGroup $group
+ * @property int $require_domain
+ * @property int $ena_stock
+ * @property int $rest_stock
+ * @property mixed|null $price_configs 价格配置
+ * @property mixed|null $server_configs 服务器插件配置
+ * @property mixed|null $upgrade_downgrade_config 升降级配置
+ * @property mixed|null $domain_configs 域名配置
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereDomainConfigs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereEnaStock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product wherePriceConfigs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereRequireDomain($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereRestStock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereServerConfigs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereUpgradeDowngradeConfig($value)
  */
 class Product extends Model
 {
+    protected $casts=[
+        'price'=>'json',
+        'price_configs'=>'json',
+        'server_configs'=>'json',
+        'upgrade_downgrade_config'=>'json',
+        'domain_configs'=>'json',
+        'extra'=>'json'
+    ];
+
     public function group()
     {
         return $this->belongsTo(ProductGroup::class);

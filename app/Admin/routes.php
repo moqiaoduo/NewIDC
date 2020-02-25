@@ -10,6 +10,7 @@ Route::name("admin.")->prefix(config('admin.route.prefix'))->namespace(config('a
         $router->get('/', 'HomeController@index');
         $router->resource('product', 'ProductController');
         $router->resource('product_group', 'ProductGroupController');
+        $router->resource('service','ServiceController');
 
         $router->name('config.')->prefix('/config')->group(function (Router $router) {
             $router->get("/",'ConfigController@index')->name('base');

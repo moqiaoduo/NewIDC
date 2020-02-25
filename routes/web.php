@@ -12,8 +12,8 @@
 */
 
 Auth::routes([
-    'verify'=>config('email_verify',false),
-    'register'=>config('register',true)
+    'verify'=>getOption('email_verify',false),
+    'register'=>getOption('register',true)
 ]);
 
 Route::get('/', 'IndexController@index');

@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductGroup;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -97,34 +98,35 @@ class ProductController extends AdminController
     {
         $form = new Form(new Product());
 
-        $form->tab(__('Base info'), function (Form $form) {
-            $form->text('name', __('Name'));
-            $form->text('type', __('Type'));
-            $form->select('product_group_id', __('Product group'));
-            $form->textarea('description', __('Description'));
-            $form->switch('hide', __('Hide'));
-            $form->switch('enable', __('Enable'))->default(1);
+        $form->tab(__('admin.product.tab.base'), function (Form $form) {
+            $form->text('name', __('Name'))->required();
+            $form->select('type', __('Type'))->options(__('type'))->required();
+            $form->select('product_group_id', __('Product group'))->required()
+                ->options(function ($id) {
+                    if ($id && $group=ProductGroup::find($id))
+                        return [$group->id => $group->name . '(GID:' . $group->id . ')'];
+                })->ajax('/admin/api/product_groups');
+            $form->editor('description', __('Description'));
+            $form->switch('require_domain',__('admin.product.domain.require'))
+                ->help(__('admin.help.product.require_domain'));
+            $form->switch('ena_stock',__('admin.product.ena_stock'))
+                ->help(__('admin.help.product.ena_stock'));
+            $form->number('stocks',__('Stocks'))->default(0);
             $form->number('order', __('Priority'))->default(0)
                 ->help(__('admin.help.product.order'));
-        })->tab(__('Price'), function (Form $form) {
-            $form->table('price',__('Price'),function (Form\NestedForm $table) {
-                $table->text('name',__('Name'));
-                $table->text('period',__('Period'));
-                $table->text('price',__('Price'));
-                $table->checkbox('options',__('Options'))->options([
-                    'enable'=>__('Enable'),
-                    'auto_activate'=>__('Automatic activate'),
-                    'allow_renew'=>__('Allow to use renewing')
-                ]);
-            });
-        })->tab(__('Upgrade').'/'.__('Downgrade'),function (Form $form) {
+            $form->switch('hide', __('Hide'));
+            $form->switch('enable', __('Enable'))->default(1);
+        })->tab(__('admin.product.tab.price'), function (Form $form) {
+            $form->price('price');
+            $form->embeds('price_configs','',function (Form\EmbeddedForm $form) {
 
-        })->tab(__('Server'), function (Form $form) {
+            });
+        })->tab(__('admin.product.tab.api'), function (Form $form) {
             $info=PluginManager::getList();
             foreach (PluginManager::getServerPluginList() as $plugin) {
                 $plugins[$plugin]=$info[$plugin]['name']??$plugin;
             }
-            $form->select('server_plugin', __('Server plugin'))->options($plugins??[]);
+            $form->select('server_plugin', __('admin.product.server.plugin'))->options($plugins??[]);
             $form->select('server_id', __('Server'))->load('city', '/api/city');
             $plugin=$form->model()->value('server_plugin');
             $form->embeds('config.server',__('Settings'),function ($form) use ($plugin) {
@@ -141,15 +143,40 @@ class ProductController extends AdminController
                     }
                 }
             });
+        })->tab(__('Upgrade').'/'.__('Downgrade'),function (Form $form) {
+            $form->embeds('upgrade_downgrade_config','',function (Form\EmbeddedForm $form) {
+                $form->switch('enable',__('admin.config.enable_udg'));
+            });
         })->tab(__('Domain'),function (Form $form) {
-            $form->tags('free_domain', __('Free domain'));
+            $form->embeds('domain_configs','',function (Form\EmbeddedForm $form) {
+                $form->tags('free_domain', __('admin.product.domain.free'))
+                    ->help(__('admin.help.product.free_domain'));
+            });
         })->tab(__('Others'),function (Form $form) {
-            $form->text('extra', __('Extra'));
+
         });
 
         $form->footer(function (Form\Footer $footer) {
             // 默认勾选`继续编辑`
             $footer->checkEditing();
+        });
+
+        $form->saving(function (Form $form) {
+            $price_table=[];
+            foreach ($form->price as $price) {
+                if (empty($price['name'])) continue;
+                $price_table[]=[
+                    'name'=>$price['name'],
+                    'period'=>$price['period'],
+                    'period_unit'=>$price['period_unit'],
+                    'price'=>$price['price'],
+                    'remark'=>$price['remark'],
+                    'enable'=>isset($price['enable']),
+                    'auto_activate'=>isset($price['auto_activate']),
+                    'allow_renew'=>isset($price['allow_renew'])
+                ];
+            }
+            $form->price=$price_table;
         });
 
         return $form;

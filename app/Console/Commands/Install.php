@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Encore\Admin\Auth\Database\Administrator;
 use Exception;
 use Illuminate\Console\Command;
 use Schema;
@@ -41,19 +42,45 @@ class Install extends Command
     {
         $this->line(__('install.welcome'));
         if (!file_exists('.env')) {
-            $this->error("env文件不存在，请将.env.example复制一份并重命名为.env");
+            $this->error(__('install.env_not_exist'));
             goto stop_inst;
         }
         try {
             $tables=Schema::getAllTables();
-        }catch (Exception $e) {
-            $this->warn('检测到数据库未连接成功，请先修改.env中数据库信息');
+        } catch (Exception $e) {
+            $this->warn(__('install.database_connect_fail'));
             goto stop_inst;
         }
         if (!empty($tables) && !$this->confirm(__('install.exist_tables'))) goto stop_inst;
-        $name = $this->ask('');
+        $this->info(__('install.admin_config_tip'));
+        $admin_username = $this->ask(__('install.admin_username_tip'),'admin');
+        while (empty($admin_password = $this->secret(__('install.admin_password_tip'))))
+            $this->warn(__('install.password_empty'));
+        if ($this->confirm(__('install.recommend_webadmin'))) {
+            $webadmin_username = $this->ask(__('install.webadmin_username_tip'),'webadmin');
+             while (empty($webadmin_password = $this->secret(__('install.webadmin_password_tip'))))
+                $this->warn(__('install.password_empty'));
+        }
+        if (!$this->confirm(__('install.ready'))) goto stop_inst;
+        $this->call('migrate');
+        $this->call('db:seed');
+        Administrator::truncate();
+        Administrator::create([
+            'username' => $admin_username,
+            'password' => bcrypt($admin_password),
+            'name'     => '超级管理员',
+        ]);
+        if (isset($webadmin_username) && isset($webadmin_password)) {
+            Administrator::create([
+                'username' => $webadmin_username,
+                'password' => bcrypt($webadmin_password),
+                'name'     => '网站管理员',
+            ]);
+        }
+        $this->info(__('install.success',['url'=>config('app.url')]));
+        return 0;
         stop_inst:
-        $this->error("已退出安装");
+        $this->error(__('install.exit'));
         return 1;
     }
 }

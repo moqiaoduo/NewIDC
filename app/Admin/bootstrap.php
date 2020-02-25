@@ -18,4 +18,9 @@
  *
  */
 
-Encore\Admin\Form::forget(['map', 'editor']);
+use App\Admin\Extensions\PriceTable;
+use Encore\Admin\Form;
+
+Form::forget(['map']);
+
+Form::extend('price', PriceTable::class);
