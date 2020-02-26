@@ -14,6 +14,10 @@ class PriceTable extends Field
 
         $count = count($this->value??[]);
 
+        $day_lang=__('admin.product.price.day');
+        $month_lang=__('admin.product.price.month');
+        $year_lang=__('admin.product.price.year');
+
         $tr_tpl = <<<HTML
 <tr>
     <td><input type="text" name="{$name}[new][name]" class="form-control"></td>
@@ -21,9 +25,9 @@ class PriceTable extends Field
         <input type="text" name="{$name}[new][period]" class="form-control"
             style="width: calc(100% - 65px);display: inline-block;">
         <select name="{$name}[new][period_unit]" class="form-control" style="width: 60px;display: inline-block;">
-            <option value="day">天</option>
-            <option value="month">月</option>
-            <option value="year">年</option>
+            <option value="day">$day_lang</option>
+            <option value="month">$month_lang</option>
+            <option value="year">$year_lang</option>
         </select>
     </td>
     <td><input type="text" name="{$name}[new][price]" class="form-control"></td>

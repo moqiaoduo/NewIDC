@@ -25,12 +25,18 @@
                         </td>
                         <td>
                             <input type="text" name="{{$name}}[{{$loop->index}}][period]" class="form-control"
-                                   style="width: calc(100% - 65px);display: inline-block;" value="{{$item['period']}}">
+                                   style="width: calc(100% - 105px);display: inline-block;" value="{{$item['period']}}">
                             <select name="{{$name}}[{{$loop->index}}][period_unit]" class="form-control"
-                                    style="width: 60px;display: inline-block;">
-                                <option value="day" @if($item['period_unit']=='day') selected @endif>天</option>
-                                <option value="month" @if($item['period_unit']=='month') selected @endif>月</option>
-                                <option value="year" @if($item['period_unit']=='year') selected @endif>年</option>
+                                    style="width: 100px;display: inline-block;">
+                                <option value="day" @if($item['period_unit']=='day') selected @endif>
+                                    @lang('admin.product.price.day')
+                                </option>
+                                <option value="month" @if($item['period_unit']=='month') selected @endif>
+                                    @lang('admin.product.price.month')
+                                </option>
+                                <option value="year" @if($item['period_unit']=='year') selected @endif>
+                                    @lang('admin.product.price.year')
+                                </option>
                             </select>
                         </td>
                         <td>

@@ -158,6 +158,9 @@ return [
             'enable'            => '启用周期',
             'auto_activate'     => '自动开通',
             'allow_renew'       => '允许用本周期续费',
+            'day'               => '天',
+            'month'             => '月',
+            'year'              => '年'
         ],
         'domain'                => [
             'free'              => '免费域名',
