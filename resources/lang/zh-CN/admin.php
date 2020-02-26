@@ -103,12 +103,14 @@ return [
     'prev'                   => '上一步',
     'next'                   => '下一步',
     'quick_create'           => '快速创建',
-    'help'                  => [
-        'product'           => [
-            'order'         => '优先级越大排得越靠前',
-            'free_domain'   => '前面不用加. ，用逗号或回车结束输入',
-            'require_domain'=> '用户订购时，要求用户输入有效域名',
-            'ena_stock'     => '启用后，将限制该产品的购买数量，每次下单后库存-1'
+    'help'                      => [
+        'product'               => [
+            'order'             => '优先级越大排得越靠前',
+            'free_domain'       => '前面不用加. ，用逗号或回车结束输入',
+            'require_domain'    => '用户订购时，要求用户输入有效域名',
+            'ena_stock'         => '启用后，将限制该产品的购买数量，每次下单后库存-1',
+            'unlimited_when_buy'=> '启用后，用户购买时可以选择永久周期，否则只能续费时选择（前提是设置了永久周期）',
+            'price_name'        => '如想实现本地化，请选择候选项($开头项)'
         ],
         'config'            => [
             'tos'           => '启用后，用户注册/购买产品需要先同意服务条款',
@@ -160,7 +162,15 @@ return [
             'allow_renew'       => '允许用本周期续费',
             'day'               => '天',
             'month'             => '月',
-            'year'              => '年'
+            'year'              => '年',
+            'unlimited'         => '永久',
+            'unlimited_when_buy'=> '购买时允许选择永久周期',
+            '$daily'            => '日付',
+            '$monthly'          => '月付',
+            '$annually'         => '年付',
+            '$semi-annually'    => '半年付',
+            '$quarterly'        => '季付',
+            '$unlimited'        => '永久'
         ],
         'domain'                => [
             'free'              => '免费域名',

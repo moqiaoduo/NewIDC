@@ -7,7 +7,11 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>@lang('admin.product.price.name')</th>
+                    <th>
+                        @lang('admin.product.price.name')
+                        <i class="fa fa-question" data-toggle="tooltip"
+                           title="@lang('admin.help.product.price_name')"></i>
+                    </th>
                     <th>@lang('admin.product.price.period')</th>
                     <th>@lang('admin.product.price.price')</th>
                     <th>@lang('admin.product.price.remark')</th>
@@ -18,54 +22,7 @@
                 </thead>
                 <tbody id="pt-{{$name}}-tbody">
                 @foreach((array) $value as $item)
-                    <tr>
-                        <td>
-                            <input type="text" name="{{$name}}[{{$loop->index}}][name]" class="form-control"
-                                   value="{{$item['name']}}">
-                        </td>
-                        <td>
-                            <input type="text" name="{{$name}}[{{$loop->index}}][period]" class="form-control"
-                                   style="width: calc(100% - 105px);display: inline-block;" value="{{$item['period']}}">
-                            <select name="{{$name}}[{{$loop->index}}][period_unit]" class="form-control"
-                                    style="width: 100px;display: inline-block;">
-                                <option value="day" @if($item['period_unit']=='day') selected @endif>
-                                    @lang('admin.product.price.day')
-                                </option>
-                                <option value="month" @if($item['period_unit']=='month') selected @endif>
-                                    @lang('admin.product.price.month')
-                                </option>
-                                <option value="year" @if($item['period_unit']=='year') selected @endif>
-                                    @lang('admin.product.price.year')
-                                </option>
-                            </select>
-                        </td>
-                        <td>
-                            <input type="text" name="{{$name}}[{{$loop->index}}][price]" class="form-control"
-                                   value="{{$item['price']}}">
-                        </td>
-                        <td>
-                            <input type="text" name="{{$name}}[{{$loop->index}}][remark]" class="form-control"
-                                   value="{{$item['remark']}}">
-                        </td>
-                        <td>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="{{$name}}[{{$loop->index}}][enable]" class="pt-checkbox"
-                                       @if($item['enable']) checked @endif />
-                            </label>
-                        </td>
-                        <td>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="{{$name}}[{{$loop->index}}][auto_activate]"
-                                       class="pt-checkbox" @if($item['auto_activate']) checked @endif />
-                            </label>
-                        </td>
-                        <td>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="{{$name}}[{{$loop->index}}][allow_renew]"
-                                       class="pt-checkbox" @if($item['allow_renew']) checked @endif />
-                            </label>
-                        </td>
-                    </tr>
+                    @include('admin.price_table_tr',['index'=>$loop->index])
                 @endforeach
                 </tbody>
             </table>
