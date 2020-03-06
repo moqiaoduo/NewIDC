@@ -98,8 +98,44 @@ return [
         'filter_clear'       => '显示全部',
         'filter_placeholder' => '过滤',
     ],
-    'grid_items_selected'    => '已选择 {n} 项',
-    'menu_titles'            => [],
+    'grid_items_selected'       => '已选择 {n} 项',
+    'menu_titles'               => [
+        'dashboard'             => '仪表盘',
+        'admin'                 => '后台管理',
+        'administrators'        => '管理员',
+        'roles'                 => '角色',
+        'permission'            => '权限',
+        'menu'                  => '菜单',
+        'operation_log'         => '操作日志',
+        'setup'                 => '配置',
+        'file_manager'          => '文件管理',
+        'products/services'     => '产品/服务',
+        'product_group'         => '产品组',
+        'server_group'          => '服务器组',
+        'support_tickets'       => '工单',
+        'add_user'              => '添加用户',
+        'manage_affiliates'     => '推广管理',
+        'mass_mail_tool'        => '群发邮件工具',
+        'gateway_log'           => '网关日志',
+        'network_issues'        => '网络故障',
+        'reports'               => '报告',
+        'daily_performance'     => '每日表现',
+        'annual_income_report'  => '年度收入报告',
+        'new_customers'         => '新客户',
+        'utilities'             => '工具',
+        'to-do_list'            => '待办事项列表',
+        'whois_lookup'          => 'WHOIS 查询',
+        'domain_resolver'       => '域名解析查询',
+        'system_status'         => '系统状态',
+        'logs'                  => '日志',
+        'activity_log'          => '系统活动日志',
+        'admin_log'             => '后台登录日志',
+        'module_log'            => '模块日志',
+        'email_message_log'     => '邮件日志',
+        'open_new_ticket'       => '开启新工单',
+        'settings'              => '网站设置',
+        'ticket_status'         => '工单状态'
+    ],
     'prev'                   => '上一步',
     'next'                   => '下一步',
     'quick_create'           => '快速创建',
@@ -123,9 +159,26 @@ return [
             'template'      => '点击叉号将其置空则使用默认模板',
             'tpl_settings'  => '下面是模板设置（保存后刷新）',
             'tpl_hp'        => '选中的产品将在首页展示，最多4个'
+        ],
+        'server'                    => [
+            'access_hash'           => '某些服务器可能需要提供Access Key/Hash来访问API',
+            'max_load'              => '该值为服务器最大承载服务的数量，负载满时，将不允许加入服务到该服务器。0为无限。',
+            'status_address'        => '要在服务器状态页上显示此服务器，请输入服务器状态PHP文件的URL（需要手动上传到每个服务器）
+            -例如https://www.example.com/status/',
+            'api_access_address'    => '因为有些时候希望用户访问的面板地址跟系统访问API的地址不一样，因此可以选择API采用主机名
+            或是IP来访问API。顺便一提，用户前端永远以主机名为优先。',
+            'api_access_ssl'        => '开启后，API访问默认走HTTPS',
+            'access_ssl'            => '开启后，用户访问面板默认走HTTPS',
+            'port'                  => '不填时，端口为接口插件设置的默认值（部分插件该设置不生效）'
         ]
     ],
     'config'                    => [
+        'tab'                   => [
+            'base'              => '基础设置',
+            'cron'              => '计划任务设置',
+            'template'          => '模板设置'
+        ],
+        'tip'                   => '修改后切换选项卡之前先保存哦',
         'register'              => '允许注册',
         'tos'                   => '服务条款(TOS)',
         'tos_url'               => '服务条款URL',
@@ -176,8 +229,40 @@ return [
             'free'              => '免费域名',
             'require'           => '要求提供域名'
         ],
-        'server'                => [
-            'plugin'            => '服务器类型'
+        'server'                    => [
+            'plugin'                => '接口',
+            'group'                 => '服务器组',
+            'detail'                => '服务器信息',
+            'access_hash'           => '访问哈希',
+            'max_load'              => '最大负载数',
+            'status_address'        => '服务器状态地址',
+            'api_access_address'    => '访问API的地址',
+            'api_access_ssl'        => 'API使用SSL',
+            'access_ssl'            => 'WEB面板使用SSL',
+            'select_server_method'  => '选择服务器的方式'
         ]
+    ],
+    'titles'                    => [
+        'config'                => '网站设置',
+        'product'               => '产品管理',
+        'product_group'         => '产品组管理',
+        'server'                => '服务器管理',
+        'server_group'          => '服务器组管理',
+        'service'               => '服务管理',
+        'user'                  => '用户管理',
+        'ticket'                => '工单管理',
+        'department'            => '部门管理',
+        'ticket_status'         => '工单状态'
+    ],
+    'user'                      => [
+        'last_logon_at'         => '最后登录时间',
+        'email_verified_at'     => '邮箱认证时间'
+    ],
+    'ticket'                    => [
+        'active'                => '激活状态',
+        'awaiting'              => '待回复状态',
+        'auto_close'            => '自动关闭',
+        'order'                 => '排序',
+        'status_color'          => '状态颜色'
     ]
 ];
