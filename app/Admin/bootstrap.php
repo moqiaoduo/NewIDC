@@ -24,3 +24,57 @@ use Encore\Admin\Form;
 Form::forget(['map']);
 
 Form::extend('price', PriceTable::class);
+
+Admin::navbar(function (\Encore\Admin\Widgets\Navbar $navbar) {
+    $list='';$url=route('admin.setting');
+    foreach (Storage::disk('lang')->allDirectories() as $directory) {
+        $active=$directory===request()->user('admin')->lang?' class="active"':"";
+        $list.=<<<HTML
+        <li role="presentation"$active>
+			<a role="menuitem" tabindex="-1" href="javascript:;" onclick="changeLang('$directory')"
+			>$directory</a>
+		</li>
+HTML;
+
+    }
+
+    $navbar->right(<<<HTML
+<style>
+.open .lang-fast {
+width: 244px;
+display: flex;
+flex-flow: wrap;
+}
+.lang-fast li {
+width: 80px;
+}
+</style>
+<script>
+function changeLang(lang) {
+    $.ajax({
+        url: '$url',
+        method: 'POST',
+        data: {
+            lang:lang,
+            _method:'PUT',
+            _token:LA.token
+        },
+        success:function(data){
+            window.location.reload()
+        }
+    });
+}
+</script>
+<li>
+    <a href="#" id="lang-fast" data-toggle="dropdown">
+        <i class="fa fa-language"></i>
+    </a>
+    <ul class="dropdown-menu lang-fast" role="menu" aria-labelledby="lang-fast">
+$list
+	</ul>
+</li>
+
+HTML
+);
+
+});
