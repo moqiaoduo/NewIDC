@@ -7,6 +7,14 @@
         @media screen and (max-width: 768px) {
             left: 0 !important;
         }
+        #lang {
+            position: fixed;
+            right: 5px;
+            bottom: 0;
+            select {
+                padding: 5px 10px;
+            }
+        }
     }
     &-nav-show-button {
         width: 40px;

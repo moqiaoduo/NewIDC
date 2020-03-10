@@ -3,7 +3,7 @@
  * 用于布局
  */
 
-layui.use(['element','jquery'],() => {
+layui.use(['element','jquery'],function() {
     let element = layui.element,
         $ = layui.jquery;
 
@@ -14,20 +14,20 @@ layui.use(['element','jquery'],() => {
     });
 
     // 展开收起菜单
-    $(".newidc-nav-show-button").on('click', () => {
+    $(".newidc-nav-show-button").on('click', function() {
         let nav = $("#newidc-nav");
         let width = $(window).width();
         if (width > 768) {
             if (nav.is(":hidden")) {
                 nav.css("width","0");
                 nav.show();
-                nav.animate({width: '200px'},() => {
+                nav.animate({width: '200px'},function() {
                     nav.css("width","");
                 });
                 changeMenuIcon(1, 1);
                 modBodyLeft(width, false)
             } else {
-                nav.animate({width: '0'},() => {
+                nav.animate({width: '0'},function() {
                     nav.css("width","");
                     nav.hide();
                 });
@@ -35,7 +35,7 @@ layui.use(['element','jquery'],() => {
                 modBodyLeft(width, true)
             }
         } else {
-            nav.slideToggle(() => {
+            nav.slideToggle(function() {
                 let hidden = nav.is(":hidden");
                 changeMenuIcon(width > 768 ? 1 : 2, hidden ? 2 : 1);
                 modBodyLeft(width, hidden ? 2 : 1)
@@ -83,7 +83,7 @@ layui.use(['element','jquery'],() => {
     function modBodyLeft(width, hidden, immediate = false) {
         let body = $("#newidc-body");
         if (immediate) body.css("left", width<=768||hidden?"0":"");
-        else body.animate({left: width<=768||hidden?"0":"200px"}, () => {
+        else body.animate({left: width<=768||hidden?"0":"200px"}, function() {
             if (body.css("left") === "200px") body.css("left","")
         })
     }

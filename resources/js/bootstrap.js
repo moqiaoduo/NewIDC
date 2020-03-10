@@ -1,4 +1,4 @@
-window._ = require('lodash');
+// window._ = require('lodash');
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
