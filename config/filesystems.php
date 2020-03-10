@@ -58,6 +58,16 @@ return [
             'root' => app_path('Plugin'),
         ],
 
+        'upgrade' => [
+            'driver' => 'local',
+            'root' => base_path('upgrades'),
+        ],
+
+        'lang' => [
+            'driver' => 'local',
+            'root' => resource_path('lang'),
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
