@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed|null $config
  * @property int $order
  * @property string|null $server_plugin
- * @property int $server_id
  * @property string|null $free_domain
  * @property mixed|null $extra
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -36,7 +35,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereServerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereServerPlugin($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereUpdatedAt($value)
@@ -58,6 +56,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereRestStock($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereServerConfigs($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereUpgradeDowngradeConfig($value)
+ * @property int|null $stocks
+ * @property int|null $server_group_id
+ * @property-read \App\Models\ServerGroup|null $server_group
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereServerGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereStocks($value)
  */
 class Product extends Model
 {
@@ -73,5 +76,10 @@ class Product extends Model
     public function group()
     {
         return $this->belongsTo(ProductGroup::class);
+    }
+
+    public function server_group()
+    {
+        return $this->belongsTo(ServerGroup::class);
     }
 }

@@ -37,10 +37,22 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service whereUsername($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Product $product
+ * @property-read \App\Models\Server $server
  */
 class Service extends Model
 {
     protected $casts=[
         'extra'=>'json'
     ];
+
+    public function server()
+    {
+        return $this->belongsTo(Server::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
