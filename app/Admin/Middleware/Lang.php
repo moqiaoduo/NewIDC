@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Admin\Middleware;
 
 use App;
 use Closure;
@@ -16,12 +16,9 @@ class Lang
      */
     public function handle($request, Closure $next)
     {
-        // 首先判断用户有没有登录和设置语言，如果没有则采用cookie中储存的语言
-        if (($user=$request->user()) && $user->lang) {
+        // 判断用户有没有登录和设置语言
+        if (($user=$request->user('admin')) && $user->lang)
             App::setLocale($user->lang);
-        } else {
-            App::setLocale($request->cookie('language',config('app.locale')));
-        }
         return $next($request);
     }
 }
