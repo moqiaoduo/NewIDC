@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->double('funds')->default(0);
+            $table->string('lang')->nullable();
+            $table->json('extra')->nullable();
             $table->timestamp('last_logon_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
