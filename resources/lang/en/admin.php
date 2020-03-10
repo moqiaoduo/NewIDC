@@ -104,7 +104,148 @@ return [
     'prev'                   => 'Prev',
     'next'                   => 'Next',
     'quick_create'           => 'Quick create',
+    'help'                      => [
+        'product'               => [
+            'free_domain'       => 'Input the free domain you provide to users without a dot prefix.
+                                    The comma or enter end input.',
+            'require_domain'    => 'The user is required to enter a valid domain name when ordering.',
+            'ena_stock'         => 'When enabled, the number of purchases of this product will be limited.',
+            'unlimited_when_buy'=> 'When enabled, users can select a permanent period when they purchase,
+                                    otherwise they can only select when they renew.',
+            'price_name'        => 'Use candidate If you want localization. e.g. $monthly'
+        ],
+        'config'            => [
+            'tos'           => 'If enable, clients must agree to your Terms of Service.',
+            'sug'           => 'If "Random username" is selected, a user name like sxxxxxxx will be generated;
+            If "Generate from domain" is selected, all letters in the domain name will be taken.',
+            'site_suu'      => 'When enabled, services with the same username in the whole website are not allowed.',
+            'site_sdu'      => 'When enabled, services with the same domain in the whole website are not allowed.',
+            'admin_email'   => 'The default sender address used for emails sent by NewIDC',
+            'template'      => 'You can click the cross symbol on the right side to use default template.',
+            'tpl_settings'  => 'Template Settings (Need to save first)',
+            'tpl_hp'        => 'You can show 4 products at most at the homepage.',
+            'url'           => 'It is very important for Cron. Please make sure the System URL is right.',
+            'suspend_days'              => 'Enter the number of days after the due payment date you want to wait before suspending the account',
+            'termination_days'          => 'Enter the number of days after the due payment date you want to wait before terminating the account',
+            'send_suspension_email'     => 'Send the Service Suspension Notification email on successful Suspend.',
+            'send_unsuspension_email'   => 'Send the Service Unsuspension Notification email on successful Unsuspend.',
+            'unsuspension'              => 'Enable automatic unsuspension on payment',
+        ],
+        'server'                    => [
+            'access_hash'           => 'Some servers may need to provide Access Key / Hash to access the API.',
+            'max_load'              => 'This value is the maximum number of services hosted by the server.
+                When the load is full, the server will not be allowed to join the service. 0 means infinite.',
+            'status_address'        => 'To display this server on the server status page, enter the full path to the
+            server status folder (required to be uploaded to each server you want to monitor)
+            - eg. https://www.example.com/status/',
+            'api_access_address'    => 'Access API through IP or Hostname.',
+            'api_access_ssl'        => 'When enabled, HTTPS is used by default for API access.',
+            'access_ssl'            => 'When enabled, the user access web panel defaults to HTTPS',
+            'port'                  => 'Use module default port when empty. Some module does not recognize this setting.'
+        ]
+    ],
+    'config'                    => [
+        'title'                 => 'Settings',
+        'tab'                   => [
+            'base'              => 'Base',
+            'cron'              => 'Cron',
+            'template'          => 'Template'
+        ],
+        'tip'                       => 'Save before switching the tab',
+        'app_name'                  => 'Website Name',
+        'register'                  => 'Allow to Register',
+        'tos'                       => 'Enable TOS Acceptance',
+        'tos_url'                   => 'Terms of Service URL',
+        'sug'                       => 'Generate Method of Service Username',
+        'sug_domain'                => 'Random username',
+        'sug_random'                => 'Generate from domain',
+        'site_suu'                  => 'Domain Unique in the Whole Site',
+        'site_sdu'                  => 'Username Unique in the Whole Site',
+        'admin_email'               => 'Email Address',
+        'cron'                      => 'Enable Cron',
+        'suspend'                   => 'Enable Suspension',
+        'suspend_days'              => 'Suspend Days',
+        'terminate'                 => 'Enable Termination',
+        'terminate_days'            => 'Termination Days',
+        'template'                  => 'Template',
+        'tpl_home_product'          => 'Recommend Product',
+        'url'                       => 'System URL',
+        'send_suspension_email'     => 'Send Suspension Email',
+        'enable_unsuspension'       => 'Enable Unsuspension',
+        'send_unsuspension_email'   => 'Send Unsuspension Email'
+    ],
+    'product'                   => [
+        'tab'                   => [
+            'base'              => 'Base',
+            'price'             => 'Price',
+            'api'               => 'Module Settings',
+        ],
+        'ena_stock'             => 'Enable Stock Control',
+        'enable_udg'            => 'Enable Upgrade/Downgrade',
+        'price'                 => [
+            'addItem'           => 'Add Item (Delete with empty name)',
+            'name'              => 'Name',
+            'period'            => 'Period',
+            'price'             => 'Price',
+            'setup'             => 'Setup Fee',
+            'remark'            => 'Remark',
+            'enable'            => 'Enable',
+            'auto_activate'     => 'Auto Activate',
+            'allow_renew'       => 'Allow Renew with this Period',
+            'day'               => 'Day',
+            'month'             => 'Month',
+            'year'              => 'Year',
+            'unlimited'         => 'Unlimited',
+            'unlimited_when_buy'=> 'Allow to select Unlimited When buy',
+            '$daily'            => 'Daily',
+            '$monthly'          => 'Monthly',
+            '$annually'         => 'Annually',
+            '$semi-annually'    => 'Semi-annually',
+            '$quarterly'        => 'Quarterly',
+            '$unlimited'        => 'Unlimited'
+        ],
+        'domain'                => [
+            'free'              => 'Free Domain',
+            'require'           => 'Require Domain'
+        ],
+        'server'                    => [
+            'plugin'                => 'Module Name',
+            'group'                 => 'Server Group',
+        ]
+    ],
+    'user'                      => [
+        'last_logon_at'         => 'Last Login at',
+        'email_verified_at'     => 'Email Verified at',
+        'reset_success'         => 'Password reset successfully',
+        'reset_password'        => [
+            'line1'             => 'A new password was generated by system.',
+            'line2'             => 'Username: :user',
+            'line3'             => 'Password: :pass',
+            'line4'             => 'Please change the password after login as soon as possible.'
+        ]
+    ],
+    'sort_order'                => 'Sort Order',
     'ticket'                    => [
-
+        'active'                => 'Include in Active Tickets',
+        'awaiting'              => 'Include in Awaiting Reply',
+        'auto_close'            => 'Auto Close',
+        'status_color'          => 'Status Color'
+    ],
+    'server'                    => [
+        'plugin'                => 'Module',
+        'detail'                => 'Server Details',
+        'access_hash'           => 'Access Hash',
+        'max_load'              => 'Maximum No. of Accounts',
+        'status_address'        => 'Server Status Address',
+        'api_access_address'    => 'Access API By',
+        'api_access_ssl'        => 'API through by SSL',
+        'access_ssl'            => 'Web Panel through by SSL',
+        'select_server_method'  => 'Fill Type',
+        'fill_type'             => [
+            0                   => 'Module decide',
+            1                   => 'Add to the least full server',
+            2                   => 'Fill active server until full then switch to next least used',
+            3                   => 'Random'
+        ]
     ]
 ];
