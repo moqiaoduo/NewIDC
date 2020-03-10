@@ -8,14 +8,9 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class ProductGroupController extends AdminController
+class ProductGroupController extends Controller
 {
-    /**
-     * Title for current resource.
-     *
-     * @var string
-     */
-    protected $title = '产品组管理';
+    protected $title = 'Product Groups';
 
     /**
      * Make a grid builder.
@@ -37,7 +32,7 @@ class ProductGroupController extends AdminController
             $actions->disableView();
         });
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', 'ID');
         $grid->column('name', __('Name'))->sortable();
         $grid->column('hide', __('Hide'))->switch()->filter([
             0 => '是',
@@ -59,8 +54,7 @@ class ProductGroupController extends AdminController
         $form = new Form(new ProductGroup());
 
         $form->text('name', __('Name'))->required();
-        $form->number('order', __('Priority'))->default(0)->required()
-            ->help(__('admin.help.product.order'));
+        $form->number('order', __('admin.sort_order'))->default(0)->required();
         $form->switch('hide', __('Hide'));
 
         $form->tools(function (Form\Tools $tools) {

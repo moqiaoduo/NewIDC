@@ -8,14 +8,9 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class ServiceController extends AdminController
+class ServiceController extends Controller
 {
-    /**
-     * Title for current resource.
-     *
-     * @var string
-     */
-    protected $title = '服务管理';
+    protected $title = 'Services';
 
     /**
      * Make a grid builder.
@@ -26,7 +21,7 @@ class ServiceController extends AdminController
     {
         $grid = new Grid(new Service());
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', 'ID');
         $grid->column('product_id', __('Product id'));
         $grid->column('user_id', __('User id'));
         $grid->column('name', __('Name'));
@@ -53,7 +48,7 @@ class ServiceController extends AdminController
     {
         $show = new Show(Service::findOrFail($id));
 
-        $show->field('id', __('Id'));
+        $show->field('id', 'ID');
         $show->field('product_id', __('Product id'));
         $show->field('user_id', __('User id'));
         $show->field('name', __('Name'));

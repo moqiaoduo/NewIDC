@@ -6,18 +6,15 @@ use App\Models\Product;
 use App\Models\ProductGroup;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
+use Encore\Admin\Form\Builder;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Lang;
 use PluginManager;
 
-class ProductController extends AdminController
+class ProductController extends Controller
 {
-    /**
-     * Title for current resource.
-     *
-     * @var string
-     */
-    protected $title = '产品管理';
+    protected $title = 'Products';
 
     /**
      * Make a grid builder.
@@ -32,7 +29,7 @@ class ProductController extends AdminController
             // 在这里添加字段过滤器
             $filter->like('name', __('Name'));
             $filter->in('product_group_id',__('Product group'))->multipleSelect('/admin/api/products');
-            $filter->in('type',__('Type'))->multipleSelect(__('type'));
+            $filter->in('type',__('Type'))->multipleSelect(__('service_type'));
             $filter->equal('hide',__('Hide'))->radio([
                 ''   => '不限',
                 1    => '是',
@@ -47,10 +44,12 @@ class ProductController extends AdminController
             $filter->between('updated_at', __('Updated at'))->datetime();
         });
 
-        $grid->column('id', __('Id'))->sortable();
-        $grid->column('group.name', __('Product group'));
+        $grid->column('id', 'ID')->sortable();
+        $grid->column('group_name', __('Product group'))->display(function () {
+            return ProductGroup::find($this->product_group_id)->name;
+        });
         $grid->column('name', __('Name'));
-        $grid->column('type', __('Type'))->using(__('type'));
+        $grid->column('type', __('Type'))->using(__('service_type'));
         $grid->column('description', __('Description'));
         $grid->column('hide', __('Hide'))->sortable()->switch();
         $grid->column('enable', __('Enable'))->sortable()->switch();
@@ -70,7 +69,7 @@ class ProductController extends AdminController
     {
         $show = new Show(Product::findOrFail($id));
 
-        $show->field('id', __('Id'));
+        $show->field('id', 'ID');
         $show->field('product_group_id', __('Product group id'));
         $show->field('name', __('Name'));
         $show->field('type', __('Type'));
@@ -98,13 +97,26 @@ class ProductController extends AdminController
     {
         $form = new Form(new Product());
 
+        $form->hidden('tab_index');
+        $form->ignore(['tab_index']);
+        $form->html(<<<HTML
+<script>
+$(function() {
+    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+        $("input[name='tab_index']").val($(e.target).attr("href").substring(10))
+    })
+})
+</script>
+HTML
+);
+
         $form->tab(__('admin.product.tab.base'), function (Form $form) {
             $form->text('name', __('Name'))->required();
-            $form->select('type', __('Type'))->options(__('type'))->required();
+            $form->select('type', __('Type'))->options(__('service_type'))->required();
             $form->select('product_group_id', __('Product group'))->required()
                 ->options(function ($id) {
-                    if ($id && $group=ProductGroup::find($id))
-                        return [$group->id => $group->name . '(GID:' . $group->id . ')'];
+                    if ($id)
+                        return ProductGroup::find($id)->pluck('name', 'id');
                 })->ajax('/admin/api/product_groups');
             $form->editor('description', __('Description'));
             $form->switch('require_domain',__('admin.product.domain.require'))
@@ -112,22 +124,23 @@ class ProductController extends AdminController
             $form->switch('ena_stock',__('admin.product.ena_stock'))
                 ->help(__('admin.help.product.ena_stock'));
             $form->number('stocks',__('Stocks'))->default(0);
-            $form->number('order', __('Priority'))->default(0)
-                ->help(__('admin.help.product.order'));
+            $form->number('order', __('admin.sort_order'))->default(0);
             $form->switch('hide', __('Hide'));
             $form->switch('enable', __('Enable'))->default(1);
-        })->tab(__('admin.product.tab.price'), function (Form $form) {
+        },request('tab')==1)->tab(__('admin.product.tab.price'), function (Form $form) {
             $form->price('price');
             $form->embeds('price_configs','',function (Form\EmbeddedForm $form) {
-
+                $form->switch('unlimited_when_buy',__('admin.product.price.unlimited_when_buy'))
+                    ->help(__('admin.help.product.unlimited_when_buy'));
             });
-        })->tab(__('admin.product.tab.api'), function (Form $form) {
+        },request('tab')==2)->tab(__('admin.product.tab.api'), function (Form $form) {
             $info=PluginManager::getList();
             foreach (PluginManager::getServerPluginList() as $plugin) {
                 $plugins[$plugin]=$info[$plugin]['name']??$plugin;
             }
-            $form->select('server_plugin', __('admin.product.server.plugin'))->options($plugins??[]);
-            $form->select('server_id', __('Server'))->load('city', '/api/city');
+            $form->select('server_plugin', __('admin.product.server.plugin'))->options($plugins??[])
+                ->load('server_group_id', '/admin/api/server_groups');
+            $form->select('server_group_id', __('admin.product.server.group'));
             $plugin=$form->model()->value('server_plugin');
             $form->embeds('config.server',__('Settings'),function ($form) use ($plugin) {
                 if (class_exists($plugin)) {
@@ -143,18 +156,18 @@ class ProductController extends AdminController
                     }
                 }
             });
-        })->tab(__('Upgrade').'/'.__('Downgrade'),function (Form $form) {
+        },request('tab')==3)->tab(__('Upgrade').'/'.__('Downgrade'),function (Form $form) {
             $form->embeds('upgrade_downgrade_config','',function (Form\EmbeddedForm $form) {
-                $form->switch('enable',__('admin.config.enable_udg'));
+                $form->switch('enable',__('admin.product.enable_udg'));
             });
-        })->tab(__('Domain'),function (Form $form) {
+        },request('tab')==4)->tab(__('Domain'),function (Form $form) {
             $form->embeds('domain_configs','',function (Form\EmbeddedForm $form) {
                 $form->tags('free_domain', __('admin.product.domain.free'))
                     ->help(__('admin.help.product.free_domain'));
             });
-        })->tab(__('Others'),function (Form $form) {
+        },request('tab')==5)->tab(__('Others'),function (Form $form) {
 
-        });
+        },request('tab')==6);
 
         $form->footer(function (Form\Footer $footer) {
             // 默认勾选`继续编辑`
@@ -162,21 +175,51 @@ class ProductController extends AdminController
         });
 
         $form->saving(function (Form $form) {
-            $price_table=[];
-            foreach ($form->price as $price) {
-                if (empty($price['name'])) continue;
-                $price_table[]=[
-                    'name'=>$price['name'],
-                    'period'=>$price['period'],
-                    'period_unit'=>$price['period_unit'],
-                    'price'=>$price['price'],
-                    'remark'=>$price['remark'],
-                    'enable'=>isset($price['enable']),
-                    'auto_activate'=>isset($price['auto_activate']),
-                    'allow_renew'=>isset($price['allow_renew'])
-                ];
+            if (request()->pjax()) {
+                $price_table=[];
+                foreach ((array) $form->price as $price) {
+                    if (empty($price['name'])) continue;
+                    $price_table[]=[
+                        'name'=>$price['name'],
+                        'period'=>$price['period'],
+                        'period_unit'=>$price['period_unit'],
+                        'price'=>$price['price'],
+                        'remark'=>$price['remark'],
+                        'enable'=>isset($price['enable']),
+                        'auto_activate'=>isset($price['auto_activate']),
+                        'allow_renew'=>isset($price['allow_renew'])
+                    ];
+                }
+                $form->price=$price_table;
             }
-            $form->price=$price_table;
+        });
+
+        $form->saved(function (Form $form) {
+            if (request()->ajax() && !request()->pjax()) {
+                return response()->json([
+                    'status'  => true,
+                    'message' => trans('admin.update_succeeded'),
+                ]);
+            }
+
+            $resourcesPath = $form->resource(-1);
+
+            if (request('after-save') == 1) {
+                // continue editing
+                $url = rtrim($resourcesPath, '/')."/{$form->model()->id}/edit?tab=".request('tab_index');
+            } elseif (request('after-save') == 2) {
+                // continue creating
+                $url = rtrim($resourcesPath, '/').'/create';
+            } elseif (request('after-save') == 3) {
+                // view resource
+                $url = rtrim($resourcesPath, '/')."/{$form->model()->id}";
+            } else {
+                $url = request(Builder::PREVIOUS_URL_KEY) ?: $resourcesPath;
+            }
+
+            admin_toastr(trans('admin.update_succeeded'));
+
+            return redirect($url);
         });
 
         return $form;
