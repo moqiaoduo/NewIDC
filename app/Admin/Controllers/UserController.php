@@ -79,7 +79,7 @@ class UserController extends Controller
     public function reset_password($id)
     {
         $user=User::findOrFail($id);
-        $user->password=\Hash::make($new_pwd=\Str::random());
+        $user->update(['password'=>\Hash::make($new_pwd=\Str::random())]);
         $user->notify(new ResetPassword($user->username,$new_pwd));
         return 'ok';
     }
