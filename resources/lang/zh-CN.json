@@ -91,5 +91,7 @@
     "High": "高",
     "Language": "语言",
     "Reset & Send Password": "重置并发送新密码",
-    "If you did not request a password reset, please Consult the Administrator.": "如果您没有请求重置密码，请咨询管理员。"
+    "If you did not request a password reset, please Consult the Administrator.": "如果您没有请求重置密码，请咨询管理员。",
+    "Guest": "游客",
+    "Welcome, :username": "欢迎，:username"
 }

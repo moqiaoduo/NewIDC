@@ -16,7 +16,7 @@ class IndexController extends Controller
     {
         if ($request->has('lang')) {
             if ($user=$request->user())
-                $user->update('lang',$request->input('lang'));
+                $user->update(['lang'=>$request->input('lang')]);
             $cookie=Cookie::make('language',$request->input('lang'));
         }
         return back()->cookie($cookie??null);
