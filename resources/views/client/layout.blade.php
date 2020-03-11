@@ -23,17 +23,31 @@
     </div>
     <div class="layui-side layui-bg-black" id="newidc-nav">
         <ul class="layui-nav layui-nav-tree">
-            <li class="layui-nav-item"><a href="{{url('/')}}">首页</a></li>
+            <li class="layui-nav-item"><a href="{{route('client.index')}}">@lang('Dashboard')</a></li>
             <li class="layui-nav-item">
-                <a href="javascript:;">默认展开</a>
+                <a href="javascript:;">@lang('Services')</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;">选项1</a></dd>
-                    <dd><a href="javascript:;">选项2</a></dd>
-                    <dd><a href="">跳转</a></dd>
+                    <dd><a href="javascript:;">@lang('My Services')</a></dd>
+                    <dd><a href="javascript:;">@lang('Store')</a></dd>
+                    <dd><a href="javascript:;">@lang('Product Addon')</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">产品</a></li>
-            <li class="layui-nav-item"><a href="">大数据</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">@lang('Billing')</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">@lang('My Invoices')</a></dd>
+                    <dd><a href="javascript:;">@lang('Add Funds')</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">@lang('Support')</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">@lang('user.ticket')</a></dd>
+                    <dd><a href="javascript:;">@lang('Announcements')</a></dd>
+                    <dd><a href="javascript:;">@lang('user.open_ticket')</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="{{url('/')}}">@lang('user.back_index')</a></li>
         </ul>
     </div>
     <div class="layui-body" id="newidc-body">

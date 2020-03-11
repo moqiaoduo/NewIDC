@@ -1,5 +1,9 @@
 <?php
 
 return [
-    'profile'   => '修改信息',
+    'profile'       => '修改信息',
+    'back_index'    => '回到首页',
+    'ticket'        => '工单',
+    'help'          => '帮助中心',
+    'open_ticket'   => '开启新工单',
 ];

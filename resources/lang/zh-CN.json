@@ -93,5 +93,11 @@
     "Reset & Send Password": "重置并发送新密码",
     "If you did not request a password reset, please Consult the Administrator.": "如果您没有请求重置密码，请咨询管理员。",
     "Guest": "游客",
-    "Welcome, :username": "欢迎，:username"
+    "Welcome, :username": "欢迎，:username",
+    "Dashboard": "仪表盘",
+    "My Services": "我的服务",
+    "Store": "商店",
+    "Product Addon": "产品额外服务",
+    "Add Funds": "充值余额",
+    "My Invoices": "我的账单"
 }

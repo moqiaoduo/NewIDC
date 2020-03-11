@@ -9,6 +9,7 @@
             <dd><a href="{{route('login')}}">@lang('Login')</a></dd>
             @if(Route::has('register')) <dd><a href="{{route('register')}}">@lang('Register')</a></dd> @endif
         @else
+            <dd><a href="{{route('client.index')}}">@lang('Dashboard')</a></dd>
             <dd><a href="javascript:;">@lang('user.profile')</a></dd>
             <dd><a href="javascript:;" onclick="document.getElementById('logout').submit()">@lang('Logout')</a></dd>
         @endguest
