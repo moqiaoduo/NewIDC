@@ -35,6 +35,10 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUsername($value)
  * @mixin \Eloquent
+ * @property string|null $lang
+ * @property mixed|null $extra
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereExtra($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLang($value)
  */
 class User extends Authenticatable
 {
@@ -46,7 +50,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password',
+        'username', 'email', 'password', 'lang'
     ];
 
     /**

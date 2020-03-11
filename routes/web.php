@@ -17,3 +17,5 @@ Auth::routes([
 ]);
 
 Route::get('/', 'IndexController@index');
+
+Route::get('/locale','IndexController@locale')->name('locale');
