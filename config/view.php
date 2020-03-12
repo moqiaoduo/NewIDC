@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'paths' => [
+    'paths' => [ // 若是没有指定模板或模板中不包含必要的模板文件，则回滚到默认模板中
+        storage_path('app/templates/'.env('TEMPLATE')),
         resource_path('views'),
     ],
 
