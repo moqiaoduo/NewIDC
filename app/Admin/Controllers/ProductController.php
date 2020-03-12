@@ -118,7 +118,8 @@ HTML
                     if ($id)
                         return ProductGroup::find($id)->pluck('name', 'id');
                 })->ajax('/admin/api/product_groups');
-            $form->editor('description', __('Description'));
+            $form->textarea('description', __('Description'))->rows(10)
+                ->style('resize','vertical');
             $form->switch('require_domain',__('admin.product.domain.require'))
                 ->help(__('admin.help.product.require_domain'));
             $form->switch('ena_stock',__('admin.product.ena_stock'))
