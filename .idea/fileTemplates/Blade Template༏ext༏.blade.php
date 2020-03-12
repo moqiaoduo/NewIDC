@@ -1,6 +1,6 @@
 @extends('')
 
-@section('title', '')
+@section('title', __(''))
 
 @section('head')
 @endsection
