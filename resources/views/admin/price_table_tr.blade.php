@@ -3,38 +3,42 @@
         <input type="text" name="{{$name}}[{{$index}}][name]" class="form-control"
                value="{{$item['name']??null}}" list="name-list" autocomplete="off">
         <datalist id="name-list">
-            <option value="$daily">@lang('admin.product.price.$daily')</option>
-            <option value="$monthly">@lang('admin.product.price.$monthly')</option>
-            <option value="$quarterly">@lang('admin.product.price.$quarterly')</option>
-            <option value="$semi-annually">@lang('admin.product.price.$semi-annually')</option>
-            <option value="$annually">@lang('admin.product.price.$annually')</option>
-            <option value="$unlimited">@lang('admin.product.price.$unlimited')</option>
+            <option value="$daily">@lang('price.$daily')</option>
+            <option value="$monthly">@lang('price.$monthly')</option>
+            <option value="$quarterly">@lang('price.$quarterly')</option>
+            <option value="$semi-annually">@lang('price.$semi-annually')</option>
+            <option value="$annually">@lang('price.$annually')</option>
+            <option value="$unlimited">@lang('price.$unlimited')</option>
         </datalist>
     </td>
     <td>
-        <input type="text" name="{{$name}}[{{$index}}][period]" class="form-control"
-               style="width: calc(100% - 105px);display: inline-block;" value="{{$item['period']??null}}">
-        <select name="{{$name}}[{{$index}}][period_unit]" class="form-control"
-                style="width: 100px;display: inline-block;">
-            <option value="day" @if(($pu=($item['period_unit']??null))=='day') selected @endif>
-                @lang('admin.product.price.day')
-            </option>
-            <option value="month" @if($pu=='month') selected @endif>
-                @lang('admin.product.price.month')
-            </option>
-            <option value="year" @if($pu=='year') selected @endif>
-                @lang('admin.product.price.year')
-            </option>
-            <option value="unlimited" @if($pu=='unlimited') selected @endif>
-                @lang('admin.product.price.unlimited')
-            </option>
-        </select>
+        <div class="input-group">
+            <input type="text" name="{{$name}}[{{$index}}][period]" class="form-control input-period"
+                   style="display: inline-block;" value="{{$item['period']??null}}">
+            <span class="input-group-btn">
+                <select name="{{$name}}[{{$index}}][period_unit]" class="form-control"
+                        style="width: auto;display: inline-block;">
+                <option value="day" @if(($pu=($item['period_unit']??null))=='day') selected @endif>
+                    @lang('admin.product.price.day')
+                </option>
+                <option value="month" @if($pu=='month') selected @endif>
+                    @lang('admin.product.price.month')
+                </option>
+                <option value="year" @if($pu=='year') selected @endif>
+                    @lang('admin.product.price.year')
+                </option>
+                <option value="unlimited" @if($pu=='unlimited') selected @endif>
+                    @lang('admin.product.price.unlimited')
+                </option>
+            </select>
+            </span>
+        </div>
     </td>
     <td>
         <input type="text" name="{{$name}}[{{$index}}][price]" class="form-control" value="{{$item['price']??null}}">
     </td>
     <td>
-        <input type="text" name="{{$name}}[{{$index}}][remark]" class="form-control" value="{{$item['remark']??null}}">
+        <input type="text" name="{{$name}}[{{$index}}][setup]" class="form-control" value="{{$item['setup']??null}}">
     </td>
     <td>
         <label class="checkbox-inline">

@@ -4,9 +4,6 @@
 .newidc {
     &-footer {
         text-align: center;
-        @media screen and (max-width: 768px) {
-            left: 0 !important;
-        }
         #lang {
             position: fixed;
             right: 5px;
@@ -14,6 +11,9 @@
             select {
                 padding: 5px 10px;
             }
+        }
+        @media screen and (max-width: 768px) {
+            left: 0 !important;
         }
     }
     &-nav-show-button {

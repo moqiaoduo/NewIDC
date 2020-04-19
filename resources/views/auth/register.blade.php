@@ -7,7 +7,7 @@
 
 @section('foot')
     <script>
-        layui.use(["form"],function () {
+        layui.use(["form"], function () {
             var form = layui.form;
         })
     </script>
@@ -21,7 +21,8 @@
                 @csrf
                 <div class="layui-form-item">
                     <input type="text" name="username" required lay-verify="required" placeholder="用户名（5-255个字符）"
-                           class="layui-input @error('username') newidc-form-invalid @enderror" value="{{old('username')}}">
+                           class="layui-input @error('username') newidc-form-invalid @enderror"
+                           value="{{old('username')}}">
                     @error('username')
                     <span class="newidc-form-error">{{$message}}</span>
                     @enderror

@@ -47,4 +47,10 @@ class LoginController extends Controller
             return $this->guard()->attempt([$value => $account, 'password' => $password], $request->filled('remember'));
         });
     }
+
+    protected function authenticated(Request $request, $user)
+    {
+        $buy_id = $request->session()->pull('buy_id');
+        return redirect()->intended($buy_id ? route('buy', $buy_id) : $this->redirectTo);
+    }
 }

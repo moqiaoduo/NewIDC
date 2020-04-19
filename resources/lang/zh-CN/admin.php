@@ -148,7 +148,14 @@ return [
             'require_domain'    => '用户订购时，要求用户输入有效域名',
             'ena_stock'         => '启用后，将限制该产品的购买数量，每次下单后库存-1',
             'unlimited_when_buy'=> '启用后，用户购买时可以选择永久周期，否则只能续费时选择（前提是设置了永久周期）',
-            'price_name'        => '如想实现本地化，请选择候选项($开头项)'
+            'price_name'        => '如想实现本地化，请选择候选项($开头项)',
+            'price'             => '免费设为0',
+            'description'       => '可以使用HTML标签，例如<br>
+&lt;br&gt; 换行<br>
+&lt;b&gt;Bold&lt;/b&gt; <b>加粗</b><br>
+&lt;i&gt;Italics&lt;/i&gt; <i>斜体</i>',
+            'free_limit_days'   => '选择免费续期时，只能在到期前n天才能续费（设定续期上限）<br>0表示没有限制',
+            'free_limit'        => '限制每个用户能够免费下单的数量',
         ],
         'config'                => [
             'tos'               => '启用后，用户注册/购买产品需要先同意服务条款',
@@ -223,7 +230,6 @@ return [
             'period'            => '周期时间',
             'price'             => '周期价格',
             'setup'             => '设置费',
-            'remark'            => '备注',
             'enable'            => '启用周期',
             'auto_activate'     => '自动开通',
             'allow_renew'       => '允许用本周期续费',
@@ -232,12 +238,8 @@ return [
             'year'              => '年',
             'unlimited'         => '永久',
             'unlimited_when_buy'=> '购买时允许选择永久周期',
-            '$daily'            => '日付',
-            '$monthly'          => '月付',
-            '$annually'         => '年付',
-            '$semi-annually'    => '半年付',
-            '$quarterly'        => '季付',
-            '$unlimited'        => '永久'
+            'free_limit_days'   => '免费续费限制天数',
+            'free_limit'        => '免费订单限制个数',
         ],
         'domain'                => [
             'free'              => '免费域名',

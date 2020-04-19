@@ -12,20 +12,19 @@ class PriceTable extends Field
     {
         $name = $this->formatName($this->column);
 
-        $count = count($this->value??[]);
-
-        $tr_tpl = str_replace("\n","",view('admin.price_table_tr', ['name'=>$name,'index'=>'new']));
+        $count = count($this->value ?? []);
 
         $this->script = <<<JS
 (function($) {
     var count = parseInt('$count');
-    var tpl = '{$tr_tpl}';
     $("#pt-{$name}-addItem").on('click',function() {
-        $("#pt-{$name}-tbody").append(tpl.replace(/new/g, String(count++)));
-        $(".pt-checkbox").iCheck({
-          checkboxClass: 'icheckbox_minimal-blue',
-          radioClass   : 'iradio_minimal-blue'
-        });
+        $.get('/admin/api/price_table_tr/$name/'+(count++),function(html) {
+            $("#pt-{$name}-tbody").append(html);
+            $(".pt-checkbox").iCheck({
+              checkboxClass: 'icheckbox_minimal-blue',
+              radioClass   : 'iradio_minimal-blue'
+            });
+        })
     });
     $(document).ready(function() {
         $(".pt-checkbox").iCheck({
@@ -33,6 +32,7 @@ class PriceTable extends Field
           radioClass   : 'iradio_minimal-blue'
         });
     });
+    $(document).on();
 })(jQuery);
 JS;
 

@@ -25,9 +25,11 @@
                         <div>{{$product['name']}}</div>
                         <div>￥{{$product['price'][0]['price']??'Free'}} Start</div>
                     </li>
-                    {!! $product['description'] !!}
+                    @foreach(explode("<br>",$product->getCleanDescription()) as $text)
+                        @if(!empty(trim($text))) <li>{!! $text !!}</li> @endif
+                    @endforeach
                     <li>
-                        <a class="layui-btn layui-btn-fluid" href="">@lang('Buy NOW')</a>
+                        <a class="layui-btn layui-btn-fluid" href="{{route('buy',$product)}}">@lang('Buy NOW')</a>
                     </li>
                 </ul>
             </div>

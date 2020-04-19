@@ -99,5 +99,9 @@
     "Store": "商店",
     "Product Addon": "产品额外服务",
     "Add Funds": "充值余额",
-    "My Invoices": "我的账单"
+    "My Invoices": "我的账单",
+    "Welcome to :site": "欢迎来到 :site",
+    "Recommend Products for you": "为您推荐以下产品",
+    "Buy NOW": "立即购买",
+    "Buy": "购买"
 }

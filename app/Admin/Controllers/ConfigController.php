@@ -18,7 +18,7 @@ class ConfigController extends Controller
     protected $save_url;
 
     public function __construct()
-    {
+    {cookie()
         $this->save_url = route('admin.config.base');
     }
 

@@ -112,7 +112,15 @@ return [
             'ena_stock'         => 'When enabled, the number of purchases of this product will be limited.',
             'unlimited_when_buy'=> 'When enabled, users can select a permanent period when they purchase,
                                     otherwise they can only select when they renew.',
-            'price_name'        => 'Use candidate If you want localization. e.g. $monthly'
+            'price_name'        => 'Use candidate If you want localization. e.g. $monthly',
+            'price'             => 'If FREE, set 0 in the field.',
+            'description'       => 'You may use HTML in this field<br>
+&lt;br&gt; New line
+&lt;b&gt;Bold&lt;/b&gt; <b>Bold</b>
+&lt;i&gt;Italics&lt;/i&gt; <i>Italics</i>',
+            'free_limit_days'   => 'If FREE were selected by users, they should not renew until the setting day.<br>
+P.S. If you want unlimited, set 0',
+            'free_limit'        => 'Allow number of orders in every user',
         ],
         'config'            => [
             'tos'           => 'If enable, clients must agree to your Terms of Service.',
@@ -188,7 +196,6 @@ return [
             'period'            => 'Period',
             'price'             => 'Price',
             'setup'             => 'Setup Fee',
-            'remark'            => 'Remark',
             'enable'            => 'Enable',
             'auto_activate'     => 'Auto Activate',
             'allow_renew'       => 'Allow Renew with this Period',
@@ -197,12 +204,8 @@ return [
             'year'              => 'Year',
             'unlimited'         => 'Unlimited',
             'unlimited_when_buy'=> 'Allow to select Unlimited When buy',
-            '$daily'            => 'Daily',
-            '$monthly'          => 'Monthly',
-            '$annually'         => 'Annually',
-            '$semi-annually'    => 'Semi-annually',
-            '$quarterly'        => 'Quarterly',
-            '$unlimited'        => 'Unlimited'
+            'free_limit_days'   => 'Free Renew Limited days',
+            'free_limit'        => 'Free Order Limit',
         ],
         'domain'                => [
             'free'              => 'Free Domain',

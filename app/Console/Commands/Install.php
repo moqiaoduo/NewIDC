@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use DB;
 use Encore\Admin\Auth\Database\Administrator;
 use Exception;
 use Illuminate\Console\Command;
@@ -37,6 +38,7 @@ class Install extends Command
      * Execute the console command.
      *
      * @return mixed
+     * @throws Exception
      */
     public function handle()
     {
@@ -62,23 +64,31 @@ class Install extends Command
                 $this->warn(__('install.password_empty'));
         }
         if (!$this->confirm(__('install.ready'))) goto stop_inst;
-        $this->call('migrate');
-        $this->call('db:seed');
-        Administrator::truncate();
-        Administrator::create([
-            'username' => $admin_username,
-            'password' => bcrypt($admin_password),
-            'name'     => '超级管理员',
-        ]);
-        if (isset($webadmin_username) && isset($webadmin_password)) {
+        try {
+            DB::beginTransaction();
+            $this->call('migrate');
+            $this->call('db:seed');
+            Administrator::truncate();
             Administrator::create([
-                'username' => $webadmin_username,
-                'password' => bcrypt($webadmin_password),
-                'name'     => '网站管理员',
+                'username' => $admin_username,
+                'password' => bcrypt($admin_password),
+                'name'     => __('install.admin'),
             ]);
+            if (isset($webadmin_username) && isset($webadmin_password)) {
+                Administrator::create([
+                    'username' => $webadmin_username,
+                    'password' => bcrypt($webadmin_password),
+                    'name'     => __('install.webadmin'),
+                ]);
+            }
+            setOption('version',config('app.version'));
+            $this->info(__('install.success',['url'=>config('app.url')]));
+            DB::commit();
+            return 0;
+        } catch (Exception $e) {
+            $this->error(__('install.error',['message'=>$e->getMessage()]));
+            DB::rollBack();
         }
-        $this->info(__('install.success',['url'=>config('app.url')]));
-        return 0;
         stop_inst:
         $this->error(__('install.exit'));
         return 1;

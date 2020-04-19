@@ -83,7 +83,7 @@ class Product extends Model
         return $this->belongsTo(ServerGroup::class);
     }
 
-    public function description() {
+    public function getCleanDescription() {
         return str_replace(["\r\n","\r","\n"],'<br>',
             preg_replace('/(\s+\r)/',"",$this->description));
     }

@@ -48,7 +48,13 @@ flex-flow: wrap;
 .lang-fast li {
 width: 80px;
 }
+@media screen and (max-width: 991px) {
+    #lang-fast {
+    display: none;
+    }
+}
 </style>
+
 <script>
 function changeLang(lang) {
     $.ajax({
