@@ -4,14 +4,12 @@ namespace App\Admin\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductGroup;
-use Encore\Admin\Controllers\AdminController;
+use App\Models\ServerGroup;
 use Encore\Admin\Form;
 use Encore\Admin\Form\Builder;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use Lang;
 use PluginManager;
-use Str;
 
 class ProductController extends Controller
 {
@@ -137,9 +135,9 @@ HTML
             $form->embeds('price_configs', '', function (Form\EmbeddedForm $form) {
                 $form->switch('unlimited_when_buy', __('admin.product.price.unlimited_when_buy'))
                     ->help(__('admin.help.product.unlimited_when_buy'));
-                $form->number('free_limit_days',__('admin.product.price.free_limit_days'))
+                $form->number('free_limit_days', __('admin.product.price.free_limit_days'))
                     ->help(__('admin.help.product.free_limit_days'))->default(0);
-                $form->number('free_limit',__('admin.product.price.free_limit'))
+                $form->number('free_limit', __('admin.product.price.free_limit'))
                     ->help(__('admin.help.product.free_limit'))->default(0);
             });
         }, request('tab') == 2)->tab(__('admin.product.tab.api'), function (Form $form) {
@@ -149,7 +147,14 @@ HTML
             }
             $form->select('server_plugin', __('admin.product.server.plugin'))->options($plugins ?? [])
                 ->load('server_group_id', '/admin/api/server_groups');
-            $form->select('server_group_id', __('admin.product.server.group'));
+            $form->select('server_group_id', __('admin.product.server.group'))
+                ->options(function ($id) {
+                    $sp = $this->server_plugin;
+                    return ServerGroup::whereExists(function ($query) use ($sp) {
+                        $query->from('servers')->where('server_plugin', $sp)
+                            ->whereRaw("JSON_CONTAINS(server_groups.servers,concat('[\"',servers.id,'\"]'))");
+                    })->get()->pluck('name', 'id');
+                });
             $plugin = $form->model()->value('server_plugin');
             $form->embeds('config.server', __('Settings'), function ($form) use ($plugin) {
                 if (class_exists($plugin)) {
