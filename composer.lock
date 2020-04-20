@@ -1512,12 +1512,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/new-idc-plugin.git",
-                "reference": "ec2848d4a038666e21d63229ac545adf1b52be61"
+                "reference": "e50599fd7b4f5003896c56ef3128e1814720d53b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/new-idc-plugin/zipball/ec2848d4a038666e21d63229ac545adf1b52be61",
-                "reference": "ec2848d4a038666e21d63229ac545adf1b52be61",
+                "url": "https://api.github.com/repos/moqiaoduo/new-idc-plugin/zipball/e50599fd7b4f5003896c56ef3128e1814720d53b",
+                "reference": "e50599fd7b4f5003896c56ef3128e1814720d53b",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1561,7 +1561,7 @@
                 }
             ],
             "description": "NewIDC插件管理器",
-            "time": "2020-04-20T09:41:37+00:00"
+            "time": "2020-04-20T12:07:44+00:00"
         },
         {
             "name": "nesbot/carbon",
