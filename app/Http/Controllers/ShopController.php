@@ -41,7 +41,12 @@ class ShopController extends Controller
             $request->session()->put('buy_id', $product->id);
             return redirect()->route('login');
         }
+        $user = $request->user();
         $price = $product->price[$request->get('period')];
+        if (!$product->enable)
+            return back()->withErrors('产品已下架', 'tip');
+        if ($product->ena_stock && $product->stocks <= 0)
+            return back()->withErrors('库存不足', 'tip');
         // TODO: 加入优惠码功能
         $pay = $price['price'];
         if ($pay > 0) {
@@ -49,6 +54,10 @@ class ShopController extends Controller
             // 当前暂不支持
             return back()->withErrors('暂不支持非免费产品', 'tip');
         } else {
+            if ($price['price'] == 0 &&
+                ($free_limit = $product->price_configs['free_limit']) &&
+                $user->services()->where('product_id',$product->id)->using()->count() >= $free_limit)
+                return back()->withErrors('您已到达免费产品服务数量上限', 'tip');
             $period = $price['period'];
             switch ($price['period_unit']) {
                 case 'day':
@@ -64,10 +73,11 @@ class ShopController extends Controller
                     $expire = null; // null 表示无期限
                     break;
                 default:
-                    throw new ServiceCreateException(ServiceCreateException::UNSUPPORTED_PERIOD);
+                    return back()->withErrors('未知周期', 'tip');
             }
-            [$service] = event(new ServiceCreate($product, $request->user(), $expire, $request->post('extra', []),
+            [$service] = event(new ServiceCreate($product, $user, $expire, $request->post('extra', []),
                 $price['auto_activate']));
+            if ($product->ena_stock) $product->decrement('stocks');
             return redirect()->route('service', $service);
         }
     }

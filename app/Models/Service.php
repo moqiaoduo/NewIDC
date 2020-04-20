@@ -55,4 +55,14 @@ class Service extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    /**
+     * 待开通、激活、暂停状态
+     *
+     * @param $query
+     */
+    public function scopeUsing($query)
+    {
+        $query->whereIn('status', ['pending', 'active', 'suspended']);
+    }
 }

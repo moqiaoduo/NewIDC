@@ -4,7 +4,6 @@ namespace App\Listeners;
 
 use App\Events\ServiceActivate;
 use App\Events\ServiceCreate;
-use App\Exceptions\ServiceCreateException;
 use App\Models\Service;
 use Str;
 
