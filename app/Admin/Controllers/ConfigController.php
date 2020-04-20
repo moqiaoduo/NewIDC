@@ -29,12 +29,10 @@ class ConfigController extends Controller
             "cron" => [__('admin.config.tab.cron'), 'addLink', route('admin.config.cron'), false],
             "template" => [__('admin.config.tab.template'), 'addLink', route('admin.config.template'), false],
         ];
-        $addons = PluginManager::trigger('settings', null, $run);
-        if ($run) {
-            foreach ($addons as $item) {
-                list($slug, $name) = explode("|", $item);
-                $items[$slug] = [__($name), 'addLink', $this->save_url . '/' . $slug, false];
-            }
+        $addons = PluginManager::trigger('settings');
+        foreach ($addons as $item) {
+            list($slug, $name) = explode("|", $item);
+            $items[$slug] = [__($name), 'addLink', $this->save_url . '/' . $slug, false];
         }
         if (!array_key_exists($nowTab, $items)) throw new NotFoundHttpException();
         $items[$nowTab][1] = 'add';
