@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\ServiceCreate;
 use App\Models\Product;
+use App\Models\Service;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -40,7 +41,16 @@ class ShopController extends Controller
             return redirect()->route('login');
         }
         $user = $request->user();
+        $data = $request->post('extra', []);
         $price = $product->price[$request->get('period')];
+        if ($product->require_domain) {
+            if (empty($data['domain']))
+                return back()->withErrors(['tip' => '要求提供域名']);
+            if (Service::where('domain', $data['domain'])
+                ->when(!getOption('site_service_domain_unique'), function ($query) use ($product) {
+                    $query->where('product_id', $product->id);
+                })->exists()) return back()->withErrors(['tip' => '域名已被占用']);
+        }
         if (!$product->enable)
             return back()->withErrors(['tip' => '产品已下架']);
         if ($product->ena_stock && $product->stocks <= 0)
@@ -73,8 +83,7 @@ class ShopController extends Controller
                 default:
                     return back()->withErrors(['tip' => '未知周期']);
             }
-            [$service] = event(new ServiceCreate($product, $user, $expire, $request->post('extra', []),
-                $price['auto_activate']));
+            [$service] = event(new ServiceCreate($product, $user, $expire, $data, $price['auto_activate']));
             if ($product->ena_stock) $product->decrement('stocks');
             return redirect()->route('client.service', $service);
         }

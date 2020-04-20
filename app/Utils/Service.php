@@ -70,7 +70,14 @@ class Service
                         $username .= $domain{$i};
                 }
                 // 假如提取不到任何英文字符，则采用随机生成
-                if (empty($username)) $username = self::generate_username('random');
+                if (empty($username)) {
+                    $username = self::generate_username('random');
+                } else {
+                    // 检测用户名是否存在，存在则
+                    while (\App\Models\Service::where('username', $username)->exists()) {
+                        $username = Str::random(8);
+                    }
+                }
         }
         return $username;
     }

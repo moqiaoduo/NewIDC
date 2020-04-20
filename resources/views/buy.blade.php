@@ -71,11 +71,25 @@
                 </div>
             </div>
             <div class="layui-card">
-                <div class="layui-card-header"><h2>付款周期</h2></div>
+                <div class="layui-card-header"><h2>优惠码</h2></div>
                 <div class="layui-card-body">
-                    <input type="text" name="" placeholder="优惠码" class="layui-input"
+                    <input type="text" name="promotion_code" class="layui-input"
                            style="width: calc(100% - 110px); display: inline-block;">
                     <button type="button" class="layui-btn">验证并使用</button>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header"><h2>附加信息</h2></div>
+                <div class="layui-card-body">
+                    @if($product->require_domain)
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">域名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="extra[domain]" required lay-verify="required"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
