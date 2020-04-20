@@ -26,8 +26,8 @@
                     </tr>
                     </thead>
                     <tbody id="pt-{{$name}}-tbody">
-                    @foreach((array) $value as $item)
-                        @include('admin.price_table_tr',['index'=>$loop->index])
+                    @foreach((array) $value as $id => $item)
+                        @include('admin.price_table_tr',['index'=>$id])
                     @endforeach
                     </tbody>
                 </table>

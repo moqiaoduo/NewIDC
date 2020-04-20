@@ -12,13 +12,10 @@ class PriceTable extends Field
     {
         $name = $this->formatName($this->column);
 
-        $count = count($this->value ?? []);
-
         $this->script = <<<JS
 (function($) {
-    var count = parseInt('$count');
     $("#pt-{$name}-addItem").on('click',function() {
-        $.get('/admin/api/price_table_tr/$name/'+(count++),function(html) {
+        $.get('/admin/api/price_table_tr/$name',function(html) {
             $("#pt-{$name}-tbody").append(html);
             $(".pt-checkbox").iCheck({
               checkboxClass: 'icheckbox_minimal-blue',

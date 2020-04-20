@@ -33,8 +33,8 @@ Route::name("admin.")->prefix(config('admin.route.prefix'))->namespace(config('a
             $router->get('/product_groups','ApiController@product_groups');
             $router->get('/server_groups','ApiController@server_groups');
             $router->get('/users','ApiController@users');
-            $router->get('/price_table_tr/{name}/{id}', function ($name, $id) {
-                return view('admin.price_table_tr', ['name' => $name, 'index' => $id]);
+            $router->get('/price_table_tr/{name}', function ($name) {
+                return view('admin.price_table_tr', ['name' => $name, 'index' => Str::random(32)]);
             });
         });
 
