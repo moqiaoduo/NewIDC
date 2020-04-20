@@ -32,17 +32,28 @@ class ServiceCreate
     private $data;
 
     /**
+     * @var bool
+     */
+    private $autoActivate;
+
+    private $expire_at;
+
+    /**
      * Create a new event instance.
      *
      * @param Product $product
      * @param User $user
+     * @param $expire_at
      * @param array $extra
+     * @param bool $autoActivate
      */
-    public function __construct(Product $product, User $user, $extra = [])
+    public function __construct(Product $product, User $user, $expire_at, $extra = [], $autoActivate = false)
     {
         $this->product = $product;
         $this->user = $user;
         $this->data = $extra;
+        $this->autoActivate = $autoActivate;
+        $this->expire_at = $expire_at;
     }
 
     /**
@@ -67,5 +78,21 @@ class ServiceCreate
     public function getData(): array
     {
         return $this->data;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAutoActivate(): bool
+    {
+        return $this->autoActivate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExpireAt()
+    {
+        return $this->expire_at;
     }
 }

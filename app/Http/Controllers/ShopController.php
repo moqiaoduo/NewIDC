@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ServiceCreate;
+use App\Exceptions\ServiceCreateException;
 use App\Models\Product;
 use App\Models\Service;
 use Auth;
@@ -44,11 +46,29 @@ class ShopController extends Controller
         $pay = $price['price'];
         if ($pay > 0) {
             // TODO: 加入账单功能
+            // 当前暂不支持
+            return back()->withErrors('暂不支持非免费产品', 'tip');
         } else {
-
+            $period = $price['period'];
+            switch ($price['period_unit']) {
+                case 'day':
+                    $expire = now()->addDays($period);
+                    break;
+                case 'month':
+                    $expire = now()->addMonths($period);
+                    break;
+                case 'year':
+                    $expire = now()->addYears($period);
+                    break;
+                case 'unlimited':
+                    $expire = null; // null 表示无期限
+                    break;
+                default:
+                    throw new ServiceCreateException(ServiceCreateException::UNSUPPORTED_PERIOD);
+            }
+            [$service] = event(new ServiceCreate($product, $request->user(), $expire, $request->post('extra', []),
+                $price['auto_activate']));
+            return redirect()->route('service', $service);
         }
-
-
-        dd($request->post(), $product);
     }
 }

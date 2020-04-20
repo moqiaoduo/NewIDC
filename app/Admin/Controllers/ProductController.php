@@ -186,9 +186,9 @@ HTML
         $form->saving(function (Form $form) {
             if (request()->pjax()) {
                 $price_table = [];
-                foreach ((array)$form->price as $price) {
+                foreach ((array)$form->price as $id => $price) {
                     if (empty($price['name'])) continue;
-                    $price_table[Str::random(32)] = [
+                    $price_table[$id] = [
                         'name' => $price['name'],
                         'period' => $price['period'],
                         'period_unit' => $price['period_unit'],

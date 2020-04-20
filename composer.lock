@@ -1512,12 +1512,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/new-idc-plugin.git",
-                "reference": "94d8975e8ada353c87316795ea2c9eabfc1cc7a2"
+                "reference": "ec2848d4a038666e21d63229ac545adf1b52be61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/new-idc-plugin/zipball/94d8975e8ada353c87316795ea2c9eabfc1cc7a2",
-                "reference": "94d8975e8ada353c87316795ea2c9eabfc1cc7a2",
+                "url": "https://api.github.com/repos/moqiaoduo/new-idc-plugin/zipball/ec2848d4a038666e21d63229ac545adf1b52be61",
+                "reference": "ec2848d4a038666e21d63229ac545adf1b52be61",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1561,7 +1561,7 @@
                 }
             ],
             "description": "NewIDC插件管理器",
-            "time": "2020-02-24T16:15:31+00:00"
+            "time": "2020-04-20T09:41:37+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -4955,6 +4955,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -5007,6 +5008,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {

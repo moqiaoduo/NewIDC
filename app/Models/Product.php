@@ -39,8 +39,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property int $product_group_id
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereProductGroupId($value)
+ * @property int $group_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereGroupId($value)
  * @property-read \App\Models\ProductGroup $group
  * @property int $require_domain
  * @property int $ena_stock

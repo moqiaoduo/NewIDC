@@ -12,16 +12,13 @@
 */
 
 Auth::routes([
-    'verify'=>getOption('email_verify',false),
-    'register'=>getOption('register',true)
+    'verify' => getOption('email_verify', false),
+    'register' => getOption('register', true)
 ]);
 
 Route::get('/', 'IndexController@index');
-Route::get('/locale','IndexController@locale')->name('locale');
-Route::get('/products','ShopController@index')->name('shop');
-Route::get('/buy/{product}','ShopController@buyShow')->name('buy');
-Route::post('/buy/{product}','ShopController@buy');
+Route::get('/locale', 'IndexController@locale')->name('locale');
+Route::get('/products', 'ShopController@index')->name('shop');
+Route::get('/buy/{product}', 'ShopController@buyShow')->name('buy');
+Route::post('/buy/{product}', 'ShopController@buy');
 
-Route::name('client.')->prefix('client')->namespace('Client')->group(function () {
-    Route::get('/','IndexController@index')->name('index');
-});
