@@ -12,9 +12,10 @@
 
 @section('foot')
     <script>
-        layui.use(['form', 'jquery'], function () {
+        layui.use(['form', 'jquery', 'layer'], function () {
             var form = layui.form,
-                $ = layui.jquery;
+                $ = layui.jquery,
+                layer = layui.layer;
 
             form.on('radio(period)', function (data) {
                 loadCalc(data.value)
@@ -31,6 +32,10 @@
                     $("#calc-loading").hide()
                 })
             }
+
+            @error('tip')
+            layer.alert('{{$message}}', {icon: 0})
+            @enderror
         })
     </script>
 @endsection
@@ -53,8 +58,8 @@
                             @continue
                         @endif
                         @if($price['period_unit']=='unlimited' && $product->price_configs['unlimited_when_buy'])
-                                @continue
-                            @endif
+                            @continue
+                        @endif
                         <input type="radio" name="period" value="{{$id}}" lay-filter="period"
                                title="@lang('price.'.$price['name'])<br>
 {{($price['price'] > 0 ? ('￥'.sprintf("%.2f",$price['price']) ) : '免费') .

@@ -42,20 +42,20 @@ class ShopController extends Controller
         $user = $request->user();
         $price = $product->price[$request->get('period')];
         if (!$product->enable)
-            return back()->withErrors('产品已下架', 'tip');
+            return back()->withErrors(['tip' => '产品已下架']);
         if ($product->ena_stock && $product->stocks <= 0)
-            return back()->withErrors('库存不足', 'tip');
+            return back()->withErrors(['tip' => '库存不足']);
         // TODO: 加入优惠码功能
         $pay = $price['price'];
         if ($pay > 0) {
             // TODO: 加入账单功能
             // 当前暂不支持
-            return back()->withErrors('暂不支持非免费产品', 'tip');
+            return back()->withErrors(['tip' => '暂不支持付费产品']);
         } else {
             if ($price['price'] == 0 &&
                 ($free_limit = $product->price_configs['free_limit']) &&
-                $user->services()->where('product_id',$product->id)->using()->count() >= $free_limit)
-                return back()->withErrors('您已到达免费产品服务数量上限', 'tip');
+                $user->services()->where('product_id', $product->id)->using()->count() >= $free_limit)
+                return back()->withErrors(['tip' => '您已到达免费产品服务数量上限']);
             $period = $price['period'];
             switch ($price['period_unit']) {
                 case 'day':
@@ -71,7 +71,7 @@ class ShopController extends Controller
                     $expire = null; // null 表示无期限
                     break;
                 default:
-                    return back()->withErrors('未知周期', 'tip');
+                    return back()->withErrors(['tip' => '未知周期']);
             }
             [$service] = event(new ServiceCreate($product, $user, $expire, $request->post('extra', []),
                 $price['auto_activate']));
