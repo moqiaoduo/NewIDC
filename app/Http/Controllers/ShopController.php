@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ServiceCreate;
-use App\Exceptions\ServiceCreateException;
 use App\Models\Product;
-use App\Models\Service;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -78,7 +76,7 @@ class ShopController extends Controller
             [$service] = event(new ServiceCreate($product, $user, $expire, $request->post('extra', []),
                 $price['auto_activate']));
             if ($product->ena_stock) $product->decrement('stocks');
-            return redirect()->route('service', $service);
+            return redirect()->route('client.service', $service);
         }
     }
 }
