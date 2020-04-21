@@ -28,7 +28,7 @@ class ProductController extends Controller
             // 在这里添加字段过滤器
             $filter->like('name', __('Name'));
             $filter->in('product_group_id', __('Product group'))->multipleSelect('/admin/api/products');
-            $filter->in('type', __('Type'))->multipleSelect(__('service_type'));
+            $filter->in('type', __('Type'))->multipleSelect(__('service.type'));
             $filter->equal('hide', __('Hide'))->radio([
                 '' => '不限',
                 1 => '是',
@@ -48,7 +48,7 @@ class ProductController extends Controller
             return ProductGroup::find($this->group_id)->name;
         });
         $grid->column('name', __('Name'));
-        $grid->column('type', __('Type'))->using(__('service_type'));
+        $grid->column('type', __('Type'))->using(__('service.type'));
         $grid->column('hide', __('Hide'))->sortable()->switch();
         $grid->column('enable', __('Enable'))->sortable()->switch();
         $grid->column('created_at', __('Created at'))->sortable();
@@ -114,7 +114,7 @@ HTML
 
         $form->tab(__('admin.product.tab.base'), function (Form $form) {
             $form->text('name', __('Name'))->required();
-            $form->select('type', __('Type'))->options(__('service_type'))->required();
+            $form->select('type', __('Type'))->options(__('service.type'))->required();
             $form->select('group_id', __('Product group'))->required()
                 ->options(function ($id) {
                     if ($id)
