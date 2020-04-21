@@ -48,6 +48,7 @@
                 </dl>
             </li>
             <li class="layui-nav-item"><a href="{{url('/')}}">@lang('user.back_index')</a></li>
+            @include('common.avatar', ['id' => 'newidc-list-avatar'])
         </ul>
     </div>
     <div class="layui-body" id="newidc-body">

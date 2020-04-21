@@ -57,6 +57,19 @@
             }
         }
     }
+
+    &-list-avatar {
+        display: none;
+        @media screen and (max-width: 768px) {
+            display: block;
+        }
+    }
+
+    &-head-avatar {
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
+    }
 }
 
 // 下面是对 layui 的样式重写

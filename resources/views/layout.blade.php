@@ -13,8 +13,8 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">{{config('app.name')}}</div>
-        <ul class="layui-layout-left">
-
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="{{url('/')}}">@lang('Products')</a></li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             @include('common.head_avatar')
