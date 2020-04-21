@@ -14,7 +14,7 @@
     <div class="layui-header">
         <div class="layui-logo">{{config('app.name')}}</div>
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="{{url('/')}}">@lang('Products')</a></li>
+            <li class="layui-nav-item"><a href="{{route('shop')}}">@lang('Store')</a></li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             @include('common.head_avatar')
