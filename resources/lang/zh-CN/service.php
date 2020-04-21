@@ -11,17 +11,17 @@ return [
          * 关于一些type选项的翻译，顺便作为一个列表
          */
 
-        'hosting'=>'Hosting',
-        'reseller'=>'Reseller',
+        'hosting'=>'虚拟主机',
+        'reseller'=>'分销主机',
         'vps'=>'VPS',
-        'server'=>'Dedicated Server',
-        'others'=>'Others',
+        'server'=>'独立服务器',
+        'others'=>'其他',
     ],
     'status' => [
-        'pending' => 'Pending',
-        'active' => 'Active',
-        'suspended' => 'Suspended',
-        'terminated' => 'Terminated',
-        'cancelled' => 'Cancelled'
+        'pending' => '待开通',
+        'active' => '运行中',
+        'suspended' => '已暂停',
+        'terminated' => '已销毁',
+        'cancelled' => '已取消'
     ]
 ];
