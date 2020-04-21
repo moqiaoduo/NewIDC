@@ -27,8 +27,8 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">@lang('Services')</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;">@lang('My Services')</a></dd>
-                    <dd><a href="javascript:;">@lang('Store')</a></dd>
+                    <dd><a href="{{route('client.services')}}">@lang('My Services')</a></dd>
+                    <dd><a href="{{route('shop')}}">@lang('Store')</a></dd>
                     <dd><a href="javascript:;">@lang('Product Addon')</a></dd>
                 </dl>
             </li>
