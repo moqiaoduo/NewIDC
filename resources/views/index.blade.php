@@ -23,7 +23,7 @@
                 <ul>
                     <li>
                         <div>{{$product['name']}}</div>
-                        <div>￥{{$product['price'][0]['price']??'Free'}} Start</div>
+                        <div>{{getLowestPrice($product['price'])}} Start</div>
                     </li>
                     @foreach(explode("<br>",$product->getCleanDescription()) as $text)
                         @if(!empty(trim($text))) <li>{!! $text !!}</li> @endif

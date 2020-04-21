@@ -10,9 +10,9 @@ if (!function_exists('arrayKeyValueSame')) {
     function arrayKeyValueSame(array $array)
     {
         foreach ($array as $value) {
-            $new_arr[$value]=$value;
+            $new_arr[$value] = $value;
         }
-        return $new_arr??[];
+        return $new_arr ?? [];
     }
 }
 
@@ -24,18 +24,18 @@ if (!function_exists('setOption')) {
      * @param null $value
      * @param int $uid
      */
-    function setOption($key, $value, $uid=0)
+    function setOption($key, $value, $uid = 0)
     {
         try {
             if (Schema::hasTable("options")) {
-                DB::table("options")->updateOrInsert(compact('key','uid'),compact('value'));
+                DB::table("options")->updateOrInsert(compact('key', 'uid'), compact('value'));
             }
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
     }
 }
 
-if (!function_exists('getOption'))
-{
+if (!function_exists('getOption')) {
     /**
      * 读取option
      *
@@ -44,14 +44,16 @@ if (!function_exists('getOption'))
      * @param int $uid
      * @return mixed|null
      */
-    function getOption($key, $default=null, $uid=0) {
+    function getOption($key, $default = null, $uid = 0)
+    {
         try {
             if (Schema::hasTable("options")) {
-                $result=DB::table("options")->where("key",$key)->where('uid',$uid)->first();
-                if (!$result || ($val=$result->value)===null) return $default;
+                $result = DB::table("options")->where("key", $key)->where('uid', $uid)->first();
+                if (!$result || ($val = $result->value) === null) return $default;
                 return $val;
             }
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
         return $default;
     }
 }
@@ -64,15 +66,17 @@ if (!function_exists('getOptions')) {
      * @param int $uid
      * @return \Illuminate\Support\Collection|null
      */
-    function getOptions($keys=null,$uid=0) {
+    function getOptions($keys = null, $uid = 0)
+    {
         try {
             if (Schema::hasTable("options")) {
-                $db=DB::table("options")->where('uid',$uid);
-                if ($keys&&is_array($keys))
-                    $db=$db->whereIn('key',$keys);
-                return $db->get()->pluck('value','key');
+                $db = DB::table("options")->where('uid', $uid);
+                if ($keys && is_array($keys))
+                    $db = $db->whereIn('key', $keys);
+                return $db->get()->pluck('value', 'key');
             }
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
         return null;
     }
 }
@@ -89,9 +93,9 @@ if (!function_exists('modifyEnv')) {
 
         $contentArray = collect(file($envPath, FILE_IGNORE_NEW_LINES));
 
-        $contentArray->transform(function ($item) use ($data){
-            foreach ($data as $key => $value){
-                if(Str::contains($item, $key)){
+        $contentArray->transform(function ($item) use ($data) {
+            foreach ($data as $key => $value) {
+                if (Str::contains($item, $key)) {
                     return $key . '=' . $value;
                 }
             }
@@ -102,5 +106,25 @@ if (!function_exists('modifyEnv')) {
         $content = implode($contentArray->toArray(), "\n");
 
         File::put($envPath, $content);
+    }
+}
+
+if (!function_exists('getLowestPrice')) {
+    /**
+     * 获取最低价格
+     *
+     * @param array $price_table 价格表
+     * @return string
+     */
+    function getLowestPrice($price_table)
+    {
+        $min = 0;
+        $count = 0;
+        foreach ((array)$price_table as $price) {
+            if ($count++ == 0 || $price['price'] < $min) {
+                $min = $price['price'];
+            }
+        }
+        return $min > 0 ? '￥' . $min : 'Free';
     }
 }
