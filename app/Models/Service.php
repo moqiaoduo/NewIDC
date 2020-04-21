@@ -45,9 +45,12 @@ class Service extends Model
 {
     protected $fillable = ['status'];
 
-    protected $casts=[
-        'extra'=>'json'
+    protected $casts = [
+        'extra' => 'json',
+        'price' => 'json'
     ];
+
+    protected $appends = ['status_text', 'status_color'];
 
     public function server()
     {
@@ -67,5 +70,28 @@ class Service extends Model
     public function scopeUsing($query)
     {
         $query->whereIn('status', ['pending', 'active', 'suspended']);
+    }
+
+    public function getStatusTextAttribute()
+    {
+        return __('service.status.' . $this->status) ?: __('Unknown');
+    }
+
+    public function getStatusColorAttribute()
+    {
+        switch ($this->status) {
+            case 'pending':
+                return '';
+            case 'active':
+                return 'layui-bg-green';
+            case 'suspended':
+                return 'layui-bg-orange';
+            case 'terminated':
+                return 'layui-bg-black';
+            case 'cancelled':
+                return 'layui-bg-gray';
+            default:
+                return 'layui-bg-blue';
+        }
     }
 }
