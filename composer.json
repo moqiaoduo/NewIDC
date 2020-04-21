@@ -20,6 +20,7 @@
         "moqiaoduo/new-idc-plugin": "dev-master"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.3",
         "barryvdh/laravel-ide-helper": "^2.6",
         "caouecs/laravel-lang": "~4.0",
         "facade/ignition": "^1.4",
