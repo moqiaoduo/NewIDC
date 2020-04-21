@@ -21,6 +21,7 @@ class CreateServicesTable extends Migration
             $table->string('username')->nullable();
             $table->string('password')->nullable();
             $table->string('domain')->nullable();
+            $table->json('price');
             $table->integer('server_id')->nullable();
             $table->string('status')->default('pending')
                 ->comment('pending:待开通 active:运行中 suspended:已暂停 terminated:已销毁 cancelled:已取消');
