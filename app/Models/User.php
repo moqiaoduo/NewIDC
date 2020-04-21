@@ -39,6 +39,8 @@ use Illuminate\Notifications\Notifiable;
  * @property mixed|null $extra
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereExtra($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLang($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Service[] $services
+ * @property-read int|null $services_count
  */
 class User extends Authenticatable
 {
