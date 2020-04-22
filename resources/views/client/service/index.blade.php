@@ -46,13 +46,13 @@
     <script type="text/html" id="tools">
         <form class="layui-form" method="get" id="service-table-form">
             <div class="layui-inline">
-                <label class="layui-form-label">筛选</label>
+                <label class="layui-form-label" style="width: 60px;">筛选</label>
                 <div class="layui-input-inline">
                     <select lay-filter="status" name="status">
                         <option value="">@lang('All')</option>
                         @foreach(__('service.status') as $key=>$val)
                             <option value="{{$key}}"
-                                    @if(request()->get('status')==$key) selected @endif>{{$val}}</option>
+                                    @if($status==$key) selected @endif>{{$val}}</option>
                         @endforeach
                     </select>
                 </div>

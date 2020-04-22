@@ -10,11 +10,13 @@ class ServiceController extends Controller
 {
     public function index(Request $request)
     {
+        $status = $request->get('status') ?: $request->cookie('service.status');
+        cookie('service.status', $status);
         $data = $request->user()->services()
-            ->when($status = $request->get('status'), function ($query) use ($status) {
+            ->when($status, function ($query) use ($status) {
             $query->where('status', $status);
         })->with('product')->with('product.group')->get();
-        return view('client.service.index',compact('data'));
+        return view('client.service.index',compact('data','status'));
     }
 
     public function detail(Service $service)
