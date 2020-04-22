@@ -57,6 +57,16 @@ class ShopController extends Controller
             return back()->withErrors(['tip' => '库存不足']);
         // TODO: 加入优惠码功能
         $pay = $price['price'];
+        $ps = [
+            'type' => $price['price'] > 0 ? 'pay' : 'free',
+            'price' => $pay,
+            'promotion_code' => '', // 优惠码待加
+            'period' => [
+                'name' => $price['name'],
+                'num' => $price['period'],
+                'unit' => $price['period_unit']
+            ]
+        ];
         if ($pay > 0) {
             // TODO: 加入账单功能
             // 当前暂不支持
@@ -83,7 +93,7 @@ class ShopController extends Controller
                 default:
                     return back()->withErrors(['tip' => '未知周期']);
             }
-            [$service] = event(new ServiceCreate($product, $user, $expire, $data, $price['auto_activate']));
+            [$service] = event(new ServiceCreate($product, $user, $expire, $ps, $data, $price['auto_activate']));
             if ($product->ena_stock) $product->decrement('stocks');
             return redirect()->route('client.service', $service);
         }

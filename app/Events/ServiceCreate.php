@@ -38,6 +38,8 @@ class ServiceCreate
 
     private $expire_at;
 
+    private $price;
+
     /**
      * Create a new event instance.
      *
@@ -47,13 +49,14 @@ class ServiceCreate
      * @param array $extra
      * @param bool $autoActivate
      */
-    public function __construct(Product $product, User $user, $expire_at, $extra = [], $autoActivate = false)
+    public function __construct(Product $product, User $user, $expire_at, $price, $extra = [], $autoActivate = false)
     {
         $this->product = $product;
         $this->user = $user;
         $this->data = $extra;
         $this->autoActivate = $autoActivate;
         $this->expire_at = $expire_at;
+        $this->price = $price;
     }
 
     /**
@@ -94,5 +97,13 @@ class ServiceCreate
     public function getExpireAt()
     {
         return $this->expire_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 }

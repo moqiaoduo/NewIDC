@@ -39,6 +39,7 @@ class ServiceCreateListener
         $service->password = encrypt(Str::random());
         $service->domain = $domain;
         $service->expire_at = $event->getExpireAt();
+        $service->price = $event->getPrice();
         $service->save();
 
         // 自动激活，激活工作由另一个监听器完成

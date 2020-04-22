@@ -40,6 +40,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\Product $product
  * @property-read \App\Models\Server $server
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service using()
+ * @property array $price
+ * @property-read mixed $status_color
+ * @property-read mixed $status_text
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service wherePrice($value)
  */
 class Service extends Model
 {
