@@ -20,7 +20,7 @@
 
 @section('foot')
     <script>
-        layui.use(['table','form'], function () {
+        layui.use(['table', 'form'], function () {
             var table = layui.table,
                 form = layui.form;
 
@@ -32,13 +32,17 @@
                 , text: {none: '暂无服务'}
                 , toolbar: '#tools'
                 , defaultToolbar: []
+                , initSort: {
+                    field: 'status' //排序字段，对应 cols 设定的各字段名
+                    , type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+                }
             });
 
             table.on('row(table)', function (obj) {
                 window.location.href = obj.data.link
             });
 
-            form.on('select(status)', function(){
+            form.on('select(status)', function () {
                 document.getElementById('service-table-form').submit()
             });
         })
