@@ -107,7 +107,7 @@ class Service extends Model
      */
     public function getPasswordAttribute($value)
     {
-        return decrypt($value);
+        return is_null($value) ? NULL : decrypt($value);
     }
 
     /**
@@ -117,6 +117,6 @@ class Service extends Model
      */
     public function setPasswordAttribute($value)
     {
-        $this->attributes['password'] = encrypt($value);
+        $this->attributes['password'] = is_null($value) ? NULL : encrypt($value);
     }
 }
