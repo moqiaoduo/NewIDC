@@ -76,7 +76,7 @@
                                     <td>{{$service->server->ip}}</td>
                                 </tr>
                                 {{-- 这个地方预计插入hook --}}
-                                <tr>
+                                <tr class="newidc-service-login">
                                     <td colspan="2">
                                         {!! $login !!}
                                     </td>
