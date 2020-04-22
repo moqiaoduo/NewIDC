@@ -19,16 +19,16 @@
                 <select name="{{$name}}[{{$index}}][period_unit]" class="form-control"
                         style="width: auto;display: inline-block;">
                 <option value="day" @if(($pu=($item['period_unit']??null))=='day') selected @endif>
-                    @lang('admin.product.price.day')
+                    @lang('period.day')
                 </option>
                 <option value="month" @if($pu=='month') selected @endif>
-                    @lang('admin.product.price.month')
+                    @lang('period.month')
                 </option>
                 <option value="year" @if($pu=='year') selected @endif>
-                    @lang('admin.product.price.year')
+                    @lang('period.year')
                 </option>
                 <option value="unlimited" @if($pu=='unlimited') selected @endif>
-                    @lang('admin.product.price.unlimited')
+                    @lang('period.unlimited')
                 </option>
             </select>
             </span>
