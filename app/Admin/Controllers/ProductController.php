@@ -156,7 +156,7 @@ HTML
                     })->get()->pluck('name', 'id');
                 });
             $plugin = $form->model()->value('server_plugin');
-            $form->embeds('config.server', __('Settings'), function ($form) use ($plugin) {
+            $form->embeds('server_configs', __('Settings'), function ($form) use ($plugin) {
                 if (class_exists($plugin)) {
                     $configs = $plugin::productConfig();
                     foreach ($configs as $key => $config) {
