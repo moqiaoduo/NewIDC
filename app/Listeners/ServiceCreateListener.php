@@ -36,7 +36,7 @@ class ServiceCreateListener
         $service->user_id = $event->getUser()->id;
         $service->name = Str::random();
         $service->username = \App\Utils\Service::generate_username(getOption('service_username_generation'), $domain);
-        $service->password = encrypt(Str::random());
+        $service->password = Str::random();
         $service->domain = $domain;
         $service->expire_at = $event->getExpireAt();
         $service->price = $event->getPrice();

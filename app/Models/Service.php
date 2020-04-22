@@ -98,4 +98,25 @@ class Service extends Model
                 return 'layui-bg-blue';
         }
     }
+
+    /**
+     * 密码访问器，自动解密
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function getPasswordAttribute($value)
+    {
+        return decrypt($value);
+    }
+
+    /**
+     * 密码修改器，自动加密
+     *
+     * @param string $value
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = encrypt($value);
+    }
 }

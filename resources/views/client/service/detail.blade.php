@@ -69,7 +69,7 @@
                                 </tr>
                                 <tr>
                                     <td>密码</td>
-                                    <td>{{decrypt($service->password)}}</td>
+                                    <td>{{$service->password}}</td>
                                 </tr>
                                 <tr>
                                     <td>IP地址</td>
