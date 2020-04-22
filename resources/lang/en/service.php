@@ -23,5 +23,11 @@ return [
         'suspended' => 'Suspended',
         'terminated' => 'Terminated',
         'cancelled' => 'Cancelled'
+    ],
+    'detail' => [
+        'tab' => [
+            'overview' => 'Overview',
+            'change_password' => 'Change Password'
+        ]
     ]
 ];

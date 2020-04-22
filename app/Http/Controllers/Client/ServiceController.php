@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use NewIDC\Plugin\Server;
 
 class ServiceController extends Controller
 {
@@ -14,13 +15,19 @@ class ServiceController extends Controller
         cookie('service.status', $status);
         $data = $request->user()->services()
             ->when($status, function ($query) use ($status) {
-            $query->where('status', $status);
-        })->with('product')->with('product.group')->get();
-        return view('client.service.index',compact('data','status'));
+                $query->where('status', $status);
+            })->with('product')->with('product.group')->get();
+        return view('client.service.index', compact('data', 'status'));
     }
 
     public function detail(Service $service)
     {
-
+        $login = '';
+        if (class_exists($class = $service->server->server_plugin)) {
+            $plugin = new $class; /* @var Server $plugin */
+            $plugin->init($service->product, $service, $service->server);
+            $login = $plugin->userLogin();
+        }
+        return view('client.service.detail', compact('service', 'login'));
     }
 }

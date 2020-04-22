@@ -92,7 +92,7 @@
                     @endif
                     @lang('price.'.$item->price['period']['name'])
                 </td>
-                <td>{{$item->expire_at}}</td>
+                <td>{{$item->expire_at ?: '-'}}</td>
                 <td>
                     <span class="layui-badge-dot {{$item->status_color}}"></span>
                     {{$item->status_text}}
