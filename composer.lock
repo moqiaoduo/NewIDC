@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fce2f62dd11981b74a07938c102c81b9",
+    "content-hash": "2e55d38ec109c07ab02781426eb00210",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1509,63 +1509,6 @@
             "time": "2019-12-20T14:22:59+00:00"
         },
         {
-            "name": "moqiaoduo/new-idc-plugin",
-            "version": "v0.3.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moqiaoduo/new-idc-plugin.git",
-                "reference": "d6e2afe1c0c43a3da0d17f16fa38fcdede320796"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/new-idc-plugin/zipball/d6e2afe1c0c43a3da0d17f16fa38fcdede320796",
-                "reference": "d6e2afe1c0c43a3da0d17f16fa38fcdede320796",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "ext-json": "*",
-                "laravel/framework": "~6.0",
-                "php": "^7.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~6.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "NewIDC\\Plugin\\ServiceProvider"
-                    ],
-                    "aliases": {
-                        "PluginManager": "NewIDC\\Plugin\\Facade\\PluginManager"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "NewIDC\\Plugin\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "moqiaoduo",
-                    "email": "415372363@qq.com"
-                }
-            ],
-            "description": "NewIDC插件管理器",
-            "time": "2020-04-22T08:25:48+00:00"
-        },
-        {
             "name": "nesbot/carbon",
             "version": "2.32.2",
             "source": {
@@ -1641,6 +1584,117 @@
                 "time"
             ],
             "time": "2020-03-31T13:43:19+00:00"
+        },
+        {
+            "name": "newidc/easypanel",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moqiaoduo/newidc-ep.git",
+                "reference": "1a54f4513c75df585809662ba444ae2d06797d57"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moqiaoduo/newidc-ep/zipball/1a54f4513c75df585809662ba444ae2d06797d57",
+                "reference": "1a54f4513c75df585809662ba444ae2d06797d57",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "newidc/plugin": "^0.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NewIDC\\EasyPanel\\EasyPanelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NewIDC\\EasyPanel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "moqiaoduo",
+                    "email": "415372363@qq.com"
+                }
+            ],
+            "description": "NewIDC的Easypanel插件",
+            "time": "2020-04-22T14:33:41+00:00"
+        },
+        {
+            "name": "newidc/plugin",
+            "version": "v0.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moqiaoduo/new-idc-plugin.git",
+                "reference": "d6e2afe1c0c43a3da0d17f16fa38fcdede320796"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moqiaoduo/new-idc-plugin/zipball/d6e2afe1c0c43a3da0d17f16fa38fcdede320796",
+                "reference": "d6e2afe1c0c43a3da0d17f16fa38fcdede320796",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "~6.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NewIDC\\Plugin\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "PluginManager": "NewIDC\\Plugin\\Facade\\PluginManager"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NewIDC\\Plugin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "moqiaoduo",
+                    "email": "415372363@qq.com"
+                }
+            ],
+            "description": "NewIDC插件管理器",
+            "time": "2020-04-22T08:25:48+00:00"
         },
         {
             "name": "nikic/php-parser",

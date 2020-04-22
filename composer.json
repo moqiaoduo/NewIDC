@@ -17,7 +17,8 @@
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "mews/purifier": "^3.1",
-        "moqiaoduo/new-idc-plugin": "^0.3"
+        "newidc/plugin": "^0.3",
+        "newidc/easypanel": "^0.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",
