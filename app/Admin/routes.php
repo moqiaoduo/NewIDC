@@ -29,8 +29,6 @@ Route::name("admin.")->prefix(config('admin.route.prefix'))->namespace(config('a
         });
 
         $router->group(['prefix'=>"/api"],function (Router $router) {
-            $router->get('/products','ApiController@products');
-            $router->get('/product_groups','ApiController@product_groups');
             $router->get('/server_groups','ApiController@server_groups');
             $router->get('/users','ApiController@users');
             $router->get('/price_table_tr/{name}', function ($name) {
