@@ -57,9 +57,9 @@ class Service
         $username = '';
         switch ($type) {
             case 'random':
-                $username = Str::random(8);
+                $username = strtolower(Str::random(8));
                 while (\App\Models\Service::where('username', $username)->exists()) {
-                    $username = Str::random(8);
+                    $username = strtolower(Str::random(8));
                 }
                 break;
             case 'domain':
@@ -73,9 +73,10 @@ class Service
                 if (empty($username)) {
                     $username = self::generate_username('random');
                 } else {
-                    // 检测用户名是否存在，存在则
+                    $username = strtolower($username);
+                    // 检测用户名是否存在，存在则增加随机字符
                     while (\App\Models\Service::where('username', $username)->exists()) {
-                        $username = Str::random(8);
+                        $username .= strtolower(Str::random(1));
                     }
                 }
         }
