@@ -1,6 +1,6 @@
 @extends('client.layout')
 
-@section('title', __('Dashboard'))
+@section('title', __('Overview'))
 
 @section('head')
 @endsection

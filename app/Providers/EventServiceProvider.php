@@ -22,21 +22,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\LoginEvent' => [
             'App\Listeners\LoginListener'
         ],
-        'App\Events\ServiceCreate' => [
-            'App\Listeners\ServiceCreateListener'
-        ],
-        'App\Events\ServiceActivate' => [
-            'App\Listeners\ServiceActivateListener'
-        ],
-        'App\Events\ServiceSuspend' => [
-            'App\Listeners\ServiceSuspendListener'
-        ],
-        'App\Events\ServiceRecover' => [
-            'App\Listeners\ServiceRecoverListener'
-        ],
-        'App\Events\ServiceTerminate' => [
-            'App\Listeners\ServiceTerminateListener'
-        ]
+    ];
+
+    protected $subscribe = [
+        'App\Listeners\ServiceEventSubscriber'
     ];
 
     /**

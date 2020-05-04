@@ -61,6 +61,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\ServerGroup|null $server_group
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereServerGroupId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereStocks($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product show()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product withGroup($gid)
  */
 class Product extends Model
 {
@@ -86,5 +88,15 @@ class Product extends Model
     public function getCleanDescription() {
         return str_replace(["\r\n","\r","\n"],'<br>',
             preg_replace('/(\s+\r)/',"",$this->description));
+    }
+
+    public function scopeShow($query)
+    {
+        $query->where('hide', 0);
+    }
+
+    public function scopeWithGroup($query, $gid)
+    {
+        $query->where('group_id', $gid);
     }
 }

@@ -26,20 +26,19 @@ class ProductGroupController extends Controller
         });
         $grid->quickSearch('name');
 
+        $grid->disableFilter();
+
         $grid->actions(function ($actions) {
 
             // 去掉查看
             $actions->disableView();
         });
 
-        $grid->column('id', 'ID');
         $grid->column('name', __('Name'))->sortable();
         $grid->column('hide', __('Hide'))->switch()->filter([
             0 => '是',
             1 => '否',
         ])->sortable();
-        $grid->column('created_at', __('Created at'))->sortable();
-        $grid->column('updated_at', __('Updated at'))->sortable();
 
         return $grid;
     }

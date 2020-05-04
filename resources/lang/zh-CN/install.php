@@ -1,13 +1,16 @@
 <?php
 
-return [
-    'welcome' => <<<EOT
+$welcome = <<<EOT
 |------------------------------------------|
 |              欢迎使用 NewIDC             |
 |          我将会帮您完成本次安装          |
 |            请如实填写以下信息            |
 |------------------------------------------|
-EOT,
+EOT
+;
+
+return [
+    'welcome'               => $welcome,
     'exist_tables'          => '检测到您的数据库不为空，继续安装可能会导致原有数据丢失，是否继续？',
     'env_not_exist'         => 'env文件不存在，请将.env.example复制一份并重命名为.env',
     'database_connect_fail' => '检测到数据库未连接成功，请先修改.env中数据库信息',

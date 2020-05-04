@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Product;
 use App\Models\User;
 use App\Notifications\ResetPassword;
 use Encore\Admin\Controllers\AdminController;
@@ -44,15 +45,40 @@ class UserController extends Controller
     {
         $show = new Show(User::findOrFail($id));
 
-        $show->field('id', __('Id'));
-        $show->field('username', __('Username'));
+        $show->field('id', __('ID'));
+        $show->field('username');
         $show->field('email', __('Email'));
-        $show->field('email_verified_at', __('Email verified at'));
+        $show->field('email_verified_at', __('admin.user.email_verified_at'));
         $show->field('funds', __('Funds'));
-        $show->field('last_logon_at', __('Last logon at'));
-        $show->field('remember_token', __('Remember token'));
+        $show->field('last_logon_at', __('admin.user.last_logon_at'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
+
+        $show->services(__('Services'), function ($service) {
+
+            $service->resource('/admin/service');
+
+            $service->id('ID');
+            $service->product_id(__('Product'))->display(function ($id) {
+                if ($product = Product::find($id))
+                    return ($product->group ? $product->group->name . ' - ' : '') . $product->name;
+            });
+            $service->name();
+            $service->username();
+            $service->domain();
+            $service->status()->display(function () {
+                return $this->status_text;
+            })->label([
+                'active' => 'success',
+                'suspended' => 'warning',
+                'pending' => 'info',
+                'terminated' => 'danger',
+                'cancelled' => 'default'
+            ]);
+            $service->expire_at();
+            $service->created_at();
+
+        });
 
         return $show;
     }
@@ -70,7 +96,7 @@ class UserController extends Controller
         $form->email('email', __('Email'))->required();
         $form->datetime('email_verified_at', __('admin.user.email_verified_at'));
         if ($form->isEditing())
-            $form->html(view('admin.reset_pwd'),'重置密码');
+            $form->html(view('admin.reset_pwd'), __('Reset Password'));
         $form->decimal('funds', __('Funds'));
 
         return $form;
@@ -78,9 +104,9 @@ class UserController extends Controller
 
     public function reset_password($id)
     {
-        $user=User::findOrFail($id);
-        $user->update(['password'=>\Hash::make($new_pwd=\Str::random())]);
-        $user->notify(new ResetPassword($user->username,$new_pwd));
+        $user = User::findOrFail($id);
+        $user->update(['password' => \Hash::make($new_pwd = \Str::random())]);
+        $user->notify(new ResetPassword($user->username, $new_pwd));
         return 'ok';
     }
 }

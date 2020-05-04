@@ -44,6 +44,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read mixed $status_color
  * @property-read mixed $status_text
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Service wherePrice($value)
+ * @property-read \App\Models\User $user
  */
 class Service extends Model
 {
@@ -64,6 +65,11 @@ class Service extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     /**

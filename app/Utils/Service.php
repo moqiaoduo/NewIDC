@@ -2,9 +2,14 @@
 
 namespace App\Utils;
 
+use App\Events\ServiceUnsuspend;
+use App\Jobs\ServiceActivate;
 use App\Models\Product;
 use App\Models\Server;
+use App\Models\User;
+use Carbon\Carbon;
 use Str;
+use App\Models\Service as Model;
 
 class Service
 {
@@ -58,7 +63,7 @@ class Service
         switch ($type) {
             case 'random':
                 $username = strtolower(Str::random(8));
-                while (\App\Models\Service::where('username', $username)->exists()) {
+                while (Model::where('username', $username)->exists()) {
                     $username = strtolower(Str::random(8));
                 }
                 break;
@@ -75,11 +80,78 @@ class Service
                 } else {
                     $username = strtolower($username);
                     // 检测用户名是否存在，存在则增加随机字符
-                    while (\App\Models\Service::where('username', $username)->exists()) {
+                    while (Model::where('username', $username)->exists()) {
                         $username .= strtolower(Str::random(1));
                     }
                 }
         }
         return $username;
+    }
+
+    public static function create(Product $product, User $user, $expire_at, $price, $data = [], $autoActivate = false)
+    {
+        $domain = $data['domain'] ?? null;
+
+        $service = new Model();
+        $service->product_id = $product->id;
+        $service->user_id = $user->id;
+        $service->name = Str::random();
+        $service->username = self::generate_username(getOption('service_username_generation'), $domain);
+        $service->password = Str::random();
+        $service->domain = $domain;
+        $service->expire_at = $expire_at;
+        $service->price = $price;
+        $service->save();
+
+        // 自动激活，激活工作由队列完成，防止拥塞
+        if ($autoActivate) {
+            ServiceActivate::dispatch($service);
+        }
+
+        return $service;
+    }
+
+    /**
+     * 续期
+     *
+     * @param Model $service
+     */
+    public static function renew(Model $service)
+    {
+        $expire_at = Carbon::parse($service->expire_at);
+        switch ($service->price['period']['unit']) {
+            case 'day':
+                $service->expire_at = $expire_at->addDays($service->price['period']['num']);
+                break;
+            case 'month':
+                $service->expire_at = $expire_at->addMonths($service->price['period']['num']);
+                break;
+            case 'year':
+                $service->expire_at = $expire_at->addYears($service->price['period']['num']);
+                break;
+            case 'unlimited':
+                $service->expire_at = null; // null 表示无期限
+                break;
+            default:
+                throw new \InvalidArgumentException('Unknown Period');
+        }
+        $service->save();
+    }
+
+    /**
+     * 解除暂停
+     *
+     * @param Model $service
+     */
+    public static function unsuspend(Model $service)
+    {
+        $class = $service->server->server_plugin;
+        if (class_exists($class)) {
+            $plugin = new $class;
+            /* @var \NewIDC\Plugin\Server $plugin */
+            $plugin->init($service->product, $service, $service->server);
+            $plugin->command('unsuspend');
+            event(new ServiceUnsuspend($service));
+        }
     }
 }

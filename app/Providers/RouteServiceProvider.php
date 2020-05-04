@@ -46,8 +46,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        Route::name('client.')
-            ->middleware(['web', 'auth', 'lang'])
+        Route::middleware(['web', 'auth', 'lang'])
             ->prefix('client')
             ->namespace($this->namespace . '\\Client')
             ->group(base_path('routes/client.php'));

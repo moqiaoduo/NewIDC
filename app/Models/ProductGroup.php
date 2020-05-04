@@ -25,11 +25,17 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductGroup show()
  */
 class ProductGroup extends Model
 {
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'group_id');
+    }
+
+    public function scopeShow($query)
+    {
+        $query->where('hide', 0);
     }
 }

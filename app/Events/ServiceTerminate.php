@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Service;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -15,22 +16,25 @@ class ServiceTerminate
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
+     * @var Service
+     */
+    private $service;
+
+    /**
      * Create a new event instance.
      *
-     * @return void
+     * @param Service $service
      */
-    public function __construct()
+    public function __construct(Service $service)
     {
-        //
+        $this->service = $service;
     }
 
     /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return Service
      */
-    public function broadcastOn()
+    public function getService(): Service
     {
-        return new PrivateChannel('channel-name');
+        return $this->service;
     }
 }

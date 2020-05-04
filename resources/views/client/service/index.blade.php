@@ -20,9 +20,10 @@
 
 @section('foot')
     <script>
-        layui.use(['table', 'form'], function () {
+        layui.use(['table', 'form', 'jquery'], function () {
             var table = layui.table,
-                form = layui.form;
+                form = layui.form,
+                $ = layui.jquery;
 
             //转换静态表格
             table.init('table', {
@@ -45,6 +46,19 @@
             form.on('select(status)', function () {
                 document.getElementById('service-table-form').submit()
             });
+
+            $(".renew").on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                layer.open({
+                    type: 2,
+                    title: '@lang('Renew')',
+                    shadeClose: true,
+                    shade: 0.6,
+                    area: ['350px', '80%'],
+                    content: e.target.href //iframe的url
+                });
+            })
         })
     </script>
     <script type="text/html" id="tools">
@@ -71,9 +85,9 @@
         <tr>
             <th lay-data="{field: 'product', sort: true}">产品/服务</th>
             <th lay-data="{field: 'price', sort: true, width: 150}">价格</th>
-            <th lay-data="{field: 'expire_at', sort: true, width: 200}">下次付款时间</th>
+            <th lay-data="{field: 'expire_at', sort: true, width: 150}">下次付款日</th>
             <th lay-data="{field: 'status', sort: true, width: 100}">状态</th>
-            <th lay-data="{field: 'op', width: 170}"></th>
+            <th lay-data="{field: 'op', width: 200}"></th>
             <th lay-data="{field: 'link', hide: true}"></th>
         </tr>
         </thead>
@@ -82,28 +96,30 @@
             <tr>
                 <td>
                     <p>{{$item->product->group->name}} - {{$item->product->name}}</p>
-                    <p><a href="{{route('client.service',$item)}}">{{$item->name}}</a></p>
+                    <p><a href="{{route('service',$item)}}">{{$item->name}}</a></p>
                 </td>
                 <td>
                     @if($item->price['type'] == 'free')
-                        <p>免费</p>
+                        <p>@lang('Free')</p>
                     @else
                         <p>￥{{$item->price['price']}}</p>
                     @endif
                     @lang('price.'.$item->price['period']['name'])
                 </td>
-                <td>{{$item->expire_at ?: '-'}}</td>
+                <td>{{$item->expire_at ? \Carbon\Carbon::parse($item->expire_at)->toDateString() : '-'}}</td>
                 <td>
                     <span class="layui-badge-dot {{$item->status_color}}"></span>
                     {{$item->status_text}}
                 </td>
                 <td>
                     <div class="layui-btn-group">
-                        <a href="" class="layui-btn layui-btn-normal">续费</a>
-                        <a href="{{route('client.service',$item)}}" class="layui-btn layui-btn-primary">管理</a>
+                        <a href="{{route('service.renew',$item)}}"
+                           class="layui-btn layui-btn-normal renew">@lang('Renew')</a>
+                        <a href="{{route('service',$item)}}"
+                           class="layui-btn layui-btn-primary">@lang('Manage')</a>
                     </div>
                 </td>
-                <td>{{route('client.service',$item)}}</td>
+                <td>{{route('service',$item)}}</td>
             </tr>
         @endforeach
         </tbody>

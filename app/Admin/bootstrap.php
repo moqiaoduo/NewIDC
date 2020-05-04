@@ -26,13 +26,16 @@ Form::forget(['map']);
 Form::extend('price', PriceTable::class);
 
 Admin::navbar(function (\Encore\Admin\Widgets\Navbar $navbar) {
-    $list='';$url=route('admin.setting');
-    foreach (Storage::disk('lang')->allDirectories() as $directory) {
-        $active=$directory===request()->user('admin')->lang?' class="active"':"";
-        $list.=<<<HTML
+    $list = '';
+    $url = route('admin.setting');
+    foreach (config('lang.locations') as $lang => $show) {
+        $active = '';
+        if ($user = request()->user('admin'))
+            $active = ($lang === $user->lang ? ' class="active"' : "");
+        $list .= <<<HTML
         <li role="presentation"$active>
-			<a role="menuitem" tabindex="-1" href="javascript:;" onclick="changeLang('$directory')"
-			>$directory</a>
+			<a role="menuitem" tabindex="-1" href="javascript:;" onclick="changeLang('$lang')"
+			>$show</a>
 		</li>
 HTML;
 
@@ -47,6 +50,7 @@ flex-flow: wrap;
 }
 .lang-fast li {
 width: 80px;
+text-align: center;
 }
 @media screen and (max-width: 991px) {
     #lang-fast {
@@ -81,6 +85,6 @@ $list
 </li>
 
 HTML
-);
+    );
 
 });

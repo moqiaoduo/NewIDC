@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use DB;
 use Encore\Admin\Auth\Database\Administrator;
+use Encore\Admin\Auth\Database\Role;
 use Exception;
 use Illuminate\Console\Command;
 use Schema;
@@ -48,19 +49,19 @@ class Install extends Command
             goto stop_inst;
         }
         try {
-            $tables=Schema::getAllTables();
+            $tables = Schema::getAllTables();
         } catch (Exception $e) {
             $this->warn(__('install.database_connect_fail'));
             goto stop_inst;
         }
         if (!empty($tables) && !$this->confirm(__('install.exist_tables'))) goto stop_inst;
         $this->info(__('install.admin_config_tip'));
-        $admin_username = $this->ask(__('install.admin_username_tip'),'admin');
+        $admin_username = $this->ask(__('install.admin_username_tip'), 'admin');
         while (empty($admin_password = $this->secret(__('install.admin_password_tip'))))
             $this->warn(__('install.password_empty'));
         if ($this->confirm(__('install.recommend_webadmin'))) {
-            $webadmin_username = $this->ask(__('install.webadmin_username_tip'),'webadmin');
-             while (empty($webadmin_password = $this->secret(__('install.webadmin_password_tip'))))
+            $webadmin_username = $this->ask(__('install.webadmin_username_tip'), 'webadmin');
+            while (empty($webadmin_password = $this->secret(__('install.webadmin_password_tip'))))
                 $this->warn(__('install.password_empty'));
         }
         if (!$this->confirm(__('install.ready'))) goto stop_inst;
@@ -69,24 +70,26 @@ class Install extends Command
             $this->call('migrate');
             $this->call('db:seed');
             Administrator::truncate();
-            Administrator::create([
+            $admin = Administrator::create([
                 'username' => $admin_username,
                 'password' => bcrypt($admin_password),
-                'name'     => __('install.admin'),
+                'name' => __('install.admin'),
             ]);
+            $admin->roles()->save(Role::where('slug', 'administrator')->first());
             if (isset($webadmin_username) && isset($webadmin_password)) {
-                Administrator::create([
+                $admin = Administrator::create([
                     'username' => $webadmin_username,
                     'password' => bcrypt($webadmin_password),
-                    'name'     => __('install.webadmin'),
+                    'name' => __('install.webadmin'),
                 ]);
+                $admin->roles()->save(Role::where('slug', 'webadmin')->first());
             }
-            setOption('version',config('app.version'));
-            $this->info(__('install.success',['url'=>config('app.url')]));
+            setOption('version', config('app.version'));
+            $this->info(__('install.success', ['url' => config('app.url')]));
             DB::commit();
             return 0;
         } catch (Exception $e) {
-            $this->error(__('install.error',['message'=>$e->getMessage()]));
+            $this->error(__('install.error', ['message' => $e->getMessage()]));
             DB::rollBack();
         }
         stop_inst:

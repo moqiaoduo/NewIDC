@@ -43,16 +43,11 @@ class ProductController extends Controller
             $filter->between('updated_at', __('Updated at'))->datetime();
         });
 
-        $grid->column('id', 'ID')->sortable();
-        $grid->column('group_name', __('Product group'))->display(function () {
-            return ProductGroup::find($this->group_id)->name;
-        });
-        $grid->column('name', __('Name'));
-        $grid->column('type', __('Type'))->using(__('service.type'));
+        $grid->column('group.name', __('Product group'));
+        $grid->column('name', __('Name'))->sortable();
+        $grid->column('type', __('Type'))->using(__('service.type'))->sortable();
         $grid->column('hide', __('Hide'))->sortable()->switch();
         $grid->column('enable', __('Enable'))->sortable()->switch();
-        $grid->column('created_at', __('Created at'))->sortable();
-        $grid->column('updated_at', __('Updated at'))->sortable();
 
         return $grid;
     }
@@ -116,10 +111,7 @@ HTML
             $form->text('name', __('Name'))->required();
             $form->select('type', __('Type'))->options(__('service.type'))->required();
             $form->select('group_id', __('Product group'))->required()
-                ->options(function ($id) {
-                    if ($id)
-                        return ProductGroup::find($id)->pluck('name', 'id');
-                })->ajax('/admin/api/product_groups');
+                ->options(ProductGroup::all()->pluck('name', 'id'));
             $form->textarea('description', __('Description'))->rows(10)
                 ->style('resize', 'vertical')->help(__('admin.help.product.description'));
             $form->switch('require_domain', __('admin.product.domain.require'))
@@ -155,8 +147,9 @@ HTML
                             ->whereRaw("JSON_CONTAINS(server_groups.servers,concat('[\"',servers.id,'\"]'))");
                     })->get()->pluck('name', 'id');
                 });
-            $plugin = $form->model()->value('server_plugin');
-            $form->embeds('server_configs', __('Settings'), function ($form) use ($plugin) {
+            $parent = $form;
+            $form->embeds('server_configs', __('Settings'), function ($form) use ($parent) {
+                $plugin = $parent->model()->server_plugin;
                 if (class_exists($plugin)) {
                     $configs = $plugin::productConfig();
                     foreach ($configs as $key => $config) {
@@ -216,7 +209,7 @@ HTML
                 ]);
             }
 
-            $resourcesPath = $form->resource(-1);
+            $resourcesPath = route('admin.product.index');
 
             if (request('after-save') == 1) {
                 // continue editing

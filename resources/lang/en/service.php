@@ -11,8 +11,8 @@ return [
          * 关于一些type选项的翻译，顺便作为一个列表
          */
 
-        'hosting'=>'Hosting',
-        'reseller'=>'Reseller',
+        'hosting'=>'Shared Hosting',
+        'reseller'=>'Reseller Hosting',
         'vps'=>'VPS',
         'server'=>'Dedicated Server',
         'others'=>'Others',
@@ -24,10 +24,16 @@ return [
         'terminated' => 'Terminated',
         'cancelled' => 'Cancelled'
     ],
-    'detail' => [
-        'tab' => [
-            'overview' => 'Overview',
-            'change_password' => 'Change Password'
+    'mail' => [
+        'suspend' => [
+            'lines' => [
+                'Your service was suspended just now.',
+                'Reason: :reason',
+                'If any confused, please contact Website Administrator by Ticket System.'
+            ],
+            'action' => 'View Service',
+            'subject' => 'Your Service on :website was suspended'
         ]
-    ]
+    ],
+    'expire_suspend' => 'Overdue payment'
 ];

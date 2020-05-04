@@ -136,7 +136,6 @@ return [
         'settings'              => '网站设置',
         'ticket_statuses'       => '工单状态',
         'email_templates'       => '邮件模板',
-        'service_statuses'      => '服务状态',
         'plugins'               => '插件'
     ],
     'prev'                   => '上一步',
@@ -173,6 +172,7 @@ return [
             'send_suspension_email'     => '成功暂停时发送服务暂停通知邮件',
             'send_unsuspension_email'   => '成功恢复时发送服务恢复通知邮件',
             'unsuspension'              => '支付完成后，被暂停服务自动恢复',
+            'limit_activity_log'        => '输入你想保留的系统级活动日志的最大数目'
         ],
         'server'                    => [
             'access_hash'           => '某些服务器可能需要提供Access Key/Hash来访问API',
@@ -215,6 +215,7 @@ return [
         'send_suspension_email'     => '发送暂停通知邮件',
         'enable_unsuspension'       => '启用自动恢复',
         'send_unsuspension_email'   => '发送恢复通知邮件',
+        'limit_activity_log'        => '限制活动日志条数'
     ],
     'product'                   => [
         'tab'                   => [
@@ -291,6 +292,23 @@ return [
             1                   => '选择最少人的服务器',
             2                   => '优先填满一个服务器',
             3                   => '随机分配'
+        ]
+    ],
+    'service' => [
+        'commands' => [
+            'name' => '命令',
+            'create' => '创建',
+            'suspend' => '暂停',
+            'unsuspend' => '解除暂停',
+            'terminate' => '销毁',
+            'modal_body' => '你确定要执行:command功能吗？',
+            'modal_title' => '确认模块命令'
+        ],
+        'fields' => [
+            'auto_terminate_end_of_cycle' => '到期时自动销毁',
+            'cancel_reason' => '取消服务原因',
+            'suspend_reason' => '暂停原因',
+            'extra' => '额外设置'
         ]
     ]
 ];

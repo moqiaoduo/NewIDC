@@ -23,11 +23,11 @@
     </div>
     <div class="layui-side layui-bg-black" id="newidc-nav">
         <ul class="layui-nav layui-nav-tree">
-            <li class="layui-nav-item"><a href="{{route('client.index')}}">@lang('Dashboard')</a></li>
+            <li class="layui-nav-item"><a href="{{route('client')}}">@lang('Overview')</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">@lang('Services')</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="{{route('client.services')}}">@lang('My Services')</a></dd>
+                    <dd><a href="{{route('services')}}">@lang('My Services')</a></dd>
                     <dd><a href="{{route('shop')}}">@lang('Store')</a></dd>
                     <dd><a href="javascript:;">@lang('Product Addon')</a></dd>
                 </dl>

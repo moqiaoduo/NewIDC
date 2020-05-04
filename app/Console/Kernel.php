@@ -24,8 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('service:expire')->dailyAt("8:00")->when(function () {
+            return getOption('cron');
+        })->withoutOverlapping(4);
     }
 
     /**

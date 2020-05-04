@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Events\ServiceCreate;
 use App\Models\Product;
+use App\Models\ProductGroup;
 use App\Models\Service;
 use Auth;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('shop');
+        $groups = ProductGroup::show()->orderBy('order')->get();
+        $gid = $request->get('gid', $groups->first()->id);
+        return view('shop', compact('groups', 'gid'))
+            ->with('data', Product::show()->withGroup($gid)->get());
     }
 
     public function buyShow(Product $product)
@@ -93,9 +97,9 @@ class ShopController extends Controller
                 default:
                     return back()->withErrors(['tip' => '未知周期']);
             }
-            [$service] = event(new ServiceCreate($product, $user, $expire, $ps, $data, $price['auto_activate']));
+            $service = \App\Utils\Service::create($product, $user, $expire, $ps, $data, $price['auto_activate']);
             if ($product->ena_stock) $product->decrement('stocks');
-            return redirect()->route('client.service', $service);
+            return redirect()->route('service', $service);
         }
     }
 }

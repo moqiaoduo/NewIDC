@@ -16,6 +16,7 @@
         <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item"><a href="{{url('/')}}">@lang('Home')</a></li>
             <li class="layui-nav-item"><a href="{{route('shop')}}">@lang('Store')</a></li>
+            @include('common.avatar', ['class' => 'newidc-little-head-avatar', 'avatar' => '客户'])
         </ul>
         <ul class="layui-nav layui-layout-right">
             @include('common.head_avatar')

@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductGroup;
 use Closure;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Widgets\Form;
@@ -91,7 +92,8 @@ class ConfigController extends Controller
                 ->help(__('admin.help.config.site_suu'));
             $form->switch('option.site_service_domain_unique', __('admin.config.site_sdu'))
                 ->help(__('admin.help.config.site_sdu'));
-            $form->number('option.limit_activity_log', __());
+            $form->number('option.limit_activity_log', __('admin.config.limit_activity_log'))
+                ->help(__('admin.help.config.limit_activity_log'))->default(1000);
         });
     }
 
@@ -122,13 +124,17 @@ class ConfigController extends Controller
                 ->help(__('admin.help.config.template'));
             $form->divider(__('admin.help.config.tpl_settings'));
             if (empty(env('TEMPLATE'))) {
+                $options = [];
+                foreach (ProductGroup::with('products')->get() as $group) {
+                    $groupName = $group->name;
+                    $options = $options + $group->products
+                            ->pluck('name', 'id')->map(function ($name) use ($groupName) {
+                                return $groupName . ' - ' . $name;
+                            })->toArray();
+                }
                 $form->multipleSelect('option.template_default_home_product',
-                    __('admin.config.tpl_home_product'))->options(function ($ids) {
-                    if ($ids)
-                        return Product::find($ids, ['id', \DB::raw("concat(name,' - #',id) as name")])
-                            ->pluck('name', 'id');
-                })->ajax('/admin/api/products')->config('maximumSelectionLength', 4)
-                    ->help(__('admin.help.config.tpl_hp'));
+                    __('admin.config.tpl_home_product'))->config('maximumSelectionLength', 4)
+                    ->options($options)->help(__('admin.help.config.tpl_hp'));
             } else {
                 $settings_file = storage_path('app/templates/' . env('TEMPLATE') . '/settings.php');
                 if (file_exists($settings_file)) $configs = include ($settings_file) ?? [];

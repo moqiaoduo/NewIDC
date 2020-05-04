@@ -20,18 +20,14 @@ class ServiceActivate
      */
     private $service;
 
-    private $background;
-
     /**
      * Create a new event instance.
      *
      * @param Service $service
-     * @param bool $background
      */
-    public function __construct(Service $service, $background = true)
+    public function __construct(Service $service)
     {
         $this->service = $service;
-        $this->background = $background;
     }
 
     /**
@@ -40,13 +36,5 @@ class ServiceActivate
     public function getService(): Service
     {
         return $this->service;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isBackground(): bool
-    {
-        return $this->background;
     }
 }

@@ -138,6 +138,7 @@ P.S. If you want unlimited, set 0',
             'send_suspension_email'     => 'Send the Service Suspension Notification email on successful Suspend.',
             'send_unsuspension_email'   => 'Send the Service Unsuspension Notification email on successful Unsuspend.',
             'unsuspension'              => 'Enable automatic unsuspension on payment',
+            'limit_activity_log'        => 'The maximum number of System Level Activity Log entries you wish to retain'
         ],
         'server'                    => [
             'access_hash'           => 'Some servers may need to provide Access Key / Hash to access the API.',
@@ -180,7 +181,8 @@ P.S. If you want unlimited, set 0',
         'url'                       => 'System URL',
         'send_suspension_email'     => 'Send Suspension Email',
         'enable_unsuspension'       => 'Enable Unsuspension',
-        'send_unsuspension_email'   => 'Send Unsuspension Email'
+        'send_unsuspension_email'   => 'Send Unsuspension Email',
+        'limit_activity_log'        => 'Limit Activity Log'
     ],
     'product'                   => [
         'tab'                   => [
@@ -245,6 +247,23 @@ P.S. If you want unlimited, set 0',
             1                   => 'Add to the least full server',
             2                   => 'Fill active server until full then switch to next least used',
             3                   => 'Random'
+        ]
+    ],
+    'service' => [
+        'commands' => [
+            'name' => 'Commands',
+            'create' => 'Create',
+            'suspend' => 'Suspend',
+            'unsuspend' => 'Unsuspend',
+            'terminate' => 'Terminate',
+            'modal_body' => 'Are you sure you want to run the :command function?',
+            'modal_title' => 'Confirm Module Command'
+        ],
+        'fields' => [
+            'auto_terminate_end_of_cycle' => 'Auto-Terminate End of Cycle',
+            'cancel_reason' => 'Cancel Reason',
+            'suspend_reason' => 'Suspend Reason',
+            'extra' => 'Extra Settings'
         ]
     ]
 ];

@@ -38,7 +38,7 @@ layui.use(['element', 'jquery'], function () {
             nav.slideToggle(function () {
                 let hidden = nav.is(":hidden");
                 changeMenuIcon(width > 768 ? 1 : 2, hidden ? 2 : 1);
-                modBodyLeft(width, hidden ? 2 : 1)
+                modBodyLeft(width)
             });
 
         }

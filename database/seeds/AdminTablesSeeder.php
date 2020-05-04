@@ -24,7 +24,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => "dashboard"
                 ],
                 [
-                    "parent_id" => 9,
+                    "parent_id" => 8,
                     "order" => 36,
                     "title" => "Admin",
                     "icon" => "fa-tv",
@@ -88,7 +88,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => "ext.media-manager"
                 ],
                 [
-                    "parent_id" => 17,
+                    "parent_id" => 16,
                     "order" => 44,
                     "title" => "Products",
                     "icon" => "fa-shopping-cart",
@@ -96,7 +96,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => "product"
                 ],
                 [
-                    "parent_id" => 17,
+                    "parent_id" => 16,
                     "order" => 43,
                     "title" => "Product Group",
                     "icon" => "fa-shopping-bag",
@@ -112,7 +112,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 17,
+                    "parent_id" => 16,
                     "order" => 46,
                     "title" => "Servers",
                     "icon" => "fa-server",
@@ -120,7 +120,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 17,
+                    "parent_id" => 16,
                     "order" => 45,
                     "title" => "Server Group",
                     "icon" => "fa-database",
@@ -128,7 +128,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 27,
+                    "parent_id" => 26,
                     "order" => 18,
                     "title" => "Support Tickets",
                     "icon" => "fa-ticket",
@@ -136,7 +136,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 9,
+                    "parent_id" => 8,
                     "order" => 42,
                     "title" => "Products/Services",
                     "icon" => "fa-shopping-basket",
@@ -152,7 +152,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 18,
+                    "parent_id" => 17,
                     "order" => 3,
                     "title" => "Users",
                     "icon" => "fa-users",
@@ -160,7 +160,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 18,
+                    "parent_id" => 17,
                     "order" => 4,
                     "title" => "Add User",
                     "icon" => "fa-user-plus",
@@ -168,7 +168,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 18,
+                    "parent_id" => 17,
                     "order" => 5,
                     "title" => "Manage Affiliates",
                     "icon" => "fa-user-md",
@@ -176,7 +176,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 18,
+                    "parent_id" => 17,
                     "order" => 6,
                     "title" => "Mass Mail Tool",
                     "icon" => "fa-send",
@@ -192,7 +192,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 23,
+                    "parent_id" => 22,
                     "order" => 8,
                     "title" => "Transactions",
                     "icon" => "fa-paypal",
@@ -200,7 +200,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 23,
+                    "parent_id" => 22,
                     "order" => 9,
                     "title" => "Invoices",
                     "icon" => "fa-credit-card",
@@ -208,7 +208,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 23,
+                    "parent_id" => 22,
                     "order" => 10,
                     "title" => "Gateway Log",
                     "icon" => "fa-file-text-o",
@@ -224,7 +224,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 27,
+                    "parent_id" => 26,
                     "order" => 13,
                     "title" => "Announcements",
                     "icon" => "fa-bullhorn",
@@ -232,7 +232,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 27,
+                    "parent_id" => 26,
                     "order" => 14,
                     "title" => "Downloads",
                     "icon" => "fa-download",
@@ -240,7 +240,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 27,
+                    "parent_id" => 26,
                     "order" => 15,
                     "title" => "Knowledgebase",
                     "icon" => "fa-info-circle",
@@ -248,7 +248,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 27,
+                    "parent_id" => 26,
                     "order" => 16,
                     "title" => "Network Issues",
                     "icon" => "fa-sitemap",
@@ -264,7 +264,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 32,
+                    "parent_id" => 31,
                     "order" => 21,
                     "title" => "Daily Performance",
                     "icon" => "fa-calendar",
@@ -272,7 +272,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 32,
+                    "parent_id" => 31,
                     "order" => 22,
                     "title" => "Annual Income Report",
                     "icon" => "fa-money",
@@ -280,7 +280,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 32,
+                    "parent_id" => 31,
                     "order" => 23,
                     "title" => "New Customers",
                     "icon" => "fa-users",
@@ -296,7 +296,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 36,
+                    "parent_id" => 35,
                     "order" => 25,
                     "title" => "To-Do List",
                     "icon" => "fa-sticky-note-o",
@@ -304,7 +304,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 36,
+                    "parent_id" => 35,
                     "order" => 26,
                     "title" => "WHOIS Lookup",
                     "icon" => "fa-search",
@@ -312,7 +312,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 36,
+                    "parent_id" => 35,
                     "order" => 27,
                     "title" => "Domain Resolver",
                     "icon" => "fa-check-circle",
@@ -320,7 +320,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 36,
+                    "parent_id" => 35,
                     "order" => 28,
                     "title" => "System Status",
                     "icon" => "fa-cog",
@@ -328,7 +328,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 36,
+                    "parent_id" => 35,
                     "order" => 29,
                     "title" => "Logs",
                     "icon" => "fa-file-text-o",
@@ -336,7 +336,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 41,
+                    "parent_id" => 40,
                     "order" => 30,
                     "title" => "Activity Log",
                     "icon" => "fa-play-circle",
@@ -344,7 +344,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 41,
+                    "parent_id" => 40,
                     "order" => 31,
                     "title" => "Admin Log",
                     "icon" => "fa-desktop",
@@ -352,7 +352,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 41,
+                    "parent_id" => 40,
                     "order" => 32,
                     "title" => "Module Log",
                     "icon" => "fa-th",
@@ -360,7 +360,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 41,
+                    "parent_id" => 40,
                     "order" => 33,
                     "title" => "Email Message Log",
                     "icon" => "fa-envelope",
@@ -368,7 +368,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 27,
+                    "parent_id" => 26,
                     "order" => 19,
                     "title" => "Open New Ticket",
                     "icon" => "fa-paper-plane-o",
@@ -376,7 +376,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 9,
+                    "parent_id" => 8,
                     "order" => 35,
                     "title" => "Settings",
                     "icon" => "fa-cogs",
@@ -384,7 +384,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 27,
+                    "parent_id" => 26,
                     "order" => 17,
                     "title" => "Department",
                     "icon" => "fa-users",
@@ -392,7 +392,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 9,
+                    "parent_id" => 8,
                     "order" => 47,
                     "title" => "Ticket Statuses",
                     "icon" => "fa-ticket",
@@ -400,7 +400,7 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 9,
+                    "parent_id" => 8,
                     "order" => 48,
                     "title" => "Email Templates",
                     "icon" => "fa-envelope",
@@ -408,19 +408,11 @@ class AdminTablesSeeder extends Seeder
                     "permission" => NULL
                 ],
                 [
-                    "parent_id" => 9,
+                    "parent_id" => 8,
                     "order" => 49,
                     "title" => "Plugins",
                     "icon" => "fa-plug",
                     "uri" => "/plugin",
-                    "permission" => NULL
-                ],
-                [
-                    "parent_id" => 9,
-                    "order" => 50,
-                    "title" => "Service Statuses",
-                    "icon" => "fa-tasks",
-                    "uri" => "/service_status",
                     "permission" => NULL
                 ]
             ]
@@ -430,49 +422,49 @@ class AdminTablesSeeder extends Seeder
         Encore\Admin\Auth\Database\Permission::insert(
             [
                 [
-                    "name" => "所有权限",
+                    "name" => "All Permissions",
                     "slug" => "*",
                     "http_method" => "",
                     "http_path" => "*"
                 ],
                 [
-                    "name" => "仪表盘",
+                    "name" => "Dashboard",
                     "slug" => "dashboard",
                     "http_method" => "GET",
                     "http_path" => "/"
                 ],
                 [
-                    "name" => "登录",
+                    "name" => "Login",
                     "slug" => "auth.login",
                     "http_method" => "",
                     "http_path" => "/auth/login\r\n/auth/logout"
                 ],
                 [
-                    "name" => "自己的信息设定",
+                    "name" => "Auth Setting",
                     "slug" => "auth.setting",
                     "http_method" => "GET,PUT",
                     "http_path" => "/auth/setting"
                 ],
                 [
-                    "name" => "后台管理（不含管理员列表）",
+                    "name" => "Auth Management",
                     "slug" => "auth.management",
                     "http_method" => "",
                     "http_path" => "/auth/roles\r\n/auth/permissions\r\n/auth/menu\r\n/auth/logs"
                 ],
                 [
-                    "name" => "网站设置",
+                    "name" => "Site Config",
                     "slug" => "site.config",
                     "http_method" => "",
                     "http_path" => "/config*"
                 ],
                 [
-                    "name" => "文件管理",
+                    "name" => "File Manager",
                     "slug" => "ext.media-manager",
                     "http_method" => "",
                     "http_path" => "/media*"
                 ],
                 [
-                    "name" => "产品(组)完全管理",
+                    "name" => "Product",
                     "slug" => "product",
                     "http_method" => "",
                     "http_path" => "/product*"

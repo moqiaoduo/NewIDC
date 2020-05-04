@@ -71,8 +71,8 @@ if (!function_exists('getOptions')) {
         try {
             if (Schema::hasTable("options")) {
                 $db = DB::table("options")->where('uid', $uid);
-                if ($keys && is_array($keys))
-                    $db = $db->whereIn('key', $keys);
+                if (!is_null($keys))
+                    $db = $db->whereIn('key', Arr::wrap($keys));
                 return $db->get()->pluck('value', 'key');
             }
         } catch (Exception $e) {

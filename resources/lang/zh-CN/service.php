@@ -23,5 +23,17 @@ return [
         'suspended' => '已暂停',
         'terminated' => '已销毁',
         'cancelled' => '已取消'
-    ]
+    ],
+    'mail' => [
+        'suspend' => [
+            'lines' => [
+                '您的服务刚刚被暂停了',
+                '原因：:reason',
+                '如有疑问，请通过工单联系网站管理员。'
+            ],
+            'action' => '查看服务',
+            'subject' => '您在:website的服务已被暂停'
+        ]
+    ],
+    'expire_suspend' => '逾期未付款'
 ];

@@ -22,12 +22,17 @@ class ServerController extends Controller
     {
         $grid = new Grid(new Server());
 
-        $grid->column('id', 'ID')->sortable();
+        $grid->quickSearch('name');
+        $grid->disableFilter();
+
         $grid->column('name', __('Name'))->sortable();
         $grid->column('usage', __('Usage'))->display(function () {
             return ($this->services_count ?? 0) . '/' . ($this->max_load > 0 ? $this->max_load : __('Unlimited'));
         });
-        $grid->column('enable', __('Enable'))->bool();
+        $grid->column('enable', __('Enable'))->bool()->sortable()->filter([
+            1 => '是',
+            0 => '否',
+        ]);
         $grid->column('login', __('Login'))->display(function () {
             $class = $this->server_plugin;
             if (class_exists($class)) {
@@ -36,8 +41,6 @@ class ServerController extends Controller
                 return $p->adminLogin();
             }
         });
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
 
         $grid->actions(function ($actions) {
             // 去掉查看
