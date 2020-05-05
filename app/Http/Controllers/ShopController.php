@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\ServiceCreate;
 use App\Models\Product;
 use App\Models\ProductGroup;
 use App\Models\Service;
@@ -14,9 +13,9 @@ class ShopController extends Controller
     public function index(Request $request)
     {
         $groups = ProductGroup::show()->orderBy('order')->get();
-        $gid = $request->get('gid', $groups->first()->id);
+        if (!$groups->isEmpty()) $gid = $request->get('gid', $groups->first()->id);
         return view('shop', compact('groups', 'gid'))
-            ->with('data', Product::show()->withGroup($gid)->get());
+            ->with('data', $groups->isEmpty()?[]:Product::show()->withGroup($gid)->get());
     }
 
     public function buyShow(Product $product)
