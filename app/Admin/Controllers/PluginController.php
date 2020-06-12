@@ -29,6 +29,7 @@ class PluginController extends Controller
             if (($key = array_search($plugin, $enables))===false) return back();
 
             unset($enables[$key]);
+            $enables = array_merge($enables);
         }
 
         setOption('ena_plugins', json_encode($enables));
