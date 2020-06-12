@@ -1703,16 +1703,16 @@
         },
         {
             "name": "newidc/plugin",
-            "version": "v0.4.4",
+            "version": "v0.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/newidc-plugin.git",
-                "reference": "e7b14779f1e6736f98348e54b26adf651e5f25d2"
+                "reference": "96209264aa6d33f7c1795cc6e70cf6bdfec27d17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/newidc-plugin/zipball/e7b14779f1e6736f98348e54b26adf651e5f25d2",
-                "reference": "e7b14779f1e6736f98348e54b26adf651e5f25d2",
+                "url": "https://api.github.com/repos/moqiaoduo/newidc-plugin/zipball/96209264aa6d33f7c1795cc6e70cf6bdfec27d17",
+                "reference": "96209264aa6d33f7c1795cc6e70cf6bdfec27d17",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1756,7 +1756,7 @@
                 }
             ],
             "description": "NewIDC插件管理器",
-            "time": "2020-06-10T13:27:44+00:00"
+            "time": "2020-06-12T17:57:35+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -4176,7 +4176,13 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/57f2219f6d9efe41ed1bc880d86701c52f261bf5",
                 "reference": "57f2219f6d9efe41ed1bc880d86701c52f261bf5",
-                "shasum": ""
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
             },
             "require": {
                 "illuminate/routing": "^5.5|^6|^7",
@@ -4757,7 +4763,13 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/instantiator/zipball/f350df0268e904597e3bd9c4685c53e0e333feea",
                 "reference": "f350df0268e904597e3bd9c4685c53e0e333feea",
-                "shasum": ""
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
             },
             "require": {
                 "php": "^7.1 || ^8.0"
@@ -5279,7 +5291,13 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/2ba9c8c862ecd5510ed16c6340aa9f6eadb4f31b",
                 "reference": "2ba9c8c862ecd5510ed16c6340aa9f6eadb4f31b",
-                "shasum": ""
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
             },
             "require": {
                 "php": ">=5.3.3"
@@ -5345,7 +5363,13 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/1a1605b8e9bacb34cc0c6278206d699772e1d372",
                 "reference": "1a1605b8e9bacb34cc0c6278206d699772e1d372",
-                "shasum": ""
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
             },
             "require": {
                 "php": "^7.1",
@@ -6232,7 +6256,13 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/63dda3b212a0025d380a745f91bdb4d8c985adb7",
                 "reference": "63dda3b212a0025d380a745f91bdb4d8c985adb7",
-                "shasum": ""
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
             },
             "require": {
                 "doctrine/instantiator": "^1.2.0",
