@@ -31,7 +31,7 @@ class PluginController extends Controller
             unset($enables[$key]);
         }
 
-        setOption('ena_plugins', $enables);
+        setOption('ena_plugins', json_encode($enables));
         return back();
     }
 }

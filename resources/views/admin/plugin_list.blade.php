@@ -12,6 +12,7 @@
                     <p>{{$info['description'] ?? null}}</p>
                     <div>
                         <form method="post" action="{{route('admin.plugin.manage')}}">
+                            @csrf
                             <input type="hidden" name="plugin" value="{{$plugin}}">
                             @if(PluginManager::isServerPlugin($plugin))
                                 <button class="btn btn-default" disabled>默认启用</button>
