@@ -97,7 +97,7 @@ class UserController extends Controller
         $form->datetime('email_verified_at', __('admin.user.email_verified_at'));
         if ($form->isEditing())
             $form->html(view('admin.reset_pwd'), __('Reset Password'));
-        $form->decimal('funds', __('Funds'));
+        $form->decimal('funds', __('Funds'))->default(0)->required();
 
         return $form;
     }

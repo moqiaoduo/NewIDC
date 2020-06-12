@@ -128,3 +128,22 @@ if (!function_exists('getLowestPrice')) {
         return $min > 0 ? '￥' . $min : 'Free';
     }
 }
+
+if (!function_exists('buildFormFromArr')) {
+    /**
+     * @param array $configs
+     * @param \Encore\Admin\Form $form
+     */
+    function buildFormFromArr(array $configs, $form)
+    {
+        foreach ($configs as $key => $config) {
+            $type = $config['type'];
+            $label = $config['label'];
+            unset($config['type'], $config['label']);
+            $t = $form->$type($key, $label);
+            foreach ($config as $k => $v) {
+                call_user_func_array([$t,$k],\Arr::wrap($v));
+            }
+        }
+    }
+}

@@ -139,15 +139,7 @@ class ConfigController extends Controller
                 $settings_file = storage_path('app/templates/' . env('TEMPLATE') . '/settings.php');
                 if (file_exists($settings_file)) $configs = include ($settings_file) ?? [];
                 else $configs = [];
-                foreach ($configs as $key => $config) {
-                    $type = $config['type'];
-                    $label = $config['label'];
-                    unset($config['type'], $config['label']);
-                    $t = $form->$type($key, $label);
-                    foreach ($config as $k => $v) {
-                        $t->$k($v);
-                    }
-                }
+                buildFormFromArr($configs, $form);
             }
 
         });
@@ -156,7 +148,7 @@ class ConfigController extends Controller
     public function third_part(Content $content)
     {
         return $this->form($content, $page = \request()->route()->fallbackPlaceholder, function (Form $form) use ($page) {
-            $configs = PluginManager::trigger(['hook' => $page . '_settings', 'last' => true]);
+            $configs = PluginManager::trigger($page . '_settings');
             foreach ((array)$configs as $key => $config) {
                 $type = $config['type'];
                 $label = $config['label'];

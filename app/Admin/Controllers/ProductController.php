@@ -152,15 +152,7 @@ HTML
                 $plugin = $parent->model()->server_plugin;
                 if (class_exists($plugin)) {
                     $configs = $plugin::productConfig();
-                    foreach ($configs as $key => $config) {
-                        $type = $config['type'];
-                        $label = $config['label'];
-                        unset($config['type'], $config['label']);
-                        $t = $form->$type($key, $label);
-                        foreach ($config as $k => $v) {
-                            $t->$k($v);
-                        }
-                    }
+                    buildFormFromArr($configs, $form);
                 }
             });
         }, request('tab') == 3)->tab(__('Upgrade') . '/' . __('Downgrade'), function (Form $form) {

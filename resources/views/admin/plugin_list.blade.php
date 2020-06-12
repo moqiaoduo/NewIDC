@@ -11,7 +11,18 @@
                     <p>@lang('Version') : {{$info['version'] ?? 'Unknown'}}</p>
                     <p>{{$info['description']}}</p>
                     <div>
-                        <button class="btn btn-default" disabled>默认启用</button>
+                        <form method="post" action="{{route('admin.plugin.manage')}}">
+                            <input type="hidden" name="plugin" value="{{$plugin}}">
+                            @if(PluginManager::isServerPlugin($plugin))
+                                <button class="btn btn-default" disabled>默认启用</button>
+                            @elseif(PluginManager::isEnable($plugin))
+                                <input type="hidden" name="enable" value="0">
+                                <button type="submit" class="btn btn-danger">禁用</button>
+                            @else
+                                <input type="hidden" name="enable" value="1">
+                                <button type="submit" class="btn btn-success">启用</button>
+                            @endif
+                        </form>
                     </div>
                 </div>
             </div>

@@ -42,6 +42,7 @@ Route::group([
         'prefix'    => 'plugin'
     ], function (Router $router) {
         $router->get('/', 'PluginController@index');
+        $router->post('/manage', 'PluginController@enableOrDisablePlugin')->name('manage');
     });
 
     $router->group(['prefix' => "/api"], function (Router $router) {
