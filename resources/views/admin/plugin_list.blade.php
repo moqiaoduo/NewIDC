@@ -9,7 +9,7 @@
                 </div>
                 <div class="panel-body">
                     <p>@lang('Version') : {{$info['version'] ?? 'Unknown'}}</p>
-                    <p>{{$info['description']}}</p>
+                    <p>{{$info['description'] ?? null}}</p>
                     <div>
                         <form method="post" action="{{route('admin.plugin.manage')}}">
                             <input type="hidden" name="plugin" value="{{$plugin}}">
