@@ -133,14 +133,15 @@ if (!function_exists('buildFormFromArr')) {
     /**
      * @param array $configs
      * @param \Encore\Admin\Form|\Encore\Admin\Widgets\Form $form
+     * @param string $prefix
      */
-    function buildFormFromArr(array $configs, $form)
+    function buildFormFromArr(array $configs, $form, $prefix = '')
     {
         foreach ($configs as $key => $config) {
             $type = $config['type'];
             $label = $config['label'];
             unset($config['type'], $config['label']);
-            $t = $form->$type($key, $label);
+            $t = $form->$type($prefix . $key, $label);
             foreach ($config as $k => $v) {
                 call_user_func_array([$t,$k],\Arr::wrap($v));
             }

@@ -139,7 +139,7 @@ class ConfigController extends Controller
                 $settings_file = storage_path('app/templates/' . env('TEMPLATE') . '/settings.php');
                 if (file_exists($settings_file)) $configs = include ($settings_file) ?? [];
                 else $configs = [];
-                buildFormFromArr($configs, $form);
+                buildFormFromArr($configs, $form, 'option.');
             }
 
         });
@@ -152,7 +152,7 @@ class ConfigController extends Controller
 
             if (empty($configs)) return;
 
-            buildFormFromArr((array) $configs[0], $form);
+            buildFormFromArr((array) $configs[0], $form, 'option.');
         });
     }
 
