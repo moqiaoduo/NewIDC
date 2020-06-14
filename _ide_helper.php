@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 6.18.19 on 2020-06-13 01:10:29.
+ * Generated for Laravel 6.18.19 on 2020-06-14 13:15:08.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -16345,7 +16345,7 @@ namespace NewIDC\Plugin\Facade {
         }
         
         /**
-         * 列出启用的插件
+         * 列出启用的插件（不包括服务器插件）
          *
          * @return array 
          * @static 
@@ -16395,19 +16395,28 @@ namespace NewIDC\Plugin\Facade {
         }
         
         /**
-         * 触发钩子
-         * 结果以数组形式返回
+         * 绑定结果变量
          *
-         * @param string $hookName
-         * @param mixed $data
-         * @param callable|null $default
-         * @return mixed 
+         * @param $var
+         * @return \NewIDC\Plugin\Manager 
          * @static 
          */ 
-        public static function trigger($hookName, $data = null, $default = null)
+        public static function trigger($var)
         {
                         /** @var \NewIDC\Plugin\Manager $instance */
-                        return $instance->trigger($hookName, $data, $default);
+                        return $instance->trigger($var);
+        }
+        
+        /**
+         * 为了不经过门面传输参数，先获取原始对象
+         *
+         * @return \NewIDC\Plugin\Manager 
+         * @static 
+         */ 
+        public static function handler()
+        {
+                        /** @var \NewIDC\Plugin\Manager $instance */
+                        return $instance->handler();
         }
          
     }

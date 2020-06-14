@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2fa518a8f48e20002cc24b94893e82a",
+    "content-hash": "40db51865d74f2992142c9cbfaeb1d1d",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1600,16 +1600,16 @@
         },
         {
             "name": "newidc/directadmin",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/newidc-da.git",
-                "reference": "8adac3aaf6b0071c70aa9a0d35616a26da77bf1e"
+                "reference": "f0044c360f1723992d6689c96da2ad16a71f1dae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/newidc-da/zipball/8adac3aaf6b0071c70aa9a0d35616a26da77bf1e",
-                "reference": "8adac3aaf6b0071c70aa9a0d35616a26da77bf1e",
+                "url": "https://api.github.com/repos/moqiaoduo/newidc-da/zipball/f0044c360f1723992d6689c96da2ad16a71f1dae",
+                "reference": "f0044c360f1723992d6689c96da2ad16a71f1dae",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1619,7 +1619,7 @@
                 ]
             },
             "require": {
-                "newidc/plugin": "^0.4"
+                "newidc/plugin": "^0.5"
             },
             "type": "library",
             "extra": {
@@ -1645,20 +1645,20 @@
                 }
             ],
             "description": "NewIDC的DirectAdmin对接插件",
-            "time": "2020-04-25T08:18:51+00:00"
+            "time": "2020-06-13T17:04:02+00:00"
         },
         {
             "name": "newidc/easypanel",
-            "version": "v0.1.5",
+            "version": "v0.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/newidc-ep.git",
-                "reference": "5924e98dd27188af4fef1f8dc9e801da70a377b3"
+                "reference": "8f09523c5d375b5d6cbe3f8cfe4136123a8a7c86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/newidc-ep/zipball/5924e98dd27188af4fef1f8dc9e801da70a377b3",
-                "reference": "5924e98dd27188af4fef1f8dc9e801da70a377b3",
+                "url": "https://api.github.com/repos/moqiaoduo/newidc-ep/zipball/8f09523c5d375b5d6cbe3f8cfe4136123a8a7c86",
+                "reference": "8f09523c5d375b5d6cbe3f8cfe4136123a8a7c86",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1670,7 +1670,7 @@
             "require": {
                 "ext-curl": "*",
                 "ext-json": "*",
-                "newidc/plugin": "^0.4"
+                "newidc/plugin": "^0.5"
             },
             "require-dev": {
                 "phpunit/phpunit": "^8.0"
@@ -1699,20 +1699,20 @@
                 }
             ],
             "description": "NewIDC的Easypanel插件",
-            "time": "2020-04-25T07:50:05+00:00"
+            "time": "2020-06-13T17:01:40+00:00"
         },
         {
             "name": "newidc/plugin",
-            "version": "v0.4.6",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/newidc-plugin.git",
-                "reference": "b3c6215394d44c8a29df72fb558858e73931ad71"
+                "reference": "596ddeb6a7b2e5ea67b14211dd96e54d8585a25d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/newidc-plugin/zipball/b3c6215394d44c8a29df72fb558858e73931ad71",
-                "reference": "b3c6215394d44c8a29df72fb558858e73931ad71",
+                "url": "https://api.github.com/repos/moqiaoduo/newidc-plugin/zipball/596ddeb6a7b2e5ea67b14211dd96e54d8585a25d",
+                "reference": "596ddeb6a7b2e5ea67b14211dd96e54d8585a25d",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1756,7 +1756,7 @@
                 }
             ],
             "description": "NewIDC插件管理器",
-            "time": "2020-06-12T18:08:24+00:00"
+            "time": "2020-06-13T16:51:58+00:00"
         },
         {
             "name": "nikic/php-parser",

@@ -30,7 +30,7 @@ class ConfigController extends Controller
             "cron" => [__('admin.config.tab.cron'), 'addLink', route('admin.config.cron'), false],
             "template" => [__('admin.config.tab.template'), 'addLink', route('admin.config.template'), false],
         ];
-        $addons = PluginManager::trigger('settings');
+        $addons = $this->pluginHandle()->trigger($plugged)->settings();
         foreach ($addons as $item) {
             list($slug, $name) = explode("|", $item);
             $items[$slug] = [__($name), 'addLink', $this->save_url . '/' . $slug, false];
@@ -148,7 +148,7 @@ class ConfigController extends Controller
     public function third_part(Content $content)
     {
         return $this->form($content, $page = \request()->route()->fallbackPlaceholder, function (Form $form) use ($page) {
-            $configs = PluginManager::trigger($page . '_settings');
+            $configs = $this->pluginHandle()->trigger($plugged)->{$page . '_settings'}();
             foreach ((array)$configs as $key => $config) {
                 $type = $config['type'];
                 $label = $config['label'];

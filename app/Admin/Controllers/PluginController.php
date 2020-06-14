@@ -33,6 +33,7 @@ class PluginController extends Controller
         }
 
         setOption('ena_plugins', json_encode($enables));
+
         return back();
     }
 }
