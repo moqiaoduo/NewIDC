@@ -18,9 +18,13 @@ class ConfigController extends Controller
 {
     protected $save_url;
 
+    protected $third_parts;
+
     public function __construct()
     {
         $this->save_url = route('admin.config.base');
+
+        $this->third_parts = $this->pluginHandle()->trigger($plugged)->settings();
     }
 
     protected function pub(Content $body, $nowTab, $content)
@@ -30,10 +34,8 @@ class ConfigController extends Controller
             "cron" => [__('admin.config.tab.cron'), 'addLink', route('admin.config.cron'), false],
             "template" => [__('admin.config.tab.template'), 'addLink', route('admin.config.template'), false],
         ];
-        $addons = $this->pluginHandle()->trigger($plugged)->settings();
-        foreach ($addons as $item) {
-            list($slug, $name) = explode("|", $item);
-            $items[$slug] = [__($name), 'addLink', $this->save_url . '/' . $slug, false];
+        foreach ($this->third_parts as $slug=>$item) {
+            $items[$slug] = [__($item['title']), 'addLink', $this->save_url . '/' . $slug, false];
         }
         if (!array_key_exists($nowTab, $items)) throw new NotFoundHttpException();
         $items[$nowTab][1] = 'add';
@@ -147,8 +149,8 @@ class ConfigController extends Controller
 
     public function third_part(Content $content)
     {
-        return $this->form($content, $page = \request()->route()->fallbackPlaceholder, function (Form $form) use ($page) {
-            $configs = $this->pluginHandle()->trigger($plugged)->{$page . '_settings'}();
+        return $this->form($content, $plugin = \request()->route()->fallbackPlaceholder, function (Form $form) use ($plugin) {
+            $configs = $this->third_parts[$plugin]['form'];
 
             if (empty($configs)) return;
 
