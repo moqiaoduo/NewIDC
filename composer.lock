@@ -1703,16 +1703,16 @@
         },
         {
             "name": "newidc/plugin",
-            "version": "v0.5.1",
+            "version": "v0.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/newidc-plugin.git",
-                "reference": "86e1363171972ad71309a2709f50d7fef8bf4845"
+                "reference": "5dd4fc22435753e76ba1e27dfd36fd8d24a867a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/newidc-plugin/zipball/86e1363171972ad71309a2709f50d7fef8bf4845",
-                "reference": "86e1363171972ad71309a2709f50d7fef8bf4845",
+                "url": "https://api.github.com/repos/moqiaoduo/newidc-plugin/zipball/5dd4fc22435753e76ba1e27dfd36fd8d24a867a3",
+                "reference": "5dd4fc22435753e76ba1e27dfd36fd8d24a867a3",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1756,7 +1756,7 @@
                 }
             ],
             "description": "NewIDC插件管理器",
-            "time": "2020-06-14T05:31:11+00:00"
+            "time": "2020-06-14T12:21:45+00:00"
         },
         {
             "name": "nikic/php-parser",

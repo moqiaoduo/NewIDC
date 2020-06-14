@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 6.18.19 on 2020-06-14 13:15:08.
+ * Generated for Laravel 6.18.19 on 2020-06-14 20:28:20.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -16330,6 +16330,17 @@ namespace NewIDC\Plugin\Facade {
         {
                         /** @var \NewIDC\Plugin\Manager $instance */
                         return $instance->register($plugin);
+        }
+        
+        /**
+         * 通过composer更新插件版本信息
+         *
+         * @static 
+         */ 
+        public static function updatePluginVersion()
+        {
+                        /** @var \NewIDC\Plugin\Manager $instance */
+                        return $instance->updatePluginVersion();
         }
         
         /**

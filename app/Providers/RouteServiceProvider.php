@@ -45,11 +45,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-
-        Route::middleware(['web', 'auth', 'lang'])
-            ->prefix('client')
-            ->namespace($this->namespace . '\\Client')
-            ->group(base_path('routes/client.php'));
     }
 
     /**
@@ -64,6 +59,11 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware(['web', 'lang'])
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
+
+        Route::middleware(['web', 'auth', 'lang'])
+            ->prefix('client')
+            ->namespace($this->namespace . '\\Client')
+            ->group(base_path('routes/client.php'));
     }
 
     /**
