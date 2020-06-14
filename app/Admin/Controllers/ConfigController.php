@@ -150,11 +150,9 @@ class ConfigController extends Controller
     public function third_part(Content $content)
     {
         return $this->form($content, $plugin = \request()->route()->fallbackPlaceholder, function (Form $form) use ($plugin) {
-            $configs = $this->third_parts[$plugin]['form'];
+            $configs = $this->third_parts[$plugin]['form'] ?? [];
 
-            if (empty($configs)) return;
-
-            buildFormFromArr((array) $configs[0], $form, 'option.');
+            buildFormFromArr((array) $configs, $form, 'option.');
         });
     }
 
