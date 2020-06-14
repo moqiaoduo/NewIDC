@@ -149,15 +149,10 @@ class ConfigController extends Controller
     {
         return $this->form($content, $page = \request()->route()->fallbackPlaceholder, function (Form $form) use ($page) {
             $configs = $this->pluginHandle()->trigger($plugged)->{$page . '_settings'}();
-            foreach ((array)$configs as $key => $config) {
-                $type = $config['type'];
-                $label = $config['label'];
-                unset($config['type'], $config['label']);
-                $t = $form->$type($key, $label);
-                foreach ($config as $k => $v) {
-                    $t->$k($v);
-                }
-            }
+
+            if (empty($configs)) return;
+
+            buildFormFromArr((array) $configs[0], $form);
         });
     }
 

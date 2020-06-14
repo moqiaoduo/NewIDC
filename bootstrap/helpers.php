@@ -132,7 +132,7 @@ if (!function_exists('getLowestPrice')) {
 if (!function_exists('buildFormFromArr')) {
     /**
      * @param array $configs
-     * @param \Encore\Admin\Form $form
+     * @param \Encore\Admin\Form|\Encore\Admin\Widgets\Form $form
      */
     function buildFormFromArr(array $configs, $form)
     {
