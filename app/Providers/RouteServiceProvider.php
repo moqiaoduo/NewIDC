@@ -64,6 +64,30 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix('client')
             ->namespace($this->namespace . '\\Client')
             ->group(base_path('routes/client.php'));
+
+        // 插件注册路由
+        Route::middleware(['web', 'lang'])
+            ->group(function () {
+                $pages = \PluginManager::handler()->trigger($plugged)->plugin_page();
+
+                if ($plugged) {
+                    foreach ($pages as $slug => $p) {
+                        foreach ($p as $page => $callable) {
+                            Route::get("plugin/$slug/$page", $callable);
+                        }
+                    }
+                }
+
+                $pages = \PluginManager::handler()->trigger($plugged)->plugin_action();
+
+                if ($plugged) {
+                    foreach ($pages as $slug => $p) {
+                        foreach ($p as $action => $callable) {
+                            Route::post("plugin/$slug/$action", $callable)->name($slug . '_' . $action);
+                        }
+                    }
+                }
+            });
     }
 
     /**
