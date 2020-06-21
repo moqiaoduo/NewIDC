@@ -70,9 +70,8 @@ class ServerController extends Controller
         $form->switch('enable', __('Enable'))->default(1);
 
         $form->divider(__('admin.server.detail'));
-        $info = PluginManager::getList();
-        foreach (PluginManager::getServerPluginList() as $plugin) {
-            $plugins[$plugin] = $info[$plugin]['name'] ?? $plugin;
+        foreach (PluginManager::getServerPluginList() as $slug=>$plugin) {
+            $plugins[$plugin] = PluginManager::getPluginInfo($slug)['name'] ?? $plugin;
         }
         $form->select('server_plugin', __('admin.server.plugin'))->required()
             ->options($plugins ?? []);
