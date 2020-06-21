@@ -133,9 +133,8 @@ HTML
                     ->help(__('admin.help.product.free_limit'))->default(0);
             });
         }, request('tab') == 2)->tab(__('admin.product.tab.api'), function (Form $form) {
-            $info = PluginManager::getList();
-            foreach (PluginManager::getServerPluginList() as $plugin) {
-                $plugins[$plugin] = $info[$plugin]['name'] ?? $plugin;
+            foreach (PluginManager::getServerPluginList() as $slug => $plugin) {
+                $plugins[$plugin] = PluginManager::getPluginInfo($slug)['name'] ?? $plugin;
             }
             $form->select('server_plugin', __('admin.product.server.plugin'))->options($plugins ?? [])
                 ->load('server_group_id', '/admin/api/server_groups');
