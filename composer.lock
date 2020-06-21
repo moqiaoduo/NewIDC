@@ -1808,16 +1808,16 @@
         },
         {
             "name": "newidc/directadmin",
-            "version": "v0.1.2",
+            "version": "v0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/newidc-da.git",
-                "reference": "a82f88c358011416ca91df95f5dfd37f64a79739"
+                "reference": "4d4f0259ab9b0ebeb32d0344dec43c48e0785460"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/newidc-da/zipball/a82f88c358011416ca91df95f5dfd37f64a79739",
-                "reference": "a82f88c358011416ca91df95f5dfd37f64a79739",
+                "url": "https://api.github.com/repos/moqiaoduo/newidc-da/zipball/4d4f0259ab9b0ebeb32d0344dec43c48e0785460",
+                "reference": "4d4f0259ab9b0ebeb32d0344dec43c48e0785460",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1853,7 +1853,7 @@
                 }
             ],
             "description": "NewIDC的DirectAdmin对接插件",
-            "time": "2020-06-21T12:20:49+00:00"
+            "time": "2020-06-21T13:58:17+00:00"
         },
         {
             "name": "newidc/easypanel",
