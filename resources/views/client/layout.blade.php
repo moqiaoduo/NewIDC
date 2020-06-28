@@ -49,14 +49,14 @@
                 </dl>
             </li>
             @foreach(PluginManager::client_menu() as $slug=>$val)
-                @foreach($val as $v)
+                @foreach($val as $name=>$v)
                     <li class="layui-nav-item">
                         <a href="@if($v['type']=='url')
                         {{url($v['url'])}}
                         @elseif($v['type']=='plugin_page')
                         {{url('/plugin/'.$slug.'/'.$v['page'])}}
                         @endif">
-                            @lang($v['name'])
+                            @lang($name)
                         </a>
                     </li>
                 @endforeach
