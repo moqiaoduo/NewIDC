@@ -48,6 +48,19 @@
                     <dd><a href="javascript:;">@lang('user.open_ticket')</a></dd>
                 </dl>
             </li>
+            @foreach(PluginManager::client_menu() as $slug=>$val)
+                @foreach($val as $v)
+                    <li class="layui-nav-item">
+                        <a href="@if($v['type']=='url')
+                        {{url($v['url'])}}
+                        @elseif($v['type']=='plugin_page')
+                        {{url('/plugin/'.$slug.'/'.$v['page'])}}
+                        @endif">
+                            @lang($v['name'])
+                        </a>
+                    </li>
+                @endforeach
+            @endforeach
             <li class="layui-nav-item"><a href="{{url('/')}}">@lang('user.back_index')</a></li>
             @include('common.avatar', ['id' => 'newidc-list-avatar'])
         </ul>
