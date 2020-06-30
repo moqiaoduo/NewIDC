@@ -22,6 +22,7 @@ Route::group([
     $router->resource('user', 'UserController');
     $router->post('user/{id}/reset_password', 'UserController@reset_password')
         ->name('user.reset_success');
+    $router->get('user/{user}/login', 'UserController@login');
     $router->resource('ticket', 'TicketController');
     $router->resource('ticket_status', 'TicketStatusController');
     $router->resource('department', 'DepartmentController');

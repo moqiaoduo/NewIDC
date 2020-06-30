@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\User\Login;
 use App\Models\Product;
 use App\Models\User;
 use App\Notifications\ResetPassword;
@@ -31,6 +32,10 @@ class UserController extends Controller
         $grid->column('last_logon_at', __('admin.user.last_logon_at'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
+
+        $grid->actions(function ($actions) {
+            $actions->add(new Login());
+        });
 
         return $grid;
     }
@@ -108,5 +113,12 @@ class UserController extends Controller
         $user->update(['password' => \Hash::make($new_pwd = \Str::random())]);
         $user->notify(new ResetPassword($user->username, $new_pwd));
         return 'ok';
+    }
+
+    public function login(User $user)
+    {
+        \Auth::login($user);
+
+        return redirect('/client');
     }
 }
