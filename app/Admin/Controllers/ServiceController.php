@@ -26,15 +26,17 @@ class ServiceController extends Controller
     {
         $grid = new Grid(new Service());
 
-        $grid->column('id', 'ID');
+        $grid->column('id', 'ID')->sortable();
         $grid->column('product_id', __('Product'))->display(function ($id) {
             if ($product = Product::find($id))
                 return ($product->group ? $product->group->name . ' - ' : '') . $product->name;
+        })->sortable();
+        $grid->column('name', __('Name'))->sortable();
+        $grid->column('user', __('User'))->display(function ($user) {
+            return '<a href="' . route('admin.user.show', $user['id']) . '">' . $user['username'] . '</a>';
         });
-        $grid->column('user.username', __('User'));
-        $grid->column('name', __('Name'));
-        $grid->column('username', __('Username'));
-        $grid->column('domain', __('Domain'));
+        $grid->column('username', __('Username'))->sortable();
+        $grid->column('domain', __('Domain'))->sortable();
         $grid->column('status', __('Status'))->display(function () {
             return $this->status_text;
         })->label([
@@ -43,9 +45,9 @@ class ServiceController extends Controller
             'pending' => 'info',
             'terminated' => 'danger',
             'cancelled' => 'default'
-        ]);
-        $grid->column('expire_at', __('Next Due Date'));
-        $grid->column('created_at', __('Created at'));
+        ])->sortable();
+        $grid->column('expire_at', __('Next Due Date'))->sortable();
+        $grid->column('created_at', __('Created at'))->sortable();
 
         $grid->actions(function ($actions) {
             // 去掉查看
