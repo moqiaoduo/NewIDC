@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use Illuminate\Auth\Events\LoginEvent;
+use App\Events\LoginEvent;
 
 class LoginListener
 {
@@ -19,13 +19,13 @@ class LoginListener
     /**
      * Handle the event.
      *
-     * @param  LoginEvent  $event
+     * @param LoginEvent $event
      * @return void
      */
     public function handle($event)
     {
-        $user=$event->user;
-        $user->last_logon_at=now();
+        $user = $event->user;
+        $user->last_logon_at = now();
         $user->save();
     }
 }
