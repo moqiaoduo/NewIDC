@@ -11,30 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ServiceSuspend
+class ServiceSuspend extends ServiceEvent
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * @var Service
-     */
-    protected $service;
-
-    /**
-     * Create a new event instance.
-     *
-     * @param Service $service
-     */
-    public function __construct(Service $service)
-    {
-        $this->service = $service;
-    }
-
-    /**
-     * @return Service
-     */
-    public function getService(): Service
-    {
-        return $this->service;
-    }
 }

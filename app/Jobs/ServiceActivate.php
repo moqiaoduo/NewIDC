@@ -53,7 +53,9 @@ class ServiceActivate implements ShouldQueue
             /* @var \NewIDC\Plugin\Server $plugin */
             $plugin = new $plugin();
             $plugin->init($product, $service, $server);
-            $plugin->command('create');
+            $result = $plugin->command('create');
+            if ($result['code'] == 0)
+                event(new \App\Events\ServiceActivate($service));
         }
     }
 }

@@ -30,7 +30,6 @@
                 limit: 10 //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
                 , page: true
                 , skin: 'line'
-                , text: {none: '暂无服务'}
                 , toolbar: '#tools'
                 , defaultToolbar: []
                 , initSort: {

@@ -72,7 +72,7 @@ class ServiceController extends Controller
         return $content
             ->title($this->title())
             ->description($this->description['edit'] ?? trans('admin.edit'))
-            ->row(view('admin.service_command_form', ['id' => $id]))
+            ->row(view('admin.service.command_form', ['id' => $id]))
             ->row($this->form()->edit($id));
     }
 
@@ -85,7 +85,7 @@ class ServiceController extends Controller
     {
         $form = new Form(new Service());
 
-        $form->html(view('admin.service_command'), __('admin.service.commands.name'));
+        $form->html(view('admin.service.command'), __('admin.service.commands.name'));
 
         $groups = [];
         foreach (ProductGroup::with('products')->get() as $group) {
@@ -135,12 +135,21 @@ class ServiceController extends Controller
 
     public function serverCommand(Request $request, Service $service, $command = null)
     {
-        $class = $service->server->server_plugin;
+        $server = $service->server;
+
+        if (empty($server)) {
+            admin_toastr('还未分配服务器', 'error'); // TODO: 国际化
+            return back();
+        }
+
+        $class = $server->server_plugin;
+
         if (empty($command)) $command = $request->input('command');
+
         if (class_exists($class)) {
             $plugin = new $class;
             /* @var \NewIDC\Plugin\Server $plugin */
-            $plugin->init($service->product, $service, $service->server);
+            $plugin->init($service->product, $service, $server);
             $result = $plugin->command($command, $request->input('payload'));
             if ($result['code']) {
                 admin_toastr($result['msg'], 'error');

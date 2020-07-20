@@ -11,7 +11,7 @@ class Login extends RowAction
 
     public function href()
     {
-        return $this->getResource() . '/' . $this->getKey() . '/login';
+        return 'javascript:window.open("' . $this->getResource() . '/' . $this->getKey() . '/login");';
     }
 
 }
