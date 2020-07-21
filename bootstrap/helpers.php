@@ -95,7 +95,7 @@ if (!function_exists('modifyEnv')) {
 
         $contentArray->transform(function ($item) use ($data) {
             foreach ($data as $key => $value) {
-                if (Str::contains($item, $key)) {
+                if (Str::contains(preg_replace('# #','',$item), $key . '=')) {
                     return $key . '=' . $value;
                 }
             }
