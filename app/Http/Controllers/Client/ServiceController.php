@@ -25,10 +25,10 @@ class ServiceController extends Controller
     public function detail(Service $service)
     {
         $login = '';
-        if (class_exists($class = $service->server->server_plugin)) {
+        if (($server = $service->server) && class_exists($class = $server->server_plugin)) {
             $plugin = new $class;
             /* @var Server $plugin */
-            $plugin->init($service->product, $service, $service->server);
+            $plugin->init($service->product, $service, $server);
             $login = $plugin->userLogin();
         }
         return view('client.service.detail', compact('service', 'login'));
