@@ -63,7 +63,7 @@ class Service
         switch ($type) {
             case 'random':
                 $username = strtolower(Str::random(8));
-                while (Model::where('username', $username)
+                while (Model::where('username', $username)->whereIn('status', ['active', 'suspended'])
                     ->when(!getOption('site_service_username_unique'), function ($query) use ($product) {
                         $query->where('product_id', $product->id);
                     })->exists()) {
@@ -83,7 +83,7 @@ class Service
                 } else {
                     $username = strtolower($username);
                     // 检测用户名是否存在，存在则增加随机字符
-                    while (Model::where('username', $username)
+                    while (Model::where('username', $username)->whereIn('status', ['active', 'suspended'])
                         ->when(!getOption('site_service_username_unique'), function ($query) use ($product) {
                             $query->where('product_id', $product->id);
                         })->exists()) {
