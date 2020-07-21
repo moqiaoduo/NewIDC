@@ -18,7 +18,7 @@ class ServiceEvent
     /**
      * @var Service
      */
-    private $service;
+    public $service;
 
     public $notify = true;
 
@@ -32,13 +32,5 @@ class ServiceEvent
     {
         $this->service = $service;
         $this->notify = $notify;
-    }
-
-    /**
-     * @return Service
-     */
-    public function getService(): Service
-    {
-        return $this->service;
     }
 }

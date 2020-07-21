@@ -46,10 +46,12 @@ class ServiceUnsuspend extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+        [$line1, $line2] = __('service.mail.unsuspend.lines');
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->subject(__('service.mail.unsuspend.subject', ['website' => config('app.name')]))
+            ->line($line1)
+            ->action(__('service.mail.unsuspend.action'), route('service', $this->service))
+            ->line($line2);
     }
 
     /**

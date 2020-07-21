@@ -12,25 +12,25 @@ class ServiceEventSubscriber implements ShouldQueue
 {
     public function handleActivate(ServiceActivate $event)
     {
-        $service = $event->getService();
+        $service = $event->service;
         $service->user->notify(new \App\Notifications\ServiceActivate($service));
     }
 
     public function handleSuspend(ServiceSuspend $event)
     {
-        $service = $event->getService();
+        $service = $event->service;
         $service->user->notify(new \App\Notifications\ServiceSuspend($service));
     }
 
     public function handleUnsuspend(ServiceUnsuspend $event)
     {
-        $service = $event->getService();
+        $service = $event->service;
         $service->user->notify(new \App\Notifications\ServiceUnsuspend($service));
     }
 
     public function handleTerminate(ServiceTerminate $event)
     {
-        $service = $event->getService();
+        $service = $event->service;
         $service->user->notify(new \App\Notifications\ServiceTerminate($service));
     }
 

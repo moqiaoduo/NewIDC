@@ -25,6 +25,17 @@ return [
         'cancelled' => '已取消'
     ],
     'mail' => [
+        'activate' => [
+            'lines' => [
+                '您的服务已经开通',
+                '用户名：:username',
+                '密码：:password',
+                '域名：:domain',
+                '感谢您选择:website。'
+            ],
+            'action' => '查看服务',
+            'subject' => '您在:website的服务已开通'
+        ],
         'suspend' => [
             'lines' => [
                 '您的服务刚刚被暂停了',
@@ -33,6 +44,22 @@ return [
             ],
             'action' => '查看服务',
             'subject' => '您在:website的服务已被暂停'
+        ],
+        'unsuspend' => [
+            'lines' => [
+                '您的服务已经解除暂停',
+                '如有疑问，请通过工单联系网站管理员。'
+            ],
+            'action' => '查看服务',
+            'subject' => '您在:website的服务已解除暂停'
+        ],
+        'terminate' => [
+            'lines' => [
+                '您的服务已经被销毁',
+                '如有疑问，请通过工单联系网站管理员。'
+            ],
+            'action' => '查看服务',
+            'subject' => '您在:website的服务已终止'
         ]
     ],
     'expire_suspend' => '逾期未付款'

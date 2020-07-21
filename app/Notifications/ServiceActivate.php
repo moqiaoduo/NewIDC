@@ -46,10 +46,21 @@ class ServiceActivate extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+        $service = $this->service;
+        // TODO: 插件自定义邮件模板
+        [$line1, $line2, $line3, $line4, $line5] = __('service.mail.activate.lines',
+            ['website' => config('app.name'),
+                'username' => $service->username,
+                'password' => $service->password,
+                'domain' => $service->domain]);
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->subject(__('service.mail.activate.subject', ['website' => config('app.name')]))
+            ->line($line1)
+            ->line($line2)
+            ->line($line3)
+            ->line($line4)
+            ->action(__('service.mail.activate.action'), route('service', $service))
+            ->line($line5);
     }
 
     /**

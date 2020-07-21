@@ -83,6 +83,11 @@ class UserController extends Controller
             $service->expire_at();
             $service->created_at();
 
+            $service->actions(function ($actions) {
+                // 去掉查看
+                $actions->disableView();
+            });
+
         });
 
         return $show;

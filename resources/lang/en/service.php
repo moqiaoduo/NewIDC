@@ -8,7 +8,7 @@ return [
     ],
     'type' => [
         /**
-         * 关于一些type选项的翻译，顺便作为一个列表
+         * A list of Type
          */
 
         'hosting'=>'Shared Hosting',
@@ -25,6 +25,17 @@ return [
         'cancelled' => 'Cancelled'
     ],
     'mail' => [
+        'activate' => [
+            'lines' => [
+                'Your service is active now.',
+                'Username: :username',
+                'Password: :password',
+                'Domain: :domain',
+                'Thank you for choosing :website.'
+            ],
+            'action' => 'View Service',
+            'subject' => 'Your Service on :website is active'
+        ],
         'suspend' => [
             'lines' => [
                 'Your service was suspended just now.',
@@ -33,6 +44,22 @@ return [
             ],
             'action' => 'View Service',
             'subject' => 'Your Service on :website was suspended'
+        ],
+        'unsuspend' => [
+            'lines' => [
+                'Your service is unsuspended now.',
+                'If any confused, please contact Website Administrator by Ticket System.'
+            ],
+            'action' => 'View Service',
+            'subject' => 'Your Service on :website is unsuspended'
+        ],
+        'terminate' => [
+            'lines' => [
+                'Your service was terminated just now.',
+                'If any confused, please contact Website Administrator by Ticket System.'
+            ],
+            'action' => 'View Service',
+            'subject' => 'Your Service on :website was terminated'
         ]
     ],
     'expire_suspend' => 'Overdue payment'
