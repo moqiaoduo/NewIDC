@@ -57,13 +57,16 @@ class Service
         return 0;
     }
 
-    public static function generate_username($type, $domain = null)
+    public static function generate_username($type, $product, $domain = null)
     {
         $username = '';
         switch ($type) {
             case 'random':
                 $username = strtolower(Str::random(8));
-                while (Model::where('username', $username)->exists()) {
+                while (Model::where('username', $username)
+                    ->when(!getOption('site_service_username_unique'), function ($query) use ($product) {
+                        $query->where('product_id', $product->id);
+                    })->exists()) {
                     $username = strtolower(Str::random(8));
                 }
                 break;
@@ -76,11 +79,14 @@ class Service
                 }
                 // 假如提取不到任何英文字符，则采用随机生成
                 if (empty($username)) {
-                    $username = self::generate_username('random');
+                    $username = self::generate_username('random', $product);
                 } else {
                     $username = strtolower($username);
                     // 检测用户名是否存在，存在则增加随机字符
-                    while (Model::where('username', $username)->exists()) {
+                    while (Model::where('username', $username)
+                        ->when(!getOption('site_service_username_unique'), function ($query) use ($product) {
+                            $query->where('product_id', $product->id);
+                        })->exists()) {
                         $username .= strtolower(Str::random(1));
                     }
                 }
@@ -96,7 +102,7 @@ class Service
         $service->product_id = $product->id;
         $service->user_id = $user->id;
         $service->name = Str::random();
-        $service->username = self::generate_username(getOption('service_username_generation'), $domain);
+        $service->username = self::generate_username(getOption('service_username_generation'), $product, $domain);
         $service->password = Str::random();
         $service->domain = $domain;
         $service->expire_at = $expire_at;
