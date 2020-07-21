@@ -152,7 +152,7 @@ class ServiceController extends Controller
             $plugin->init($service->product, $service, $server);
             $result = $plugin->command($command, $request->input('payload'));
             if ($result['code']) {
-                admin_toastr($result['msg'], 'error');
+                admin_toastr(str_replace(PHP_EOL, '', $result['msg']), 'error');
             } else {
                 admin_toastr('命令执行成功'); // TODO: 国际化
             }
