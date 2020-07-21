@@ -49,7 +49,7 @@ class ShopController extends Controller
         if ($product->require_domain) {
             if (empty($data['domain']))
                 return back()->withErrors(['tip' => '要求提供域名']);
-            if (Service::where('domain', $data['domain'])
+            if (Service::where('domain', $data['domain'])->whereIn('type', ['active', 'suspended'])
                 ->when(!getOption('site_service_domain_unique'), function ($query) use ($product) {
                     $query->where('product_id', $product->id);
                 })->exists()) return back()->withErrors(['tip' => '域名已被占用']);
