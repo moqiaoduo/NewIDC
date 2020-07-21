@@ -124,7 +124,7 @@ P.S. If you want unlimited, set 0',
         ],
         'config'            => [
             'tos'           => 'If enable, clients must agree to your Terms of Service.',
-            'sug'           => 'If "Random username" is selected, a user name like sxxxxxxx will be generated;
+            'sug'           => 'If "Random username" is selected, a random username will be generated;
             If "Generate from domain" is selected, all letters in the domain name will be taken.',
             'site_suu'      => 'When enabled, services with the same username in the whole website are not allowed.',
             'site_sdu'      => 'When enabled, services with the same domain in the whole website are not allowed.',
