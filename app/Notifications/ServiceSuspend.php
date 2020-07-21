@@ -46,13 +46,15 @@ class ServiceSuspend extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+        $service = $this->service;
         [$line1, $line2, $line3] = __('service.mail.suspend.lines',
-            ['reason' => $this->service->extra['suspend_reason'] ?? __('service.expire_suspend')]);
+            ['reason' => $this->service->extra['suspend_reason'] ?? __('service.expire_suspend'),
+                'service' => $service->product->name . ' - ' . $service->name]);
         return (new MailMessage)
             ->subject(__('service.mail.suspend.subject', ['website' => config('app.name')]))
             ->line($line1)
             ->line($line2)
-            ->action(__('service.mail.suspend.action'), route('service', $this->service))
+            ->action(__('service.mail.suspend.action'), route('service', $service))
             ->line($line3);
     }
 

@@ -52,7 +52,8 @@ class ServiceActivate extends Notification implements ShouldQueue
             ['website' => config('app.name'),
                 'username' => $service->username,
                 'password' => $service->password,
-                'domain' => $service->domain]);
+                'domain' => $service->domain,
+                'service' => $service->product->name . ' - ' . $service->name]);
         return (new MailMessage)
             ->subject(__('service.mail.activate.subject', ['website' => config('app.name')]))
             ->line($line1)

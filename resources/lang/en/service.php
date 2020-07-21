@@ -27,7 +27,7 @@ return [
     'mail' => [
         'activate' => [
             'lines' => [
-                'Your service is active now.',
+                'Your service :service is active now.',
                 'Username: :username',
                 'Password: :password',
                 'Domain: :domain',
@@ -38,7 +38,7 @@ return [
         ],
         'suspend' => [
             'lines' => [
-                'Your service was suspended just now.',
+                'Your service :service was suspended just now.',
                 'Reason: :reason',
                 'If any confused, please contact Website Administrator by Ticket System.'
             ],
@@ -47,7 +47,7 @@ return [
         ],
         'unsuspend' => [
             'lines' => [
-                'Your service is unsuspended now.',
+                'Your service :service is unsuspended now.',
                 'If any confused, please contact Website Administrator by Ticket System.'
             ],
             'action' => 'View Service',
@@ -55,7 +55,7 @@ return [
         ],
         'terminate' => [
             'lines' => [
-                'Your service was terminated just now.',
+                'Your service :service was terminated just now.',
                 'If any confused, please contact Website Administrator by Ticket System.'
             ],
             'action' => 'View Service',

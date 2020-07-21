@@ -46,11 +46,13 @@ class ServiceTerminate extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        [$line1, $line2] = __('service.mail.terminate.lines');
+        $service = $this->service;
+        [$line1, $line2] = __('service.mail.terminate.lines',
+            ['service' => $service->product->name . ' - ' . $service->name]);
         return (new MailMessage)
             ->subject(__('service.mail.terminate.subject', ['website' => config('app.name')]))
             ->line($line1)
-            ->action(__('service.mail.terminate.action'), route('service', $this->service))
+            ->action(__('service.mail.terminate.action'), route('service', $service))
             ->line($line2);
     }
 

@@ -27,7 +27,7 @@ return [
     'mail' => [
         'activate' => [
             'lines' => [
-                '您的服务已经开通',
+                '您的服务 :service 已经开通',
                 '用户名：:username',
                 '密码：:password',
                 '域名：:domain',
@@ -38,7 +38,7 @@ return [
         ],
         'suspend' => [
             'lines' => [
-                '您的服务刚刚被暂停了',
+                '您的服务 :service 刚刚被暂停了',
                 '原因：:reason',
                 '如有疑问，请通过工单联系网站管理员。'
             ],
@@ -47,7 +47,7 @@ return [
         ],
         'unsuspend' => [
             'lines' => [
-                '您的服务已经解除暂停',
+                '您的服务 :service 已经解除暂停',
                 '如有疑问，请通过工单联系网站管理员。'
             ],
             'action' => '查看服务',
@@ -55,7 +55,7 @@ return [
         ],
         'terminate' => [
             'lines' => [
-                '您的服务已经被销毁',
+                '您的服务 :service 已经被销毁',
                 '如有疑问，请通过工单联系网站管理员。'
             ],
             'action' => '查看服务',
