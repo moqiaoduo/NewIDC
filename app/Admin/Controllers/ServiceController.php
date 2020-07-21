@@ -26,6 +26,8 @@ class ServiceController extends Controller
     {
         $grid = new Grid(new Service());
 
+        $grid->model()->orderBy('created_at', 'desc');
+
         $grid->column('id', 'ID')->sortable();
         $grid->column('product_id', __('Product'))->display(function ($id) {
             if ($product = Product::find($id))
