@@ -10,6 +10,7 @@ class PluginController extends Controller
 {
     public function index(Content $content)
     {
+        \PluginManager::updatePluginVersion();
         $plugins = \PluginManager::getList();
         return $content
             ->title('插件管理')
