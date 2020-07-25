@@ -24,7 +24,7 @@ class TicketController extends Controller
     public function create(Request $request)
     {
         return view('client.ticket.create')->with('services', $request->user()->services)
-            ->with('departments', Department::all());
+            ->with('departments', Department::where('hide', 0)->get());
     }
 
     public function show(Ticket $ticket)
