@@ -17,7 +17,6 @@ class CreateDepartmentsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->string('email');
             $table->json('assign');
             $table->boolean('client_only');
             $table->boolean('hide');

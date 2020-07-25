@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -31,8 +32,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TicketDetail extends Model
 {
+    protected $casts = [
+        'attachments' => 'json'
+    ];
+
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->admin ? $this->belongsTo(Administrator::class) : $this->belongsTo(User::class);
     }
 }

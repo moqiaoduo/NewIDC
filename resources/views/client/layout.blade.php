@@ -43,9 +43,9 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">@lang('Support')</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;">@lang('user.ticket')</a></dd>
+                    <dd><a href="{{route('ticket.index')}}">@lang('user.ticket')</a></dd>
                     <dd><a href="javascript:;">@lang('Announcements')</a></dd>
-                    <dd><a href="javascript:;">@lang('user.open_ticket')</a></dd>
+                    <dd><a href="{{route('ticket.create')}}">@lang('user.open_ticket')</a></dd>
                 </dl>
             </li>
             @foreach(PluginManager::client_menu() as $slug=>$val)

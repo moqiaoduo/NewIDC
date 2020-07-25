@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExportableFileTemplateSettings">
+    <default_templates>
+      <template name="Blade Template༏ext༏.blade.php" reformat="true" live-template-enabled="true" />
+      <template name="Client Blade Template༏ext༏.blade.php" reformat="true" live-template-enabled="true" />
+    </default_templates>
+  </component>
+</project>

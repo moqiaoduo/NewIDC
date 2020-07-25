@@ -51,13 +51,17 @@ class UserController extends Controller
         $show = new Show(User::findOrFail($id));
 
         $show->field('id', __('ID'));
-        $show->field('username');
+        $show->field('username', __('Username'));
         $show->field('email', __('Email'));
         $show->field('email_verified_at', __('admin.user.email_verified_at'));
         $show->field('funds', __('Funds'));
         $show->field('last_logon_at', __('admin.user.last_logon_at'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
+        $show->field('login', __('Login'))->unescape()->as(function () use ($show) {
+            return '<a href="' . $show->getResourcePath() . '/' . $this->id . '/login' .
+                '" target="_blank" class="btn btn-success">以该用户身份登录</a>';
+        });
 
         $show->services(__('Services'), function ($service) {
 

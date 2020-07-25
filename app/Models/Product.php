@@ -63,6 +63,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereStocks($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product show()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product withGroup($gid)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Service[] $services
+ * @property-read int|null $services_count
  */
 class Product extends Model
 {
@@ -83,6 +85,11 @@ class Product extends Model
     public function server_group()
     {
         return $this->belongsTo(ServerGroup::class);
+    }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
     }
 
     public function getCleanDescription() {

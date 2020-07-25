@@ -148,3 +148,39 @@ if (!function_exists('buildFormFromArr')) {
         }
     }
 }
+
+if (!function_exists('isDomain')) {
+    /**
+     * @description 匹配
+     *              t.cn 正确
+     *              t-.cn 错误
+     *              tt.cn正确
+     *              -t.cn 错误
+     *              t-t.cn 正确
+     *              tst-test-tst.cn 正确
+     *              tst--tt.cn -- 错误
+     *
+     *
+     *
+     * @param $domain
+     *
+     * @return bool
+     */
+    function isDomain($domain)
+    {
+        return !empty($domain) && strpos($domain, '--') === false &&
+            preg_match('/^([a-z0-9]+([a-z0-9-]*(?:[a-z0-9]+))?\.)?[a-z0-9]+([a-z0-9-]*(?:[a-z0-9]+))?(\.us|\.tv|\.org\.cn|\.org|\.net\.cn|\.net|\.mobi|\.me|\.la|\.info|\.hk|\.gov\.cn|\.edu|\.com\.cn|\.com|\.co\.jp|\.co|\.cn|\.cc|\.biz)$/i', $domain);
+    }
+}
+
+if (!function_exists('usingList')) {
+    function usingList(...$p) {
+        if (func_num_args() < 1) {
+            $p[0] = __('No');
+        }
+        if (func_num_args() < 2) {
+            $p[1] = __('Yes');
+        }
+        return $p;
+    }
+}

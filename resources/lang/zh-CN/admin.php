@@ -172,7 +172,9 @@ return [
             'send_suspension_email'     => '成功暂停时发送服务暂停通知邮件',
             'send_unsuspension_email'   => '成功恢复时发送服务恢复通知邮件',
             'unsuspension'              => '支付完成后，被暂停服务自动恢复',
-            'limit_activity_log'        => '输入你想保留的系统级活动日志的最大数目'
+            'limit_activity_log'        => '输入你想保留的系统级活动日志的最大数目',
+            'allow_upload_ext'          => '输入时请不要在开头加.',
+            'max_upload_size'           => '单位为MB'
         ],
         'server'                    => [
             'access_hash'           => '某些服务器可能需要提供Access Key/Hash来访问API',
@@ -191,6 +193,7 @@ return [
         'tab'                   => [
             'base'              => '基础设置',
             'cron'              => '计划任务设置',
+            'upload'            => '上传设置',
             'template'          => '模板设置'
         ],
         'tip'                   => '修改后切换选项卡之前先保存哦',
@@ -215,7 +218,9 @@ return [
         'send_suspension_email'     => '发送暂停通知邮件',
         'enable_unsuspension'       => '启用自动恢复',
         'send_unsuspension_email'   => '发送恢复通知邮件',
-        'limit_activity_log'        => '限制活动日志条数'
+        'limit_activity_log'        => '限制活动日志条数',
+        'allow_upload_ext'          => '允许上传的文件后缀名',
+        'max_upload_size'           => '最大允许上传大小'
     ],
     'product'                   => [
         'tab'                   => [
@@ -275,7 +280,15 @@ return [
         'awaiting'              => '待回复状态',
         'auto_close'            => '自动关闭',
         'order'                 => '排序',
-        'status_color'          => '状态颜色'
+        'status_color'          => '状态颜色',
+        'reply'                 => '回复',
+        'service'               => '相关服务'
+    ],
+    'department'                => [
+        'assign'                => '指派的管理员',
+        'client_only'           => '仅客户',
+        'assign_help'           => '管理员被指派后，将会收到客户对该部门开启或回复工单的提醒邮件，且有权限进行回单/关闭工单。',
+        'client_only_help'      => '启用后，只有登录后客户才能选择这个部门。'
     ],
     'server'                    => [
         'plugin'                => '接口',

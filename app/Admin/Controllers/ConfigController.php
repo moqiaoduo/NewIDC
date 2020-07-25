@@ -32,6 +32,7 @@ class ConfigController extends Controller
         $items = [
             "base" => [__('admin.config.tab.base'), 'addLink', $this->save_url, false],
             "cron" => [__('admin.config.tab.cron'), 'addLink', route('admin.config.cron'), false],
+            'upload' => [__('admin.config.tab.upload'), 'addLink', route('admin.config.upload'), false],
             "template" => [__('admin.config.tab.template'), 'addLink', route('admin.config.template'), false],
         ];
         foreach ($this->third_parts as $slug=>$item) {
@@ -115,6 +116,16 @@ class ConfigController extends Controller
             $form->switch('option.terminate', __('admin.config.terminate'));
             $form->number('option.terminate_days', __('admin.config.terminate_days'))
                 ->default(3)->min(0)->help(__('admin.help.config.termination_days'));
+        });
+    }
+
+    public function upload(Content $content)
+    {
+        return $this->form($content, 'upload', function (Form $form) {
+            $form->tags('option.allow_upload_ext', __('admin.config.allow_upload_ext'))
+                ->help(__('admin.help.config.allow_upload_ext'));
+            $form->number('option.max_upload_size', __('admin.config.max_upload_size'))
+                ->help(__('admin.help.config.max_upload_size'))->default(2);
         });
     }
 

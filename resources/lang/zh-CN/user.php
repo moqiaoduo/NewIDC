@@ -6,5 +6,6 @@ return [
     'ticket'        => '工单',
     'help'          => '帮助中心',
     'open_ticket'   => '开启新工单',
-    'area'          => '客户区'
+    'area'          => '客户区',
+    'ticket_show'   => '查看工单'
 ];

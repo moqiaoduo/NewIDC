@@ -63,20 +63,46 @@ class ProductController extends Controller
         $show = new Show(Product::findOrFail($id));
 
         $show->field('id', 'ID');
-        $show->field('product_group_id', __('Product group id'));
+        $show->field('group.name', __('Product group'));
         $show->field('name', __('Name'));
-        $show->field('type', __('Type'));
-        $show->field('description', __('Description'));
-        $show->field('hide', __('Hide'));
-        $show->field('enable', __('Enable'));
-        $show->field('price', __('Price'));
-        $show->field('config', __('Config'));
-        $show->field('server_plugin', __('Server plugin'));
-        $show->field('server_id', __('Server id'));
-        $show->field('free_domain', __('Free domain'));
-        $show->field('extra', __('Extra'));
+        $show->field('type', __('Type'))->using(__('service.type'));
+        $show->field('description', __('Description'))->unescape()->as(function () {
+            return $this->getCleanDescription();
+        });
+        $show->field('hide', __('Hide'))->using(usingList());
+        $show->field('enable', __('Enable'))->using(usingList());
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
+
+        $show->services(__('Services'), function ($service) {
+
+            $service->resource('/admin/service');
+
+            $service->id('ID');
+            $service->user(__('User'))->display(function ($user) {
+                return '<a href="' . route('admin.user.show', $user['id']) . '">' . $user['username'] . '</a>';
+            });
+            $service->name();
+            $service->username();
+            $service->domain();
+            $service->status()->display(function () {
+                return $this->status_text;
+            })->label([
+                'active' => 'success',
+                'suspended' => 'warning',
+                'pending' => 'info',
+                'terminated' => 'danger',
+                'cancelled' => 'default'
+            ]);
+            $service->expire_at();
+            $service->created_at();
+
+            $service->actions(function ($actions) {
+                // 去掉查看
+                $actions->disableView();
+            });
+
+        });
 
         return $show;
     }

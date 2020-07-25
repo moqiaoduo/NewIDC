@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $name
  * @property string|null $description
- * @property string $email
  * @property mixed $assign
  * @property int $client_only
  * @property int $hide
@@ -29,13 +28,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Department whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Department whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
- * @property-read int|null $users_count
  */
 class Department extends Model
 {
-    public function users()
-    {
-        return $this->belongsToMany(User::class);
-    }
+    protected $casts = [
+        'assign' => 'json'
+    ];
 }

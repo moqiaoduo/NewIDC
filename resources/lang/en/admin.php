@@ -142,11 +142,11 @@ P.S. If you want unlimited, set 0',
         ],
         'server'                    => [
             'access_hash'           => 'Some servers may need to provide Access Key / Hash to access the API.',
-            'max_load'              => 'This value is the maximum number of services hosted by the server.
-                When the load is full, the server will not be allowed to join the service. 0 means infinite.',
-            'status_address'        => 'To display this server on the server status page, enter the full path to the
-            server status folder (required to be uploaded to each server you want to monitor)
-            - eg. https://www.example.com/status/',
+            'max_load'              => 'This value is the maximum number of services hosted by the server.'.
+                'When the load is full, the server will not be allowed to join the service. 0 means infinite.',
+            'status_address'        => 'To display this server on the server status page, enter the full path to the'.
+            'server status folder (required to be uploaded to each server you want to monitor)'.
+            '- eg. https://www.example.com/status/',
             'api_access_address'    => 'Access API through IP or Hostname.',
             'api_access_ssl'        => 'When enabled, HTTPS is used by default for API access.',
             'access_ssl'            => 'When enabled, the user access web panel defaults to HTTPS',
@@ -230,7 +230,16 @@ P.S. If you want unlimited, set 0',
         'active'                => 'Include in Active Tickets',
         'awaiting'              => 'Include in Awaiting Reply',
         'auto_close'            => 'Auto Close',
-        'status_color'          => 'Status Color'
+        'status_color'          => 'Status Color',
+        'reply'                 => '回复'
+    ],
+    'department'                => [
+        'assign'                => 'Assign',
+        'client_only'           => 'Client Only',
+        'assign_help'           => 'Once the administrators are assigned, they will receive the mails of opening and '.
+            'replying tickets from the clients for this department. Also, they have permissions to reply or close the tickets.',
+        'client_only_help'      => 'Only client can choose this department if enabled.',
+        'hide_help'             => 'This option only affect the page of departments selected. Opening ticket page can be seen all the time.'
     ],
     'server'                    => [
         'plugin'                => 'Module',

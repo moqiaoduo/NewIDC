@@ -26,11 +26,11 @@ class ServiceController extends Controller
     {
         $grid = new Grid(new Service());
 
-        $grid->model()->orderBy('created_at', 'desc');
+        $grid->model()->orderBy('created_at', 'desc')->with('product.group');
 
         $grid->column('id', 'ID')->sortable();
-        $grid->column('product_id', __('Product'))->display(function ($id) {
-            if ($product = Product::find($id))
+        $grid->column('product_id', __('Product'))->display(function () {
+            if ($product = $this->product)
                 return ($product->group ? $product->group->name . ' - ' : '') . $product->name;
         })->sortable();
         $grid->column('name', __('Name'))->sortable();

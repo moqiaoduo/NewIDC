@@ -118,5 +118,8 @@
     "Generate Password": "生成密码",
     "Renew": "续费",
     "Manage": "管理",
-    "Free": "免费"
+    "Free": "免费",
+    "No": "否",
+    "Yes": "是",
+    "Attachments": "附件"
 }

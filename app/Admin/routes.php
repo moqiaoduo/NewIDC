@@ -24,6 +24,7 @@ Route::group([
         ->name('user.reset_success');
     $router->get('user/{user}/login', 'UserController@login');
     $router->resource('ticket', 'TicketController');
+    $router->post('/ticket/{ticket}/reply', 'TicketController@reply')->name('ticket.reply');
     $router->resource('ticket_status', 'TicketStatusController');
     $router->resource('department', 'DepartmentController');
 
@@ -34,6 +35,7 @@ Route::group([
         $router->get("/", 'ConfigController@index')->name('base');
         $router->post('/', 'ConfigController@save');
         $router->get('/cron', 'ConfigController@cron')->name('cron');
+        $router->get('/upload', 'ConfigController@upload')->name('upload');
         $router->get('/template', 'ConfigController@template')->name('template');
         $router->fallback('ConfigController@third_part');
     });
@@ -49,6 +51,7 @@ Route::group([
     $router->group(['prefix' => "/api"], function (Router $router) {
         $router->get('/server_groups', 'ApiController@server_groups');
         $router->get('/users', 'ApiController@users');
+        $router->get('/services', 'ApiController@services');
         $router->get('/price_table_tr/{name}', function ($name) {
             return view('admin.price_table_tr', ['name' => $name, 'index' => Str::random(32)]);
         });

@@ -3,14 +3,15 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Department;
+use Encore\Admin\Auth\Database\Administrator;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class DepartmentController extends AdminController
+class DepartmentController extends Controller
 {
-    protected $title = 'Department';
+    protected $title = 'Departments';
 
     /**
      * Make a grid builder.
@@ -23,35 +24,16 @@ class DepartmentController extends AdminController
 
         $grid->column('name', __('Name'))->sortable();
         $grid->column('description', __('Description'))->limit(200);
-        $grid->column('email', __('Email'));
         $grid->column('hide', __('Hide'))->switch();
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
+        $grid->actions(function ($actions) {
+            // 去掉查看
+            $actions->disableView();
+        });
+
         return $grid;
-    }
-
-    /**
-     * Make a show builder.
-     *
-     * @param mixed $id
-     * @return Show
-     */
-    protected function detail($id)
-    {
-        $show = new Show(Department::findOrFail($id));
-
-        $show->field('id', __('Id'));
-        $show->field('name', __('Name'));
-        $show->field('description', __('Description'));
-        $show->field('email', __('Email'));
-        $show->field('assign', __('Assign'));
-        $show->field('client_only', __('Client only'));
-        $show->field('hide', __('Hide'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
-
-        return $show;
     }
 
     /**
@@ -63,12 +45,23 @@ class DepartmentController extends AdminController
     {
         $form = new Form(new Department());
 
-        $form->text('name', __('Name'));
+        $form->text('name', __('Name'))->required();
         $form->textarea('description', __('Description'));
-        $form->email('email', __('Email'));
-        $form->text('assign', __('Assign'));
-        $form->switch('client_only', __('Client only'));
+        $form->listbox('assign', __('admin.department.assign'))->options(Administrator::all()->pluck('name', 'id'))
+            ->help(__('admin.department.assign_help'));
+        $form->switch('client_only', __('admin.department.client_only'))->default(true)
+            ->help(__('admin.department.client_only_help'));
         $form->switch('hide', __('Hide'));
+
+        $form->tools(function (Form\Tools $tools) {
+            // 去掉`查看`按钮
+            $tools->disableView();
+        });
+        $form->footer(function ($footer) {
+            // 去掉`查看`checkbox
+            $footer->disableViewCheck();
+        });
+
 
         return $form;
     }

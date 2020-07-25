@@ -2,14 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\{Department, Ticket, TicketDetail, TicketStatus, User};
+use App\Models\{Department, Service, Ticket, TicketDetail, TicketStatus, User};
 use Encore\Admin\Controllers\AdminController;
-use Encore\Admin\{
-    Form,
-    Grid,
-    Show
-};
+use Encore\Admin\{Form, Grid, Layout\Column, Layout\Content, Layout\Row, Show, Widgets\Box};
+use Illuminate\Http\Request;
 use Lang;
+use Storage;
+use App\Utils\Ticket as TicketUtils;
 
 class TicketController extends Controller
 {
@@ -25,9 +24,15 @@ class TicketController extends Controller
         $grid = new Grid(new Ticket());
 
         $grid->column('id', __('ID'));
-        $grid->column('user', __('User'));
-        $grid->column('title', __('Title'));
-        $grid->column('status', __('Status'));
+        $grid->column('user', __('User'))->display(function ($user) {
+            return '<a href="' . route('admin.user.show', $user['id']) . '">' . $user['username'] . '</a>';
+        });
+        $grid->column('title', __('Title'))->display(function ($user) {
+            return '<a href="' . route('admin.ticket.show', $this) . '">' . $user . '</a>';
+        });
+        $grid->column('status', __('Status'))->display(function () {
+            return '<a><span style="color: ' . $this->status_color . ';">' . $this->status_text . '</span></a>';
+        })->sortable();
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -35,23 +40,46 @@ class TicketController extends Controller
     }
 
     /**
-     * Make a show builder.
+     * Show interface.
      *
      * @param mixed $id
-     * @return Show
+     * @param Content $content
+     *
+     * @return Content
      */
-    protected function detail($id)
+    public function show($id, Content $content)
     {
-        $show = new Show(Ticket::findOrFail($id));
+        $ticket = Ticket::findOrFail($id);
+        return $content
+            ->title($this->title())
+            ->description(__('admin.ticket.reply'))
+            ->body(function (Row $row) use ($ticket) {
+                $row->column(3, function (Column $column) use ($ticket) {
+                    $column->row(view('admin.ticket.status', compact('ticket')));
+                });
+                $row->column(9, function (Column $column) use ($ticket) {
+                    $form = new \Encore\Admin\Widgets\Form($ticket);
 
-        $show->field('id', __('ID'));
-        $show->field('user_id', __('User id'));
-        $show->field('title', __('Title'));
-        $show->field('status', __('Status'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+                    $form->action(route('admin.ticket.reply', $ticket));
 
-        return $show;
+                    $form->editor('content', __('Content'))->required();
+                    $form->multipleFile('files', __('Attachments'))
+                        ->help("支持的文件格式：" . implode(",", array_filter(
+                                json_decode(getOption('allow_upload_ext'), true))));
+
+                    $column->row((new Box('回复', $form))->collapsable());
+
+                    $column->row(view('admin.ticket.dialog')->with('data', $ticket->contents()
+                        ->orderByDesc('created_at')->get()));
+                });
+            });
+    }
+
+    public function reply(Request $request, $id)
+    {
+        TicketUtils::reply($request, $id, $request->user('admin')->id, true);
+
+        return redirect()->route('admin.ticket.show', $id);
     }
 
     /**
@@ -64,54 +92,49 @@ class TicketController extends Controller
         $form = new Form(new Ticket());
 
         $form->select('user_id', __('User'))->options(function ($id) {
-            if ($id && $user=User::find($id))
-                return [$user->id=>$user->username .' - #'. $user->id];
+            if ($id && $user = User::find($id))
+                return [$user->id => $user->username . ' - #' . $user->id];
         })->ajax('/admin/api/users')->required();
-        $form->select('department_id',__('Department'))->required()
-            ->options(Department::all()->pluck('name','id'));
-        $form->select('priority',__('Priority'))->options([
-            'low'=>__('Low'),'medium'=>__('Medium'),'high'=>__('High')
-        ])->required();
+        $form->select('department_id', __('Department'))->required()
+            ->options(Department::all()->pluck('name', 'id'));
+        $form->select('service_id', __('admin.ticket.service'))->options(function ($id) {
+            if ($id && $service = Service::find($id))
+                return [$service->id => $service->name . ' - #' . $service->id];
+        })->ajax('/admin/api/services');
+        $form->select('priority', __('Priority'))->options([
+            'low' => __('Low'), 'medium' => __('Medium'), 'high' => __('High')
+        ])->required()->default('medium');
         $form->text('title', __('Title'))->required();
-        $tsf=$form->select('status', __('Status'))->required();
+        $tsf = $form->select('status', __('Status'))->required();
+
         foreach (TicketStatus::orderBy('order')->get() as $ts) {
-            $default_ts = $default_ts??$ts['id'];
-            if (Lang::has($tsn='ticket.status.'.str_replace(['-',' '],'_',strtolower($ts['title'])))) {
-                $tss[$ts['id']] = Lang::get($tsn);
-            } else {
-                $tss[$ts['id']] = __($ts['title']);
-            }
+            $default_ts = $default_ts ?? $ts['id'];
+            $tss[$ts['id']] = TicketUtils::titleTrans($ts['title']);
         }
+
         if (isset($default_ts)) $tsf->default($default_ts);
         if (isset($tss)) $tsf->options($tss);
-        if ($form->isCreating())
-            $form->editor('content',__('Content'))->required();
+        if ($form->isCreating()) {
+            $form->editor('content', __('Content'))->required();
+            $form->multipleFile('files', __('Attachments'));
+        }
 
         return $form;
     }
 
     public function store()
     {
-        \request()->validate([
-            'user_id'       => 'required|numeric',
+        $request = \request();
+        $request->validate([
+            'user_id' => 'required|numeric',
             'department_id' => 'required|numeric',
-            'priority'      => 'required',
-            'title'         => 'required|string|max:255',
-            'content'       => 'required'
+            'priority' => 'required',
+            'title' => 'required|string|max:255',
+            'content' => 'required'
         ]);
-        $ticket=Ticket::create([
-            'user_id'       => \request()->post('user_id'),
-            'title'         => \request()->post('title'),
-            'department_id' => \request()->post('department_id'),
-            'priority'      => \request()->post('priority'),
-            'status'        => 2
-        ]);
-        TicketDetail::create([
-            'user_id'   => \request()->user('admin')->id,
-            'ticket_id' => $ticket->id,
-            'content'   => clean(\request()->post('content')),
-            'admin'     => true
-        ]);
-        return redirect(\request()->post('_previous_'));
+
+        TicketUtils::create($request, $request->post('user_id'), true, $request->user('admin')->id);
+
+        return redirect($request->post('_previous_'));
     }
 }
