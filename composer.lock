@@ -1167,16 +1167,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v6.18.26",
+            "version": "v6.18.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d11b6168c65251ffa81ae0dfaf017ad2f30013da"
+                "reference": "a731824421f9ebc586728ea9c7cff231a249aaa9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d11b6168c65251ffa81ae0dfaf017ad2f30013da",
-                "reference": "d11b6168c65251ffa81ae0dfaf017ad2f30013da",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/a731824421f9ebc586728ea9c7cff231a249aaa9",
+                "reference": "a731824421f9ebc586728ea9c7cff231a249aaa9",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1317,7 +1317,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-07-21T14:25:39+00:00"
+            "time": "2020-07-27T18:23:18+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1466,16 +1466,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.69",
+            "version": "1.0.70",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "7106f78428a344bc4f643c233a94e48795f10967"
+                "reference": "585824702f534f8d3cf7fab7225e8466cc4b7493"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/7106f78428a344bc4f643c233a94e48795f10967",
-                "reference": "7106f78428a344bc4f643c233a94e48795f10967",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/585824702f534f8d3cf7fab7225e8466cc4b7493",
+                "reference": "585824702f534f8d3cf7fab7225e8466cc4b7493",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1492,7 +1492,7 @@
                 "league/flysystem-sftp": "<1.0.6"
             },
             "require-dev": {
-                "phpspec/phpspec": "^3.4",
+                "phpspec/phpspec": "^3.4 || ^4.0 || ^5.0 || ^6.0",
                 "phpunit/phpunit": "^5.7.26"
             },
             "suggest": {
@@ -1552,7 +1552,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2020-05-18T15:13:39+00:00"
+            "time": "2020-07-26T07:20:36+00:00"
         },
         {
             "name": "mews/purifier",
@@ -1727,16 +1727,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.36.1",
+            "version": "2.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "ee7378a36cc62952100e718bcc58be4c7210e55f"
+                "reference": "1f61206de973d67f36ce50f041c792ddac663c3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/ee7378a36cc62952100e718bcc58be4c7210e55f",
-                "reference": "ee7378a36cc62952100e718bcc58be4c7210e55f",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/1f61206de973d67f36ce50f041c792ddac663c3e",
+                "reference": "1f61206de973d67f36ce50f041c792ddac663c3e",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1808,20 +1808,20 @@
                 "datetime",
                 "time"
             ],
-            "time": "2020-07-04T12:29:56+00:00"
+            "time": "2020-07-28T06:04:54+00:00"
         },
         {
             "name": "newidc/directadmin",
-            "version": "v0.1.4",
+            "version": "v0.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/newidc-da.git",
-                "reference": "3ea2375f4dd31c94e046c853ee33f0bf585177e4"
+                "reference": "d96f4631e124fb02854ae106582e41765f3d9923"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/newidc-da/zipball/3ea2375f4dd31c94e046c853ee33f0bf585177e4",
-                "reference": "3ea2375f4dd31c94e046c853ee33f0bf585177e4",
+                "url": "https://api.github.com/repos/moqiaoduo/newidc-da/zipball/d96f4631e124fb02854ae106582e41765f3d9923",
+                "reference": "d96f4631e124fb02854ae106582e41765f3d9923",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1857,20 +1857,20 @@
                 }
             ],
             "description": "NewIDC的DirectAdmin对接插件",
-            "time": "2020-07-15T07:55:29+00:00"
+            "time": "2020-08-03T12:05:26+00:00"
         },
         {
             "name": "newidc/easypanel",
-            "version": "v0.1.8",
+            "version": "v0.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/newidc-ep.git",
-                "reference": "b591663381c4860e437ccc0dc4cd0093d283076b"
+                "reference": "17246eeb01f031aec6b4c17678c578d8205e200f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/newidc-ep/zipball/b591663381c4860e437ccc0dc4cd0093d283076b",
-                "reference": "b591663381c4860e437ccc0dc4cd0093d283076b",
+                "url": "https://api.github.com/repos/moqiaoduo/newidc-ep/zipball/17246eeb01f031aec6b4c17678c578d8205e200f",
+                "reference": "17246eeb01f031aec6b4c17678c578d8205e200f",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1911,20 +1911,20 @@
                 }
             ],
             "description": "NewIDC的Easypanel插件",
-            "time": "2020-07-24T03:53:16+00:00"
+            "time": "2020-08-03T12:03:47+00:00"
         },
         {
             "name": "newidc/plugin",
-            "version": "v0.5.7",
+            "version": "v0.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/newidc-plugin.git",
-                "reference": "1d311345bcb7731570d8adc8c885eb95d14678e1"
+                "reference": "c1ecd1591712a072d2008f26cf47d4efb1456398"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/newidc-plugin/zipball/1d311345bcb7731570d8adc8c885eb95d14678e1",
-                "reference": "1d311345bcb7731570d8adc8c885eb95d14678e1",
+                "url": "https://api.github.com/repos/moqiaoduo/newidc-plugin/zipball/c1ecd1591712a072d2008f26cf47d4efb1456398",
+                "reference": "c1ecd1591712a072d2008f26cf47d4efb1456398",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1968,20 +1968,20 @@
                 }
             ],
             "description": "NewIDC插件管理器",
-            "time": "2020-07-23T01:31:19+00:00"
+            "time": "2020-08-03T12:01:38+00:00"
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.6.0",
+            "version": "v4.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "c346bbfafe2ff60680258b631afb730d186ed864"
+                "reference": "21dce06dfbf0365c6a7cc8fdbdc995926c6a9300"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c346bbfafe2ff60680258b631afb730d186ed864",
-                "reference": "c346bbfafe2ff60680258b631afb730d186ed864",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/21dce06dfbf0365c6a7cc8fdbdc995926c6a9300",
+                "reference": "21dce06dfbf0365c6a7cc8fdbdc995926c6a9300",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2004,7 +2004,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "4.7-dev"
                 }
             },
             "autoload": {
@@ -2026,7 +2026,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-07-02T17:12:47+00:00"
+            "time": "2020-07-25T13:18:53+00:00"
         },
         {
             "name": "opis/closure",
@@ -5040,16 +5040,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "1.10.9",
+            "version": "1.10.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "83c3250093d5491600a822e176b107a945baf95a"
+                "reference": "32966a3b1d48bc01472a8321fd6472b44fad033a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/83c3250093d5491600a822e176b107a945baf95a",
-                "reference": "83c3250093d5491600a822e176b107a945baf95a",
+                "url": "https://api.github.com/repos/composer/composer/zipball/32966a3b1d48bc01472a8321fd6472b44fad033a",
+                "reference": "32966a3b1d48bc01472a8321fd6472b44fad033a",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5122,7 +5122,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2020-07-16T10:57:00+00:00"
+            "time": "2020-08-03T09:35:19+00:00"
         },
         {
             "name": "composer/semver",
