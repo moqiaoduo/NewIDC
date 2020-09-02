@@ -6,9 +6,11 @@
         <div class="box-header with-border">
             <h3 class="box-title">
                 @if($item['admin'])
-                    {{$user->username}}(Stuff)
-                @else
+                    {{$user->name}}(Stuff)
+                @elseif($user)
                     <a href="{{route('admin.user.show', $user)}}">{{$user->username}}</a>(Client)
+                @else
+                    {{$ticket->name}}(Client)
                 @endif
             </h3>
             <div class="box-title pull-right">

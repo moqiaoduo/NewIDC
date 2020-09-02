@@ -37,6 +37,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read mixed $priority_text
  * @property int|null $service_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ticket whereServiceId($value)
+ * @property string $name
+ * @property string $email
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ticket whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ticket whereName($value)
+ * @property string $check_code
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ticket whereCheckCode($value)
  */
 class Ticket extends Model
 {

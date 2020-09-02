@@ -25,7 +25,10 @@ class TicketController extends Controller
 
         $grid->column('id', __('ID'));
         $grid->column('user', __('User'))->display(function ($user) {
-            return '<a href="' . route('admin.user.show', $user['id']) . '">' . $user['username'] . '</a>';
+            if ($user)
+                return '<a href="' . route('admin.user.show', $user['id']) . '">' . $user['username'] . '</a>';
+
+            return $this->name;
         });
         $grid->column('title', __('Title'))->display(function ($user) {
             return '<a href="' . route('admin.ticket.show', $this) . '">' . $user . '</a>';
@@ -70,7 +73,7 @@ class TicketController extends Controller
                     $column->row((new Box('回复', $form))->collapsable());
 
                     $column->row(view('admin.ticket.dialog')->with('data', $ticket->contents()
-                        ->orderByDesc('created_at')->get()));
+                        ->orderByDesc('created_at')->get())->with('ticket', $ticket));
                 });
             });
     }
@@ -94,7 +97,7 @@ class TicketController extends Controller
         $form->select('user_id', __('User'))->options(function ($id) {
             if ($id && $user = User::find($id))
                 return [$user->id => $user->username . ' - #' . $user->id];
-        })->ajax('/admin/api/users')->required();
+        })->ajax('/admin/api/users');
         $form->select('department_id', __('Department'))->required()
             ->options(Department::all()->pluck('name', 'id'));
         $form->select('service_id', __('admin.ticket.service'))->options(function ($id) {

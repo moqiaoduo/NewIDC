@@ -20,65 +20,59 @@
 
 @section('foot')
     <script>
-        layui.use(['table', 'form', 'jquery'], function () {
-            var table = layui.table,
-                form = layui.form,
-                $ = layui.jquery;
+        var table = layui.table,
+            form = layui.form,
+            $ = layui.jquery;
 
-            //转换静态表格
-            table.init('table', {
-                limit: 10 //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
-                , page: true
-                , skin: 'line'
-                , toolbar: '#tools'
-                , defaultToolbar: []
-                , initSort: {
-                    field: 'status' //排序字段，对应 cols 设定的各字段名
-                    , type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
-                }
+        //转换静态表格
+        table.init('table', {
+            limit: 10 //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+            , page: true
+            , skin: 'line'
+            , initSort: {
+                field: 'status' //排序字段，对应 cols 设定的各字段名
+                , type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+            }
+        });
+
+        table.on('row(table)', function (obj) {
+            window.location.href = obj.data.link
+        });
+
+        form.on('select(status)', function () {
+            document.getElementById('service-table-form').submit()
+        });
+
+        $(".renew").on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            layer.open({
+                type: 2,
+                title: '@lang('Renew')',
+                shadeClose: true,
+                shade: 0.6,
+                area: ['350px', '80%'],
+                content: e.target.href //iframe的url
             });
-
-            table.on('row(table)', function (obj) {
-                window.location.href = obj.data.link
-            });
-
-            form.on('select(status)', function () {
-                document.getElementById('service-table-form').submit()
-            });
-
-            $(".renew").on('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                layer.open({
-                    type: 2,
-                    title: '@lang('Renew')',
-                    shadeClose: true,
-                    shade: 0.6,
-                    area: ['350px', '80%'],
-                    content: e.target.href //iframe的url
-                });
-            })
         })
-    </script>
-    <script type="text/html" id="tools">
-        <form class="layui-form" method="get" id="service-table-form">
-            <div class="layui-inline">
-                <label class="layui-form-label" style="width: 60px;">筛选</label>
-                <div class="layui-input-inline">
-                    <select lay-filter="status" name="status">
-                        <option value="">@lang('All')</option>
-                        @foreach(__('service.status') as $key=>$val)
-                            <option value="{{$key}}"
-                                    @if($status==$key) selected @endif>{{$val}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-        </form>
     </script>
 @endsection
 
 @section('content')
+    <form class="layui-form" method="get" id="service-table-form">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 60px;">筛选</label>
+            <div class="layui-input-inline">
+                <select lay-filter="status" name="status">
+                    <option value="">@lang('All')</option>
+                    @foreach(__('service.status') as $key=>$val)
+                        <option value="{{$key}}"
+                                @if($status==$key) selected @endif>{{$val}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </form>
     <table lay-filter="table">
         <thead>
         <tr>

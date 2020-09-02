@@ -48,32 +48,31 @@
     <script type="text/javascript" src="{{
     asset('vendor/laravel-admin-ext/wang-editor/wangEditor-3.0.10/release/wangEditor.min.js')}}"></script>
     <script>
-        //Demo
-        layui.use(['form', 'layer', 'jquery'], function () {
-            var form = layui.form, layer = layui.layer, upload = layui.upload, $ = layui.jquery;
-            var E = window.wangEditor
-            var editor = new E('#editor')
-            editor.create()
+        var form = layui.form, layer = layui.layer, $ = layui.jquery;
+        var E = window.wangEditor;
+        var editor = new E('#editor');
 
+        function ticketSubmit() {
+            document.querySelector('input[name="content"]').value = editor.txt.html();
+        }
+
+        function addFile() {
+            $('#files').append('<div class="file-item"><input type="file" name="files[]">' +
+                '<button type="button" class="layui-btn layui-btn-xs" onclick="removeFile(this)">' +
+                '<i class="layui-icon layui-icon-delete"></i>' +
+                '</button></div>')
+        }
+
+        function removeFile(obj) {
+            $(obj).parent().remove()
+        }
+
+        $(document).ready(function () {
+            addFile();
+            editor.create();
             @error('content')
             layer.open({icon: 2, content: "{{$message}}"})
             @enderror
-
-            //监听提交
-            form.on('submit(ticketSubmit)', function (data) {
-                document.querySelector('input[name="content"]').value = editor.txt.html();
-            });
-
-            $('#add-file').on('click', function () {
-                $('#files').append('<div class="file-item"><input type="file" name="files[]">' +
-                    '<button type="button" class="layui-btn layui-btn-xs file-delete">' +
-                    '<i class="layui-icon layui-icon-delete"></i>' +
-                    '</button></div>')
-            }).trigger('click')
-
-            $(document).on('click', '.file-delete', function () {
-                $(this).parent().remove()
-            })
         });
     </script>
 @endsection
@@ -125,9 +124,10 @@
                     <h2 class="layui-colla-title" id="reply">回复</h2>
                     <div class="layui-colla-content">
                         <form class="layui-form" action="{{route('ticket.update', $ticket)}}" method="post"
-                              enctype="multipart/form-data">
+                              enctype="multipart/form-data" onsubmit="ticketSubmit()">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="check_code" value="{{$ticket->check_code}}">
                             <div class="layui-form-item layui-form-text">
                                 <label class="layui-form-label">内容</label>
                                 <div class="layui-input-block">
@@ -141,13 +141,16 @@
                                     <p>支持的文件格式：{{implode(",", array_filter(json_decode(
     getOption('allow_upload_ext'), true)))}}； 支持的单个文件大小：{{getOption('max_upload_size', 2)}} MB</p>
                                     <div id="files"></div>
-                                    <p><button type="button" class="layui-btn layui-btn-xs" id="add-file">
-                                            <i class="layui-icon layui-icon-add-circle"></i></button></p>
+                                    <p>
+                                        <button type="button" class="layui-btn layui-btn-xs" onclick="addFile()">
+                                            <i class="layui-icon layui-icon-add-circle"></i>
+                                        </button>
+                                    </p>
                                 </div>
                             </div>
                             <div class="layui-form-item">
                                 <div class="layui-input-block">
-                                    <button class="layui-btn" lay-submit lay-filter="ticketSubmit">提交</button>
+                                    <button class="layui-btn" lay-submit>提交</button>
                                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                                 </div>
                             </div>
@@ -163,9 +166,11 @@
                     <div class="layui-card-header">
                         <span>
                             @if($item['admin'])
-                                {{$user->username}}(Stuff)
-                            @else
+                                {{$user->name}}(Stuff)
+                            @elseif($user)
                                 {{$user->username}}(Client)
+                            @else
+                                {{$ticket['name']}}(Client)
                             @endif
                         </span>
                         <span>

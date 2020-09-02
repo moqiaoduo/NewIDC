@@ -16,42 +16,41 @@
 
 @section('foot')
     <script>
-        layui.use(['jquery', 'form'], function () {
-            var $ = layui.jquery,
-                form = layui.form;
+        var $ = layui.jquery, form = layui.form;
 
-            form.verify({
-                pass_confirm: function (value) {
-                    console.log(form.val('change-password'))
-                    if (value !== form.val('change-password').password) {
-                        return '密码与确认密码不符'
-                    }
+        form.verify({
+            pass_confirm: function (value) {
+                console.log(form.val('change-password'))
+                if (value !== form.val('change-password').password) {
+                    return '密码与确认密码不符'
+                }
+            }
+        });
+
+        function generate_password() {
+            var text = ['abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '1234567890', '~!@#$%^&*()_+";",./?<>'];
+            var rand = function (min, max) {
+                return Math.floor(Math.max(min, Math.random() * (max + 1)));
+            }
+            var pw = '';
+            for (var i = 0; i < 16; ++i) {
+                var strpos = rand(0, 3);
+                pw += text[strpos].charAt(rand(0, text[strpos].length));
+            }
+            var index = layer.open({
+                title: '密码生成成功'
+                , content: '新密码：' + pw + '，点击确定填写到输入框'
+                , yes: function () {
+                    form.val('change-password', {
+                        password: pw,
+                        password_confirmation: pw
+                    })
+                    layer.close(index)
                 }
             });
+        }
 
-            $("#generate-password").on('click', function () {
-                var text = ['abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '1234567890', '~!@#$%^&*()_+";",./?<>'];
-                var rand = function (min, max) {
-                    return Math.floor(Math.max(min, Math.random() * (max + 1)));
-                }
-                var pw = '';
-                for (var i = 0; i < 16; ++i) {
-                    var strpos = rand(0, 3);
-                    pw += text[strpos].charAt(rand(0, text[strpos].length));
-                }
-                var index = layer.open({
-                    title: '密码生成成功'
-                    , content: '新密码：' + pw + '，点击确定填写到输入框'
-                    , yes: function () {
-                        form.val('change-password', {
-                            password: pw,
-                            password_confirmation: pw
-                        })
-                        layer.close(index)
-                    }
-                });
-            })
-
+        $(document).ready(function () {
             @error('change_password')
             layer.alert('{{$message}}')
             @enderror
@@ -160,7 +159,7 @@
                                    class="layui-input" placeholder="@lang('New Password')">
                         </div>
                         <div class="layui-word-aux">
-                            <button class="layui-btn layui-btn-normal" id="generate-password" type="button">
+                            <button class="layui-btn layui-btn-normal" onclick="generate_password()" type="button">
                                 @lang('Generate Password')</button>
                         </div>
                     </div>

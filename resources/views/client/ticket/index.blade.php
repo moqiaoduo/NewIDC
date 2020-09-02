@@ -20,53 +20,52 @@
 
 @section('foot')
     <script>
-        layui.use(['table', 'form', 'jquery'], function () {
-            var table = layui.table,
-                form = layui.form,
-                $ = layui.jquery;
+        var table = layui.table,
+            form = layui.form,
+            $ = layui.jquery;
 
-            //转换静态表格
-            table.init('table', {
-                limit: 10 //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
-                , page: true
-                , skin: 'line'
-                , toolbar: '#tools'
-                , defaultToolbar: []
-                , initSort: {
-                    field: 'updated_at' //排序字段，对应 cols 设定的各字段名
-                    , type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
-                }
-            });
+        //转换静态表格
+        table.init('table', {
+            limit: 10 //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+            , page: true
+            , skin: 'line'
+            , initSort: {
+                field: 'updated_at' //排序字段，对应 cols 设定的各字段名
+                , type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+            }
+        });
 
-            table.on('row(table)', function (obj) {
-                window.location.href = obj.data.link
-            });
+        table.on('row(table)', function (obj) {
+            window.location.href = obj.data.link
+        });
 
-            form.on('select(status)', function () {
-                document.getElementById('ticket-table-form').submit()
-            });
-        })
+        form.on('select(status)', function () {
+            document.getElementById('ticket-table-form').submit()
+        });
+
+        form.render()
     </script>
-    <script type="text/html" id="tools">
-        <form class="layui-form" method="get" id="ticket-table-form">
-            <div class="layui-inline">
-                <label class="layui-form-label" style="width: 60px;">筛选</label>
-                <div class="layui-input-inline">
-                    <select lay-filter="status" name="status">
-                        <option value="">@lang('All')</option>
-                        @foreach($ticket_statuses as $item)
-                            <option value="{{$item['id']}}"
-                                    @if($status==$item['id']) selected @endif
-                            >{{\App\Utils\Ticket::titleTrans($item['title'])}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-        </form>
+    <script type="text/html" id="tools-update">
+
     </script>
 @endsection
 
 @section('content')
+    <form class="layui-form" method="get" id="ticket-table-form">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 60px;">筛选</label>
+            <div class="layui-input-inline">
+                <select lay-filter="status" name="status">
+                    <option value="">@lang('All')</option>
+                    @foreach($ticket_statuses as $item)
+                        <option value="{{$item['id']}}"
+                                @if($status==$item['id']) selected @endif
+                        >{{\App\Utils\Ticket::titleTrans($item['title'])}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </form>
     <table lay-filter="table">
         <thead>
         <tr>

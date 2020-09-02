@@ -2,11 +2,15 @@
 
 namespace App\Utils;
 
+use App\Events\TicketAnswer;
+use App\Events\TicketCustomerReply;
+use App\Events\TicketOpen;
 use App\Models\Ticket as Model;
 use App\Models\TicketDetail;
 use Illuminate\Http\Request;
 use Lang;
 use Storage;
+use Str;
 
 class Ticket
 {
@@ -16,10 +20,16 @@ class Ticket
 
         try {
             $ticket = new Model();
+            if ($user_id == 0) {
+                $ticket->name = $request->post('name');
+                $ticket->email = $request->post('email');
+                $ticket->check_code = Str::random(); // 这个代码需要保存好，通过这个验证发起人
+            } else {
+                $ticket->service_id = $request->post('service_id');
+            }
             $ticket->user_id = $user_id;
             $ticket->title = $request->post('title');
             $ticket->department_id = $request->post('department_id');
-            $ticket->service_id = $request->post('service_id');
             $ticket->priority = $request->post('priority');
             $ticket->status = 1;
             $ticket->save();
@@ -31,6 +41,8 @@ class Ticket
             $ticket_detail->admin = $admin;
             $ticket_detail->attachments = self::upload($request);
             $ticket_detail->save();
+
+            event(new TicketOpen($ticket, $ticket_detail->content));
 
             \DB::commit();
             return $ticket;
@@ -44,7 +56,9 @@ class Ticket
     {
         $request->validate(['content' => 'required']);
 
-        Model::findOrFail($id)->update(['status' => $admin ? 2 : 3]);
+        $ticket = Model::findOrFail($id);
+
+        $ticket->update(['status' => $admin ? 2 : 3]);
 
         $ticket_detail = new TicketDetail();
         $ticket_detail->user_id = $uid;
@@ -53,6 +67,11 @@ class Ticket
         $ticket_detail->admin = $admin;
         $ticket_detail->attachments = self::upload($request);
         $ticket_detail->save();
+
+        event($admin ?
+            new TicketAnswer($ticket, $ticket_detail->content) :
+            new TicketCustomerReply($ticket, $ticket_detail->content)
+        );
     }
 
     public static function titleTrans($title)

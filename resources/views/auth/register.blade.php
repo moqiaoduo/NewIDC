@@ -6,11 +6,6 @@
 @endsection
 
 @section('foot')
-    <script>
-        layui.use(["form"], function () {
-            var form = layui.form;
-        })
-    </script>
 @endsection
 
 @section('content')

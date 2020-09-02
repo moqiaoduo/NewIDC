@@ -73,7 +73,7 @@
     <div class="layui-footer newidc-footer">
         @include('common.foot')
     </div>
-    <script src="{{asset('vendor/layui/layui.js')}}"></script>
+    <script src="{{asset('vendor/layui/layui.all.js')}}"></script>
     <script src="{{mix('js/app.js')}}"></script>
     @yield('foot')
 </div>

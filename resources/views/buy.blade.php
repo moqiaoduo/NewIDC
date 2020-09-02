@@ -12,31 +12,27 @@
 
 @section('foot')
     <script>
-        layui.use(['form', 'jquery', 'layer'], function () {
-            var form = layui.form,
-                $ = layui.jquery,
-                layer = layui.layer;
+        var form = layui.form, $ = layui.jquery, layer = layui.layer;
 
-            form.on('radio(period)', function (data) {
-                loadCalc(data.value)
-            })
+        form.on('radio(period)', function (data) {
+            loadCalc(data.value)
+        })
 
-            $(document).ready(function () {
-                loadCalc($('#selected-period').val())
-            })
-
-            function loadCalc(id) {
-                $("#calc-loading").show()
-                $("#buy-calc").load("/api/buy/{{$product->id}}/calc/" + id +
-                    '?lang={{App::getLocale()}}&login={{$guest?0:1}}', function () {
-                    $("#calc-loading").hide()
-                })
-            }
+        $(document).ready(function () {
+            loadCalc($('#selected-period').val());
 
             @error('tip')
             layer.alert('{{$message}}', {icon: 0})
             @enderror
         })
+
+        function loadCalc(id) {
+            $("#calc-loading").show()
+            $("#buy-calc").load("/api/buy/{{$product->id}}/calc/" + id +
+                '?lang={{App::getLocale()}}&login={{$guest?0:1}}', function () {
+                $("#calc-loading").hide()
+            })
+        }
     </script>
 @endsection
 
