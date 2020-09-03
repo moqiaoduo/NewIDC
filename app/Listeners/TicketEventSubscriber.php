@@ -30,7 +30,8 @@ class TicketEventSubscriber
 
     public function handleCustomerReply(TicketEvent $event)
     {
-        Notification::send($event->ticket->department->email, new TicketCustomerReply($event->ticket, $event->content));
+        Notification::route('mail', $event->ticket->department->email)
+            ->notify(new TicketCustomerReply($event->ticket, $event->content));
     }
 
     public function handleClose(TicketEvent $event)
