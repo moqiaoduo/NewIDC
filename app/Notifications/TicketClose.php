@@ -48,7 +48,7 @@ class TicketClose extends Notification implements ShouldQueue
             ->line('由于您超过48小时未响应或管理员操作，您的工单已被关闭')
             ->line('编号：#' . $this->ticket->id)
             ->line('标题：' . $this->ticket->title)
-            ->line('由于您超过48小时未响应或管理员操作，您的工单已被关闭')
+            ->line('若您仍对该工单有问题，请直接回复工单来重新打开工单')
             ->action('查看工单', route('ticket.show', $this->ticket))
             ->line('若该邮件与您无关，请忽略该邮件');
     }
