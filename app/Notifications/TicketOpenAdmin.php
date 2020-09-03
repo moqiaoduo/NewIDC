@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class TicketOpenAdmin extends Notification
+class TicketOpenAdmin extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -50,9 +50,10 @@ class TicketOpenAdmin extends Notification
     {
         return (new MailMessage)
             ->subject(config('app.name') . '的工单等待您回复')
+            ->line('有一条工单等待您回复')
             ->line('编号：#' . $this->ticket->id)
             ->line('标题：' . $this->ticket->title)
-            ->line('内容：' . $this->content)
+            ->line('内容：' . strip_tags($this->content))
             ->action('查看工单', route('admin.ticket.show', $this->ticket))
             ->line('若该邮件与您无关，请忽略该邮件');
     }

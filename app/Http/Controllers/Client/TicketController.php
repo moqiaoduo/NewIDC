@@ -73,7 +73,7 @@ class TicketController extends Controller
 
         $ticket = TicketUtils::create($request, $user ? $user->id : 0); // 若未登录，则user_id=0
 
-        if (!$ticket) return back();
+        if (!$ticket) return back()->withInput();
 
         return redirect()->route('ticket.show', ['ticket' => $ticket, 'c' => $ticket->check_code]);
     }

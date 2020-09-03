@@ -7,6 +7,7 @@ use App\Events\TicketCustomerReply;
 use App\Events\TicketOpen;
 use App\Models\Ticket as Model;
 use App\Models\TicketDetail;
+use DB;
 use Illuminate\Http\Request;
 use Lang;
 use Storage;
@@ -16,7 +17,7 @@ class Ticket
 {
     public static function create(Request $request, $user_id, $admin = false, $admin_id = null)
     {
-        \DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $ticket = new Model();
@@ -42,12 +43,12 @@ class Ticket
             $ticket_detail->attachments = self::upload($request);
             $ticket_detail->save();
 
-            event(new TicketOpen($ticket, $ticket_detail->content));
+            event(new TicketOpen($ticket, $ticket_detail->content, $admin));
 
-            \DB::commit();
+            DB::commit();
             return $ticket;
         } catch (\Exception $e) {
-            \DB::rollBack();
+            DB::rollBack();
             return false;
         }
     }

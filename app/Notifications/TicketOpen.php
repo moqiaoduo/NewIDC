@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class TicketCustomerReply extends Notification implements ShouldQueue
+class TicketOpen extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -32,7 +32,7 @@ class TicketCustomerReply extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -43,17 +43,16 @@ class TicketCustomerReply extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(config('app.name') . '的工单等待您回复')
-            ->subject('有一条工单等待您回复')
+            ->subject('您在' . config('app.name') . '创建了一条新工单')
+            ->line('您的账户下创建了一条新工单')
             ->line('编号：#' . $this->ticket->id)
             ->line('标题：' . $this->ticket->title)
-            ->line('内容：' . strip_tags($this->content))
             ->action('查看工单', route('admin.ticket.show', $this->ticket))
             ->line('若该邮件与您无关，请忽略该邮件');
     }
@@ -61,7 +60,7 @@ class TicketCustomerReply extends Notification implements ShouldQueue
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

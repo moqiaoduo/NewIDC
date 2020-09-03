@@ -236,8 +236,8 @@ P.S. If you want unlimited, set 0',
     'department'                => [
         'assign'                => 'Assign',
         'client_only'           => 'Client Only',
-        'assign_help'           => 'Once the administrators are assigned, they will receive the mails of opening and '.
-            'replying tickets from the clients for this department. Also, they have permissions to reply or close the tickets.',
+        'email_help'           => 'When the tickets are open or replied by clients, system will send an email to the address.',
+        'assign_help'           => 'Once the administrators are assigned, they will have permissions to reply or close the tickets in this department.',
         'client_only_help'      => 'Only client can choose this department if enabled.',
         'hide_help'             => 'This option only affect the page of departments selected. Opening ticket page can be seen all the time.'
     ],

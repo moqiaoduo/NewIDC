@@ -47,6 +47,7 @@ class DepartmentController extends Controller
 
         $form->text('name', __('Name'))->required();
         $form->textarea('description', __('Description'));
+        $form->email('email', __('Email'))->required()->help(__('admin.department.email_help'));
         $form->listbox('assign', __('admin.department.assign'))->options(Administrator::all()->pluck('name', 'id'))
             ->help(__('admin.department.assign_help'));
         $form->switch('client_only', __('admin.department.client_only'))->default(true)

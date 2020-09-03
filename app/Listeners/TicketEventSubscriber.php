@@ -3,23 +3,24 @@
 namespace App\Listeners;
 
 use App\Events\TicketEvent;
-use App\Models\User;
+use App\Models\Administrator;
 use App\Notifications\TicketAnswer;
 use App\Notifications\TicketClose;
 use App\Notifications\TicketCustomerReply;
 use App\Notifications\TicketOpen;
 use App\Notifications\TicketOpenAdmin;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Notification;
 
 class TicketEventSubscriber
 {
     public function handleOpen(TicketEvent $event)
     {
-        try {
-            foreach ($event->ticket->department->assign as $user_id) {
-                User::findOrFail($user_id)->notify(new TicketOpenAdmin($event->ticket, $event->content));
-            }
-        } catch (ModelNotFoundException $e) {}
+        $event->ticket->user->notify(new TicketOpen($event->ticket, $event->content));
+
+        if (!$event->admin) {
+            Notification::route('mail', $event->ticket->department->email)
+                ->notify(new TicketOpenAdmin($event->ticket, $event->content));
+        }
     }
 
     public function handleAnswer(TicketEvent $event)
@@ -29,11 +30,7 @@ class TicketEventSubscriber
 
     public function handleCustomerReply(TicketEvent $event)
     {
-        try {
-            foreach ($event->ticket->department->assign as $user_id) {
-                User::findOrFail($user_id)->notify(new TicketCustomerReply($event->ticket, $event->content));
-            }
-        } catch (ModelNotFoundException $e) {}
+        Notification::send($event->ticket->department->email, new TicketCustomerReply($event->ticket, $event->content));
     }
 
     public function handleClose(TicketEvent $event)
