@@ -23,6 +23,8 @@ class TicketController extends Controller
     {
         $grid = new Grid(new Ticket());
 
+        $grid->model()->orderBy('updated_at', 'desc');
+
         $grid->column('id', __('ID'));
         $grid->column('user', __('User'))->display(function ($user) {
             if ($user)
@@ -36,8 +38,8 @@ class TicketController extends Controller
         $grid->column('status', __('Status'))->display(function () {
             return '<a><span style="color: ' . $this->status_color . ';">' . $this->status_text . '</span></a>';
         })->sortable();
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('created_at', __('Created at'))->sortable();
+        $grid->column('updated_at', __('Updated at'))->sortable();
 
         return $grid;
     }
