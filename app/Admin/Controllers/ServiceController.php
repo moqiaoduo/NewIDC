@@ -95,12 +95,12 @@ class ServiceController extends Controller
         }
         $form->select('product_id', __('Product'))->groups($groups)->required();
 
-        $groups = [];
+        $groups = [['label' => '未指定', 'options' => [null => '未指定']]];
         foreach (ServerGroup::all() as $group) {
             $servers = Server::findMany($group->servers);
             $groups[] = ['label' => $group->name, 'options' => $servers->pluck('name', 'id')];
         }
-        $form->select('server_id', __('Server'))->groups($groups);
+        $form->select('server_id', __('Server'))->groups($groups)->default(null);
 
         $form->select('user_id', __('User'))->options(function ($id) {
             if ($id && $user = User::find($id))
