@@ -43,7 +43,7 @@
                             {!! $val->getCleanDescription() !!}
                         </div>
                         <div class="newidc-product-price">
-                            <p>{{getLowestPrice($product['price'])}} Start</p>
+                            <p>{{getLowestPrice($val['price'])}} Start</p>
                             <a href="{{route('buy', $val->id)}}" class="layui-btn">@lang('Buy NOW')</a>
                         </div>
                     </div>
