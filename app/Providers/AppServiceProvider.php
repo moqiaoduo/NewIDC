@@ -24,7 +24,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (env('DB_COMPATIBILITY'))
-            Schema::defaultStringLength(env('DB_DEFAULT_STRING_LENGTH',250));
     }
 }
