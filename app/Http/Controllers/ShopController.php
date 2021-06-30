@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductGroup;
 use App\Models\Service;
+use App\Utils\ServiceUtils;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -96,7 +97,7 @@ class ShopController extends Controller
                 default:
                     return back()->withErrors(['tip' => '未知周期']);
             }
-            $service = \App\Utils\Service::create($product, $user, $expire, $ps, $data, $price['auto_activate']);
+            $service = ServiceUtils::create($product, $user, $expire, $ps, $data, $price['auto_activate']);
             if ($product->ena_stock) $product->decrement('stocks');
             return redirect()->route('service', $service);
         }

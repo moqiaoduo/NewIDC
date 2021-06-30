@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Exceptions\ServiceCreateException;
 use App\Models\Server;
 use App\Models\Service;
+use App\Utils\ServiceUtils;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -41,7 +42,7 @@ class ServiceActivate implements ShouldQueue
         $service = $this->service;
         $product = $service->product;
 
-        if (($server_id = \App\Utils\Service::pickServer($product)) == 0) {
+        if (($server_id = ServiceUtils::pickServer($product)) == 0) {
             throw new ServiceCreateException(ServiceCreateException::NO_SERVER_AVAILABLE);
         }
         $service->server_id = $server_id;

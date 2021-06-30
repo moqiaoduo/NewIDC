@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Str;
 use App\Models\Service as Model;
 
-class Service
+class ServiceUtils
 {
     public static function pickServer(Product $product, $method = null)
     {

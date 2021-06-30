@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
-use Carbon\Carbon;
+use App\Utils\ServiceUtils;
 use DB;
 use Illuminate\Http\Request;
 use NewIDC\Plugin\Server;
@@ -72,7 +72,7 @@ class ServiceController extends Controller
         DB::beginTransaction();
         try {
             if ($free) {
-                \App\Utils\Service::renew($service);
+                ServiceUtils::renew($service);
             } else {
                 // TODO: 生成账单
             }
@@ -82,7 +82,7 @@ class ServiceController extends Controller
             return 'Something broken';
         }
         if ($service->expire_at > now() && $service->status == 'suspended') {
-            \App\Utils\Service::unsuspend($service);
+            ServiceUtils::unsuspend($service);
         }
         return <<<HTML
 <script>
