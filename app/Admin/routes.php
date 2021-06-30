@@ -17,6 +17,12 @@ Route::group([
     $router->resource('service', 'ServiceController');
     $router->any('service/{service}/command/{command?}', 'ServiceController@serverCommand')
         ->name('service.command');
+    $router->post('service/create/next/{step}', function (\Illuminate\Http\Request $request, $step) {
+        $data = $request->all();
+        unset($data['_token']);
+        $data['step'] = $step;
+        return redirect(route('admin.service.create', $data));
+    })->name('service.create.next');
     $router->resource('server', 'ServerController');
     $router->resource('server_group', 'ServerGroupController');
     $router->resource('user', 'UserController');

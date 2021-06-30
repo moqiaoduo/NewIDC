@@ -11,6 +11,7 @@ use App\Models\User;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
+use Encore\Admin\Widgets\Box;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -61,12 +62,64 @@ class ServiceController extends Controller
 
     public function create(Content $content)
     {
+        $step = request('step', 1);
         $form = '';
+
+        switch ($step) {
+            case 1:
+                // 取所有产品
+                $form = new Box('创建服务第一步：选择产品');
+                $frm = new \Encore\Admin\Widgets\Form();
+                $frm->action(route('admin.service.create.next', ['step' => 2]));
+                $frm->select('product_id', '产品')->groups($this->makeProductGroups())->required();
+                $form->content($frm->render());
+                break;
+            case 2:
+                $product = Product::findOrFail(request('product_id'));
+                $service = new Service();
+                $form = new Form($service);
+                $form->setAction(route('admin.service.store'));
+                $form->hidden('product_id')->default($product->id);
+                $form->select('server_id', __('Server'))
+                    ->groups($this->makeServerGroups())->default(null);
+                $form->select('user_id', __('User'))->options(function ($id) {
+                    if ($id && $user = User::find($id))
+                        return [$user->id => $user->username . ' - #' . $user->id];
+                })->ajax('/admin/api/users')->required();
+                $form->text('name', __('Name'));
+                $form->text('domain', __('Domain'));
+                $form->text('username', __('Username'));
+                $form->password('password', __('Password'));
+                $form->datetime('expire_at', __('Next Due Date'));
+                $form->checkbox('extra', __('admin.service.fields.extra'))
+                    ->options(['activate' => '创建后开通']);
+                break;
+        }
+
 
         return $content
             ->title($this->title())
             ->description($this->description['create'] ?? trans('admin.create'))
             ->body($form);
+    }
+
+    public function store()
+    {
+        $service = new Service();
+        $service->product_id = request()->post('product_id');
+        $service->user_id = request()->post('user_id');
+        $service->server_id = request()->post('server_id');
+        $service->name = request()->post('name');
+        $service->username = request()->post('username');
+        $service->password = request()->post('password');
+        $service->domain = request()->post('domain');
+        $service->expire_at = request()->post('expire_at');
+        $service->save();
+
+        $extra = request()->post('extra');
+        if (in_array('activate', $extra)) {
+            $this->serverCommand(request(), $service, 'create');
+        }
     }
 
     public function edit($id, Content $content)
@@ -89,18 +142,9 @@ class ServiceController extends Controller
 
         $form->html(view('admin.service.command'), __('admin.service.commands.name'));
 
-        $groups = [];
-        foreach (ProductGroup::with('products')->get() as $group) {
-            $groups[] = ['label' => $group->name, 'options' => $group->products->pluck('name', 'id')];
-        }
-        $form->select('product_id', __('Product'))->groups($groups)->required();
+        $form->select('product_id', __('Product'))->groups($this->makeProductGroups())->required();
 
-        $groups = [['label' => '未指定', 'options' => [null => '未指定']]];
-        foreach (ServerGroup::all() as $group) {
-            $servers = Server::findMany($group->servers);
-            $groups[] = ['label' => $group->name, 'options' => $servers->pluck('name', 'id')];
-        }
-        $form->select('server_id', __('Server'))->groups($groups)->default(null);
+        $form->select('server_id', __('Server'))->groups($this->makeServerGroups())->default(null);
 
         $form->select('user_id', __('User'))->options(function ($id) {
             if ($id && $user = User::find($id))
