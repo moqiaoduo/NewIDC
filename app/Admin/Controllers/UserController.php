@@ -6,11 +6,12 @@ use App\Admin\Actions\User\Login;
 use App\Models\Product;
 use App\Models\User;
 use App\Notifications\ResetPassword;
-use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
+use Encore\Admin\Form\Builder;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Str;
 
 class UserController extends Controller
 {
@@ -116,10 +117,40 @@ class UserController extends Controller
         return $form;
     }
 
+    public function store()
+    {
+        $user = new User();
+        $user->username = request()->post('username');
+        $user->password = Hash::make($password = Str::random());
+        $user->email = request()->post('email');
+        $user->funds = request()->post('funds', 0);
+        $user->save();
+
+        admin_success('用户创建成功', "用户名：{$user->username}<br>密码：{$password}");
+
+        $resourcesPath = route('admin.user.index');
+        $key = $user->getKey();
+
+        if (request('after-save') == 1) {
+            // continue editing
+            $url = rtrim($resourcesPath, '/')."/{$key}/edit";
+        } elseif (request('after-save') == 2) {
+            // continue creating
+            $url = rtrim($resourcesPath, '/').'/create';
+        } elseif (request('after-save') == 3) {
+            // view resource
+            $url = rtrim($resourcesPath, '/')."/{$key}";
+        } else {
+            $url = request(Builder::PREVIOUS_URL_KEY) ?: $resourcesPath;
+        }
+
+        return redirect($url);
+    }
+
     public function reset_password($id)
     {
         $user = User::findOrFail($id);
-        $user->update(['password' => \Hash::make($new_pwd = \Str::random())]);
+        $user->update(['password' => Hash::make($new_pwd = Str::random())]);
         $user->notify(new ResetPassword($user->username, $new_pwd));
         return 'ok';
     }
