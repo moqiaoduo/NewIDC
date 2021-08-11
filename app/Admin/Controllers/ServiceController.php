@@ -36,7 +36,9 @@ class ServiceController extends Controller
         })->sortable();
         $grid->column('name', __('Name'))->sortable();
         $grid->column('user', __('User'))->display(function ($user) {
-            return '<a href="' . route('admin.user.show', $user['id']) . '">' . ($user['username'] ?? '已销号') . '</a>';
+            return '<a href="' .
+                (isset($user['id']) ? route('admin.user.show', $user['id']) : 'javascript:;') . '">'
+                    . ($user['username'] ?? '已销号') . '</a>';
         });
         $grid->column('username', __('Username'))->sortable();
         $grid->column('domain', __('Domain'))->sortable();
