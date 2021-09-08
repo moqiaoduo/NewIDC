@@ -27,7 +27,7 @@ class ServerController extends Controller
 
         $grid->column('name', __('Name'))->sortable();
         $grid->column('usage', __('Usage'))->display(function () {
-            return ($this->services_count ?? 0) . '/' . ($this->max_load > 0 ? $this->max_load : __('Unlimited'));
+            return ($this->services()->count()) . '/' . ($this->max_load > 0 ? $this->max_load : __('Unlimited'));
         });
         $grid->column('enable', __('Enable'))->bool()->sortable()->filter([
             1 => '是',

@@ -24,14 +24,14 @@ class ServiceUtils
             case 1:
                 $min_count = 0; $min_server = 0;
                 foreach (Server::findMany($servers) as $server) {
-                    if ($server->services_count == 0) {
+                    if ($server->services()->count() == 0) {
                         $min_server = $server->id;
                         break;
                     }
-                    if ($min_count > $server->services_count) {
+                    if ($min_count > $server->services()->count()) {
                         // 假如已经超限，那么就不能选
-                        if ($server->max_load > 0 && $server->services_count >= $server->max_load) continue;
-                        $min_count = $server->services_count;
+                        if ($server->max_load > 0 && $server->services()->count() >= $server->max_load) continue;
+                        $min_count = $server->services()->count();
                         $min_server = $server->id;
                     }
                 }
@@ -39,10 +39,10 @@ class ServiceUtils
             case 2:
                 $max_count = 0; $max_server = 0;
                 foreach (Server::findMany($servers) as $server) {
-                    if ($max_count < $server->services_count) {
+                    if ($max_count < $server->services()->count()) {
                         // 假如已经超限，那么就不能选
-                        if ($server->max_load > 0 && $server->services_count >= $server->max_load) continue;
-                        $max_count = $server->services_count;
+                        if ($server->max_load > 0 && $server->services()->count() >= $server->max_load) continue;
+                        $max_count = $server->services()->count();
                         $max_server = $server->id;
                     }
                 }
@@ -50,7 +50,7 @@ class ServiceUtils
             case 3:
                 shuffle($servers);
                 foreach (Server::findMany($servers) as $server) {
-                    if ($server->max_load == 0 && $server->services_count < $server->max_load) break;
+                    if ($server->max_load == 0 && $server->services()->count() < $server->max_load) break;
                 }
                 return $server->id ?? 0;
         }
