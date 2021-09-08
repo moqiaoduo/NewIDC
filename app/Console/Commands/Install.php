@@ -51,6 +51,7 @@ class Install extends Command
         try {
             $tables = Schema::getAllTables();
         } catch (Exception $e) {
+            $this->warn('Database error: ' . $e->getMessage());
             $this->warn(__('install.database_connect_fail'));
             goto stop_inst;
         }
