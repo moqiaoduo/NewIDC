@@ -30,11 +30,10 @@ class ShopController extends Controller
     {
         if ($request->has('lang'))
             app()->setLocale($request->input('lang'));
-        $login = $request->get('login');
         $price = $product->price[$id];
         $base = sprintf("%.2f", $price['price']);
         $total = sprintf("%.2f", $price['price'] + $price['setup']);
-        return view('buy_calc', compact('product', 'base', 'price', 'total', 'login'));
+        return view('buy_calc', compact('product', 'base', 'price', 'total'));
     }
 
     public function buy(Request $request, Product $product)
