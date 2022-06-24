@@ -2342,16 +2342,16 @@
         },
         {
             "name": "newidc/virtualmin",
-            "version": "v0.1.1",
+            "version": "v0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moqiaoduo/newidc-virtualmin.git",
-                "reference": "a3fd752311ed2d77d02dbff78beb4b56345d3419"
+                "reference": "a95d321a02745e397b65a24f2fd56024923e4c34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moqiaoduo/newidc-virtualmin/zipball/a3fd752311ed2d77d02dbff78beb4b56345d3419",
-                "reference": "a3fd752311ed2d77d02dbff78beb4b56345d3419",
+                "url": "https://api.github.com/repos/moqiaoduo/newidc-virtualmin/zipball/a95d321a02745e397b65a24f2fd56024923e4c34",
+                "reference": "a95d321a02745e397b65a24f2fd56024923e4c34",
                 "shasum": ""
             },
             "require": {
@@ -2389,9 +2389,9 @@
             "description": "NewIDC的Virtualmin插件",
             "support": {
                 "issues": "https://github.com/moqiaoduo/newidc-virtualmin/issues",
-                "source": "https://github.com/moqiaoduo/newidc-virtualmin/tree/v0.1.1"
+                "source": "https://github.com/moqiaoduo/newidc-virtualmin/tree/v0.1.2"
             },
-            "time": "2022-06-24T15:05:36+00:00"
+            "time": "2022-06-24T16:16:23+00:00"
         },
         {
             "name": "nikic/php-parser",
