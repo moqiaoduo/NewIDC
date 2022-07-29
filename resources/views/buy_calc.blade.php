@@ -31,7 +31,12 @@
     </tr>
     <tr>
         <td colspan="2">
-            <button lay-submit class="layui-btn layui-btn-fluid">@guest 登录后才能下单 @else 下单 @endif</button>
+            <button lay-submit class="layui-btn layui-btn-fluid">
+                @guest
+                    登录后才能下单
+                @else
+                    下单
+                @endguest</button>
         </td>
     </tr>
     </tbody>
