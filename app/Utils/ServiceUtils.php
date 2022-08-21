@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Server;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Str;
 use App\Models\Service as Model;
 
@@ -50,7 +51,7 @@ class ServiceUtils
             case 3:
                 shuffle($servers);
                 foreach (Server::findMany($servers) as $server) {
-                    if ($server->max_load == 0 && $server->services()->count() < $server->max_load) break;
+                    if ($server->max_load == 0 || $server->services()->count() < $server->max_load) break;
                 }
                 return $server->id ?? 0;
         }
