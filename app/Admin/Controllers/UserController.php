@@ -158,24 +158,8 @@ class UserController extends Controller
 
     public function login(User $user)
     {
-        \Auth::login($user);
+        \Auth::guard('web')->login($user);
 
         return redirect('/client');
-    }
-
-    public function testUserLogin(Request $request)
-    {
-        $user = $request->user();
-
-        if ($user) {
-            dump([
-                'id' => $user->id,
-                'name' => $user->username
-            ]);
-        }
-        else
-        {
-            dump('no user login');
-        }
     }
 }
