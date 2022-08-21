@@ -10,6 +10,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Form\Builder;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Str;
 
@@ -160,5 +161,21 @@ class UserController extends Controller
         \Auth::login($user);
 
         return redirect('/client');
+    }
+
+    public function testUserLogin(Request $request)
+    {
+        $user = $request->user();
+
+        if ($user) {
+            dump([
+                'id' => $user->id,
+                'name' => $user->username
+            ]);
+        }
+        else
+        {
+            dump('no user login');
+        }
     }
 }
