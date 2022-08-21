@@ -33,7 +33,8 @@ class ShopController extends Controller
         $price = $product->price[$id];
         $base = sprintf("%.2f", $price['price']);
         $total = sprintf("%.2f", $price['price'] + $price['setup']);
-        return view('buy_calc', compact('product', 'base', 'price', 'total'));
+        $login = $request->input('login');
+        return view('buy_calc', compact('product', 'base', 'price', 'total', 'login'));
     }
 
     public function buy(Request $request, Product $product)
