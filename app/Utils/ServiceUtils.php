@@ -16,15 +16,19 @@ class ServiceUtils
 {
     public static function pickServer(Product $product, $method = null)
     {
-        $servers = $product->server_group->servers;
+        $server_ids = $product->server_group->servers;
         $method = is_null($method) ? $product->server_group->select_server_method : $method;
         switch ($method) {
             case 0:
                 // TODO: 插件接管分配任务
                 return self::pickServer($product, 3); // 现在临时用随机方式
             case 1:
-                $min_count = 0; $min_server = 0;
-                foreach (Server::findMany($servers) as $server) {
+                $servers = Server::find($server_ids);
+                if (is_null($servers) || count($servers) == 0) return 0;    // 无服务器则返回0
+                $first_server = $servers->first();
+                $min_count = $first_server->services()->count();
+                $min_server = $first_server->id;
+                foreach ($servers as $server) {
                     if ($server->services()->count() == 0) {
                         $min_server = $server->id;
                         break;
@@ -39,7 +43,7 @@ class ServiceUtils
                 return $min_server;
             case 2:
                 $max_count = 0; $max_server = 0;
-                foreach (Server::findMany($servers) as $server) {
+                foreach (Server::findMany($server_ids) as $server) {
                     if ($max_count < $server->services()->count()) {
                         // 假如已经超限，那么就不能选
                         if ($server->max_load > 0 && $server->services()->count() >= $server->max_load) continue;
@@ -49,8 +53,8 @@ class ServiceUtils
                 }
                 return $max_server;
             case 3:
-                shuffle($servers);
-                foreach (Server::findMany($servers) as $server) {
+                shuffle($server_ids);
+                foreach (Server::findMany($server_ids) as $server) {
                     if ($server->max_load == 0 || $server->services()->count() < $server->max_load) break;
                 }
                 return $server->id ?? 0;

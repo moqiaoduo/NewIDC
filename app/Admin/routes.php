@@ -29,7 +29,6 @@ Route::group([
     $router->post('user/{id}/reset_password', 'UserController@reset_password')
         ->name('user.reset_success');
     $router->get('user/{user}/login', 'UserController@login');
-    $router->get('user/login/test', 'UserController@testUserLogin');
     $router->resource('ticket', 'TicketController');
     $router->post('/ticket/{ticket}/reply', 'TicketController@reply')->name('ticket.reply');
     $router->resource('ticket_status', 'TicketStatusController');
