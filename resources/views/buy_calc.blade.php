@@ -33,9 +33,9 @@
         <td colspan="2">
             <button lay-submit class="layui-btn layui-btn-fluid">
                 @if ($login)
-                    登录后才能下单
-                @else
                     下单
+                @else
+                    登录后才能下单
                 @endif
             </button>
         </td>
