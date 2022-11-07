@@ -3,7 +3,7 @@
         @if(isset($avatar))
             {!! $avatar !!}
         @else
-            <img src="https://sdn.geekzu.org/avatar/@if(Auth::check()) {{md5(Auth::user()->email)}} @endif"
+            <img src="https://cn.gravatar.com/avatar/@if(Auth::check()) {{md5(Auth::user()->email)}} @endif"
                  class="layui-nav-img">
             @guest @lang('Guest') @else @lang('Welcome, :username',['username'=>Auth::user()->username]) @endguest
         @endif
